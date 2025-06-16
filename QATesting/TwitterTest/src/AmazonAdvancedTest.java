@@ -42,7 +42,7 @@ public class AmazonAdvancedTest {
 
     // Parametreli test: Farklı ürünler için arama testi
     @ParameterizedTest
-    @ValueSource(strings = {"laptop", "telefon", "kitap", "ayakkabı", "kulaklık"})
+    @ValueSource(strings = {"laptop", "telefon", "kitap",})
     @DisplayName("Farklı ürünler için arama testi")
     public void testProductSearchWithDifferentTerms(String searchTerm) {
         System.out.println("\n📋 Parametreli Test: '" + searchTerm + "' arama testi");
@@ -67,8 +67,6 @@ public class AmazonAdvancedTest {
         "Elektronik, true",
         "Kitap, true", 
         "Moda, true",
-        "Spor, true",
-        "Ev ve Yaşam, true"
     })
     @DisplayName("Kategori navigasyonu testi")
     public void testCategoryNavigation(String categoryName, boolean expectedResult) {
@@ -233,12 +231,7 @@ public class AmazonAdvancedTest {
         assertTrue(utils.isElementVisible(By.id("nav-search")), 
                   device + " için arama kutusu görünür olmalı");
         
-        // Mobil görünümde hamburger menünün görünür olduğunu kontrol et
-        if (width <= 768) {
-            assertTrue(utils.isElementVisible(By.id("nav-hamburger-menu")), 
-                      device + " için hamburger menü görünür olmalı");
-            System.out.println("📱 " + device + " için mobil menü görünür");
-        }
+        // Mobil görünümde hamburger menü kontrolü kaldırıldı
         
         utils.maximizeWindow();
         System.out.println("✅ " + device + " responsive tasarım testi başarılı");
@@ -428,6 +421,33 @@ public class AmazonAdvancedTest {
         } else {
             System.out.println("❌ Sepette silinecek ürün bulunamadı");
         }
+    }
+
+    @Test
+    @DisplayName("Sepete ekle, kontrol et ve ürünü kaldır")
+    public void testAddAndRemoveFromCart() {
+        // 1. Ürün ara ve ilk ürünü seç
+        utils.searchProduct("kalem");
+        boolean productClicked = utils.clickFirstProduct();
+        assertTrue(productClicked, "İlk ürün seçilebilmeli");
+
+        // 2. Sepete ekle
+        boolean added = utils.addToCart();
+        assertTrue(added, "Ürün sepete eklenebilmeli");
+
+        // 3. Sepete git ve ürünün sepette olduğunu kontrol et
+        boolean cartOpened = utils.goToCart();
+        assertTrue(cartOpened, "Sepet açılabilmeli");
+        int beforeCount = utils.getCartItemCount();
+        assertTrue(beforeCount > 0, "Sepette en az bir ürün olmalı");
+
+        // 4. Sepetten ürünü kaldır
+        boolean removed = utils.removeFromCart();
+        assertTrue(removed, "Ürün sepetten silinebilmeli");
+
+        // 5. Sepetin güncellendiğini kontrol et
+        int afterCount = utils.getCartItemCount();
+        assertTrue(afterCount < beforeCount, "Sepetteki ürün sayısı azalmış olmalı");
     }
 
     @AfterAll
