@@ -3,6 +3,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.Duration;
 import java.util.List;
+import org.openqa.selenium.support.ui.Select;
 
 public class AmazonTestUtils {
     
@@ -19,7 +20,7 @@ public class AmazonTestUtils {
      */
     public void testDelay() {
         try {
-            Thread.sleep(2000); // 2 saniye bekle
+            Thread.sleep(600); // 0.2 saniye bekle
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -30,7 +31,7 @@ public class AmazonTestUtils {
      */
     public void longDelay() {
         try {
-            Thread.sleep(3000); // 3 saniye bekle
+            Thread.sleep(900); // 0.3 saniye bekle
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -223,21 +224,25 @@ public class AmazonTestUtils {
             
             // Strateji 1: Standart sepete ekle butonu
             if (tryStandardAddToCart()) {
+                closeAddToCartPopupIfPresent();
                 return true;
             }
             
             // Strateji 2: JavaScript ile sepete ekle
             if (tryJavaScriptAddToCart()) {
+                closeAddToCartPopupIfPresent();
                 return true;
             }
             
             // Strateji 3: Farklı seçicilerle sepete ekle
             if (tryAlternativeAddToCart()) {
+                closeAddToCartPopupIfPresent();
                 return true;
             }
             
             // Strateji 4: Form submit ile sepete ekle
             if (tryFormSubmitAddToCart()) {
+                closeAddToCartPopupIfPresent();
                 return true;
             }
             
@@ -407,7 +412,7 @@ public class AmazonTestUtils {
             }
             
             // Sepet sayısının artıp artmadığını kontrol et
-            Thread.sleep(2000);
+            Thread.sleep(500);
             int cartCount = getCartItemCount();
             if (cartCount > 0) {
                 System.out.println("✅ Sepete eklendi (sepet sayısı: " + cartCount + ")");
@@ -444,10 +449,47 @@ public class AmazonTestUtils {
     }
     
     /**
-     * Sepetten ürün kaldır (ilk ürünü)
+     * Sepetten ürün sil (ilk ürünü)
      */
     public boolean removeFromCart() {
         return removeFromCart(0); // İlk ürünü kaldır
+    }
+    
+    /**
+     * Sepetten ürün sil
+     */
+    public boolean removeFromCart(int itemIndex) {
+        System.out.println("🗑️ Sepetten ürün siliniyor...");
+        try {
+            List<WebElement> removeButtons = driver.findElements(By.cssSelector(".sc-action-delete"));
+            if (removeButtons.isEmpty()) {
+                removeButtons = driver.findElements(By.cssSelector("[data-feature-id='sc-action-delete']"));
+            }
+            if (removeButtons.isEmpty()) {
+                removeButtons = driver.findElements(By.cssSelector("input[value*='Sil'], input[value*='Delete']"));
+            }
+            if (removeButtons.isEmpty()) {
+                removeButtons = driver.findElements(By.xpath("//input[@type='submit' and contains(@value, 'Sil')]"));
+            }
+            int beforeCount = getCartItemCount();
+            if (itemIndex < removeButtons.size()) {
+                removeButtons.get(itemIndex).click();
+                waitForPageLoad();
+                longDelay();
+                int afterCount = getCartItemCount();
+                if (afterCount < beforeCount) {
+                    System.out.println("✅ Ürün sepetten silindi");
+                    return true;
+                } else {
+                    System.out.println("❌ Ürün silinemedi, sepet güncellenmedi");
+                    return false;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            System.out.println("❌ Ürün silinemedi: " + e.getMessage());
+            return false;
+        }
     }
     
     /**
@@ -573,37 +615,6 @@ public class AmazonTestUtils {
             return cartItems;
         } catch (Exception e) {
             return driver.findElements(By.cssSelector(".sc-list-item"));
-        }
-    }
-    
-    /**
-     * Sepetten ürün sil
-     */
-    public boolean removeFromCart(int itemIndex) {
-        System.out.println("🗑️ Sepetten ürün siliniyor...");
-        try {
-            // Farklı silme butonlarını dene
-            List<WebElement> removeButtons = driver.findElements(By.cssSelector(".sc-action-delete"));
-            if (removeButtons.isEmpty()) {
-                removeButtons = driver.findElements(By.cssSelector("[data-feature-id='sc-action-delete']"));
-            }
-            if (removeButtons.isEmpty()) {
-                removeButtons = driver.findElements(By.cssSelector("input[value*='Sil'], input[value*='Delete']"));
-            }
-            if (removeButtons.isEmpty()) {
-                removeButtons = driver.findElements(By.xpath("//input[@type='submit' and contains(@value, 'Sil')]"));
-            }
-            
-            if (itemIndex < removeButtons.size()) {
-                removeButtons.get(itemIndex).click();
-                longDelay();
-                System.out.println("✅ Ürün sepetten silindi");
-                return true;
-            }
-            return false;
-        } catch (Exception e) {
-            System.out.println("❌ Ürün silinemedi: " + e.getMessage());
-            return false;
         }
     }
     
@@ -808,7 +819,7 @@ public class AmazonTestUtils {
      */
     public void enterEmail(String email) {
         System.out.println("📧 E-posta adresi giriliyor...");
-        WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ap_email")));
+        WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("iloveselfcare@gmail.com")));
         emailInput.clear();
         emailInput.sendKeys(email);
         testDelay();
@@ -831,7 +842,7 @@ public class AmazonTestUtils {
      */
     public void enterPassword(String password) {
         System.out.println("🔒 Şifre giriliyor...");
-        WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ap_password")));
+        WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("PS5nxQ8Dfa3HsgV")));
         passwordInput.clear();
         passwordInput.sendKeys(password);
         testDelay();
@@ -871,6 +882,71 @@ public class AmazonTestUtils {
             Thread.sleep(seconds * 1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
+        }
+    }
+
+    /**
+     * Fiyatı en düşükten sırala
+     */
+    public void sortByLowestPrice() {
+        System.out.println("🔽 Fiyatı en düşükten sırala seçiliyor...");
+        WebElement sortDropdown = driver.findElement(By.id("s-result-sort-select"));
+        Select select = new Select(sortDropdown);
+        select.selectByValue("price-asc-rank");
+        waitForPageLoad();
+        testDelay();
+        System.out.println("✅ Fiyatı en düşükten sırala uygulandı");
+    }
+
+    /**
+     * Sepetten ilk ürünü sil
+     */
+    public void removeFirstItemFromCart() {
+        System.out.println("🗑️ Sepetten ilk ürünü silme işlemi başlatılıyor...");
+        goToCart();
+        List<WebElement> deleteButtons = driver.findElements(By.xpath("//input[@value='Sil' or @value='Delete']"));
+        if (!deleteButtons.isEmpty()) {
+            deleteButtons.get(0).click();
+            testDelay();
+            System.out.println("✅ İlk ürün sepetten silindi");
+        } else {
+            System.out.println("❌ Sepette silinecek ürün bulunamadı");
+        }
+    }
+
+    /**
+     * Belirtilen e-posta ve şifre ile Amazon'a giriş yap
+     */
+    public void loginWithCredentials() {
+        System.out.println("🔑 Amazon login başlatılıyor...");
+        driver.get("https://www.amazon.com/ap/signin?openid.pape.max_auth_age=900&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fyourstore%2Fhome%3Fpath%3D%252Fgp%252Fyourstore%252Fhome%26useRedirectOnSuccess%3D1%26signIn%3D1%26action%3Dsign-out%26ref_%3Dnav_AccountFlyout_signout&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0");
+        waitForPageLoad();
+        WebElement emailInput = driver.findElement(By.id("ap_email"));
+        emailInput.clear();
+        emailInput.sendKeys("iloveselfcare@gmail.com");
+        driver.findElement(By.id("continue")).click();
+        waitForPageLoad();
+        WebElement passwordInput = driver.findElement(By.id("ap_password"));
+        passwordInput.clear();
+        passwordInput.sendKeys("PS5nxQ8Dfa3HsgV");
+        driver.findElement(By.id("signInSubmit")).click();
+        waitForPageLoad();
+        System.out.println("✅ Amazon login tamamlandı");
+    }
+
+    /**
+     * Sepete ekledikten sonra çıkan popup'ı kapat
+     */
+    public void closeAddToCartPopupIfPresent() {
+        try {
+            WebElement closePopup = driver.findElement(By.cssSelector(".a-button-close, .a-popover-close"));
+            if (closePopup.isDisplayed()) {
+                closePopup.click();
+                testDelay();
+                System.out.println("✅ Sepete eklendi popup'ı kapatıldı");
+            }
+        } catch (Exception e) {
+            // Popup yoksa sorun değil
         }
     }
 } 

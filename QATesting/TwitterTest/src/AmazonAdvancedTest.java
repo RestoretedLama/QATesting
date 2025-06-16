@@ -192,6 +192,26 @@ public class AmazonAdvancedTest {
             System.out.println("⚠️ Filtreleme seçenekleri bulunamadı");
         }
     }
+    @Test
+    @DisplayName("Fiyatı en düşükten sırala ve sepete ekle/sil testi")
+    public void testSortByLowestPriceAndCartRemove() {
+        utils.searchProduct("laptop");
+        utils.sortByLowestPrice();
+
+        // İlk ürünü sepete ekle
+        boolean productClicked = utils.clickFirstProduct();
+        assertTrue(productClicked, "İlk ürün seçilebilmeli");
+        boolean added = utils.addToCartAdvanced();
+        assertTrue(added, "Ürün sepete eklenebilmeli");
+
+        // Sepete git ve ilk ürünü sil
+        boolean cartOpened = utils.goToCart();
+        assertTrue(cartOpened, "Sepet açılabilmeli");
+        int beforeCount = utils.getCartItemCount();
+        utils.removeFirstItemFromCart();
+        int afterCount = utils.getCartItemCount();
+        assertTrue(afterCount < beforeCount, "Sepetteki ürün sayısı azalmış olmalı");
+    }
 
     // Test: Responsive tasarım kontrolü
     @ParameterizedTest
@@ -363,7 +383,7 @@ public class AmazonAdvancedTest {
         utils.navigateToLoginPage();
         
         // E-posta girişi
-        utils.enterEmail("your-email@example.com");
+        utils.enterEmail("iloveselfcare@gmail.com");
         utils.clickContinueButton();
         
         System.out.println("⚠️ Robot kontrolü için manuel müdahale gerekiyor!");
@@ -373,7 +393,7 @@ public class AmazonAdvancedTest {
         utils.waitForSeconds(30);
         
         // Şifre girişi
-        utils.enterPassword("your-password");
+        utils.enterPassword("PS5nxQ8Dfa3HsgV");
         utils.clickSignInButton();
         
         // Giriş başarılı mı kontrol et
@@ -383,20 +403,41 @@ public class AmazonAdvancedTest {
         System.out.println("✅ Giriş yapma işlemi testi başarılı");
     }
 
+    @Test
+    @DisplayName("Amazon login testi (kayıtlı bilgilerle)")
+    public void testAmazonLoginWithCredentials() {
+        utils.loginWithCredentials();
+        assertTrue(utils.isUserLoggedIn(), "Kullanıcı başarıyla giriş yapabilmeli");
+    }
+
+    /**
+     * Sepetten ilk ürünü sil
+     */
+    public void removeFirstItemFromCart() {
+        System.out.println("🗑️ Sepetten ilk ürünü silme işlemi başlatılıyor...");
+        utils.goToCart();
+        utils.waitForPageLoad();
+        List<WebElement> deleteButtons = driver.findElements(By.xpath("//input[@value='Sil' or @value='Delete']"));
+        if (!deleteButtons.isEmpty()) {
+            int beforeCount = utils.getCartItemCount();
+            deleteButtons.get(0).click();
+            utils.waitForPageLoad();
+            int afterCount = utils.getCartItemCount();
+            assertTrue(afterCount < beforeCount, "Sepetteki ürün sayısı azalmış olmalı");
+            System.out.println("✅ İlk ürün sepetten silindi");
+        } else {
+            System.out.println("❌ Sepette silinecek ürün bulunamadı");
+        }
+    }
+
     @AfterAll
     public static void teardown() {
         System.out.println("\n🔒 Gelişmiş testler tamamlanıyor...");
         System.out.println("==============================================");
-        
         if (utils != null) {
             utils.closeBrowser();
         }
-        
         System.out.println("🎉 Tüm gelişmiş testler tamamlandı!");
         System.out.println("==============================================");
-        
-        // Programı kapat
-        System.out.println("🔒 Program kapatılıyor...");
-        System.exit(0);
     }
 } 

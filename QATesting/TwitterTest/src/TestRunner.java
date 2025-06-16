@@ -17,7 +17,7 @@ public class TestRunner {
         
         // Test sınıflarını çalıştır
         try {
-            runTestClass(Class.forName("AmazonTurkeyTest"));
+            // runTestClass(Class.forName("AmazonTurkeyTest")); // Artık yok, kaldırıldı
             runTestClass(Class.forName("AmazonAdvancedTest"));
         } catch (ClassNotFoundException e) {
             System.err.println("Test sınıfları bulunamadı: " + e.getMessage());
@@ -89,21 +89,17 @@ public class TestRunner {
         System.out.println("Test Tarihi: " + java.time.LocalDateTime.now());
         System.out.println("Test Hedefi: https://www.amazon.com.tr/");
         System.out.println();
-        
         // Test sınıflarını çalıştır
         try {
-            runTestClass(Class.forName("AmazonTurkeyTest"));
             runTestClass(Class.forName("AmazonAdvancedTest"));
         } catch (ClassNotFoundException e) {
             System.err.println("Test sınıfları bulunamadı: " + e.getMessage());
             System.err.println("Lütfen test sınıflarının doğru konumda olduğunu kontrol edin.");
+            System.exit(1);
         }
-        
         System.out.println("\n" + "=".repeat(50));
         System.out.println("Test Raporu Tamamlandı");
         System.out.println("=".repeat(50));
-        
-        // Programı kapat
         System.out.println("🔒 Program kapatılıyor...");
         System.exit(0);
     }

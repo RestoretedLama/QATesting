@@ -38,13 +38,9 @@ public class Main {
         System.out.println("📊 Test sonuçları yukarıda görüntülendi.");
         System.out.println("🔒 Tarayıcı otomatik olarak kapatıldı.");
         System.out.println();
-        System.out.println("Çıkmak için bir tuşa basın...");
+        System.out.println("Uygulama kapatılıyor...");
         
-        // Kullanıcıdan giriş bekle (opsiyonel)
-        try {
-            System.in.read();
-        } catch (Exception ignored) {
-            // Kullanıcı girişi bekleme başarısız olursa program sonlanır
-        }
+        // Uygulama otomatik olarak kapanır
+        System.exit(0);
     }
 }
