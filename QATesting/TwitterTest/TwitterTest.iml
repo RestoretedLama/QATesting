@@ -12,19 +12,6 @@
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="junit.jupiter.engine" level="project" />
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="file://$USER_HOME$/Downloads/selenium-java-4.32.0" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES>
-          <root url="file://$USER_HOME$/Downloads/selenium-java-4.32.0" />
-        </SOURCES>
-        <jarDirectory url="file://$USER_HOME$/Downloads/selenium-java-4.32.0" recursive="false" />
-        <jarDirectory url="file://$USER_HOME$/Downloads/selenium-java-4.32.0" recursive="false" type="SOURCES" />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="junit.platform.suite.engine" level="project" />
     <orderEntry type="library" name="junit.jupiter.params" level="project" />
     <orderEntry type="library" name="seleniumhq.selenium.java" level="project" />
