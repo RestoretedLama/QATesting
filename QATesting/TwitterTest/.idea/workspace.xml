@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonAdvancedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AmazonTestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonTestUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,6 +39,7 @@
   "keyToString": {
     "Application.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.AmazonAdvancedTest.testAddAndRemoveFromCart.executor": "Run",
     "JUnit.AmazonAdvancedTest.testAddToCartProcess.executor": "Run",
     "JUnit.AmazonAdvancedTest.testAmazonLoginWithCredentials.executor": "Run",
     "JUnit.AmazonAdvancedTest.testLoginProcess.executor": "Run",
@@ -74,10 +76,20 @@
       <recent name="" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Main">
+  <component name="RunManager" selected="JUnit.AmazonAdvancedTest.testScrolling">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="TwitterTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AmazonAdvancedTest.testAddAndRemoveFromCart" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TwitterTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
+      <option name="METHOD_NAME" value="testAddAndRemoveFromCart" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -102,21 +114,11 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonAdvancedTest.testPageTitleValidation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonAdvancedTest.testScrolling" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="METHOD_NAME" value="testPageTitleValidation" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AmazonAdvancedTest.testUrlValidation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TwitterTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="METHOD_NAME" value="testUrlValidation" />
+      <option name="METHOD_NAME" value="testScrolling" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -124,11 +126,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AmazonAdvancedTest.testScrolling" />
+        <item itemvalue="JUnit.AmazonAdvancedTest.testLoginProcess" />
+        <item itemvalue="JUnit.AmazonAdvancedTest.testAddAndRemoveFromCart" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.AmazonAdvancedTest.testAmazonLoginWithCredentials" />
-        <item itemvalue="JUnit.AmazonAdvancedTest.testUrlValidation" />
-        <item itemvalue="JUnit.AmazonAdvancedTest.testPageTitleValidation" />
-        <item itemvalue="JUnit.AmazonAdvancedTest.testLoginProcess" />
       </list>
     </recent_temporary>
   </component>
@@ -154,7 +156,7 @@
       <workItem from="1749805682327" duration="2304000" />
       <workItem from="1749808216303" duration="1414000" />
       <workItem from="1750083559088" duration="447000" />
-      <workItem from="1750098055380" duration="5703000" />
+      <workItem from="1750098055380" duration="6173000" />
     </task>
     <servers />
   </component>
@@ -170,7 +172,7 @@
           <option name="timeStamp" value="1" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/src/AmazonAdvancedTest.java</url>
+          <url>file://$PROJECT_DIR$/Tests/AmazonAdvancedTest.java</url>
           <line>46</line>
           <properties class="AmazonAdvancedTest" method="testProductSearchWithDifferentTerms">
             <option name="EMULATED" value="true" />

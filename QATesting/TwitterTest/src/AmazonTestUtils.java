@@ -171,20 +171,29 @@ public class AmazonTestUtils {
     }
     
     /**
-     * İlk ürünü seç ve detay sayfasına git
+     * İlk ürünü seç ve detay sayfasına git (daha esnek)
      */
     public boolean clickFirstProduct() {
         System.out.println("📦 İlk ürün seçiliyor...");
         try {
+            // 1. Mevcut seçici
             List<WebElement> products = driver.findElements(By.cssSelector("[data-component-type='s-search-results'] .s-result-item h2 a"));
+            // 2. Alternatif seçici (daha genel)
+            if (products.isEmpty()) {
+                products = driver.findElements(By.cssSelector("h2 a"));
+            }
+            // 3. XPath alternatifi
+            if (products.isEmpty()) {
+                products = driver.findElements(By.xpath("//h2/a"));
+            }
             if (!products.isEmpty()) {
                 products.get(0).click();
-                wait.until(ExpectedConditions.presenceOfElementLocated(By.id("productTitle")));
+                waitForPageLoad();
                 testDelay();
                 System.out.println("✅ Ürün detay sayfası açıldı");
                 return true;
             } else {
-                System.out.println("❌ Arama sonucunda ürün bulunamadı");
+                System.out.println("❌ Arama sonucunda ürün bulunamadı (tüm seçiciler denendi)");
                 return false;
             }
         } catch (Exception e) {

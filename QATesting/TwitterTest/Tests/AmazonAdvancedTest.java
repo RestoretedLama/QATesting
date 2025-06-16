@@ -427,7 +427,7 @@ public class AmazonAdvancedTest {
     @DisplayName("Sepete ekle, kontrol et ve ürünü kaldır")
     public void testAddAndRemoveFromCart() {
         // 1. Ürün ara ve ilk ürünü seç
-        utils.searchProduct("kalem");
+        utils.searchProduct("laptop");
         boolean productClicked = utils.clickFirstProduct();
         assertTrue(productClicked, "İlk ürün seçilebilmeli");
 
