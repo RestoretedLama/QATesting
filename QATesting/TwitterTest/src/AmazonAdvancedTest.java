@@ -16,8 +16,7 @@ public class AmazonAdvancedTest {
 
     @BeforeAll
     public static void setup() {
-        System.out.println("🚀 Amazon Advanced Test Bot Başlatılıyor...");
-        System.out.println("==============================================");
+        System.out.println("Amazon Advanced Test");
         
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
@@ -30,38 +29,35 @@ public class AmazonAdvancedTest {
         
         driver = new ChromeDriver(options);
         utils = new AmazonTestUtils(driver);
-        
-        System.out.println("✅ Gelişmiş test ortamı hazırlandı");
     }
 
     @BeforeEach
     public void beforeEach() {
-        // Her test öncesi ana sayfaya git
         utils.navigateToHomePage();
     }
 
-    // Parametreli test: Farklı ürünler için arama testi
+    //Farklı ürünler için arama testi
     @ParameterizedTest
     @ValueSource(strings = {"laptop", "telefon", "kitap", "ayakkabı", "kulaklık"})
     @DisplayName("Farklı ürünler için arama testi")
     public void testProductSearchWithDifferentTerms(String searchTerm) {
-        System.out.println("\n📋 Parametreli Test: '" + searchTerm + "' arama testi");
+        System.out.println("\n'" + searchTerm + "' arama testi");
         System.out.println("----------------------------------------");
         
         utils.searchProduct(searchTerm);
         
         List<WebElement> searchResults = utils.getSearchResults();
-        assertFalse(searchResults.isEmpty(), searchTerm + " için arama sonuçları görünür olmalı");
+        assertFalse(searchResults.isEmpty(), searchTerm + " için arama sonuçları görünmeli");
         
         String pageTitle = utils.getPageTitle();
         assertTrue(pageTitle.toLowerCase().contains(searchTerm.toLowerCase()) || 
                   pageTitle.contains("Amazon"), 
                   "Sayfa başlığı arama terimini veya Amazon'u içermeli");
         
-        System.out.println("✅ '" + searchTerm + "' arama testi başarılı - " + searchResults.size() + " sonuç");
+        System.out.println("'" + searchTerm + "' arama testi başarılı - " + searchResults.size() + " sonuç");
     }
 
-    // Parametreli test: Farklı kategoriler için navigasyon testi
+    // farklı kategoriler için navigasyon testi
     @ParameterizedTest
     @CsvSource({
         "Elektronik, true",
@@ -72,7 +68,7 @@ public class AmazonAdvancedTest {
     })
     @DisplayName("Kategori navigasyonu testi")
     public void testCategoryNavigation(String categoryName, boolean expectedResult) {
-        System.out.println("\n📋 Parametreli Test: '" + categoryName + "' kategori testi");
+        System.out.println("\n'" + categoryName + "' kategori testi");
         System.out.println("----------------------------------------");
         
         utils.openCategoryMenu();
@@ -84,47 +80,42 @@ public class AmazonAdvancedTest {
         if (result) {
             String pageTitle = utils.getPageTitle();
             assertTrue(pageTitle.contains(categoryName) || pageTitle.contains("Amazon"), 
-                      "Kategori sayfası doğru yüklenmeli");
-            System.out.println("✅ '" + categoryName + "' kategori testi başarılı");
+                      "Kategori sayfası doğru şekilde yüklenmeli");
+            System.out.println("'" + categoryName + "' kategori testi başarılı");
         } else {
-            System.out.println("⚠️ '" + categoryName + "' kategori testi başarısız");
+            System.out.println("'" + categoryName + "' kategori testi başarısız");
         }
     }
 
-    // Test: Ürün detay sayfası bilgilerini kontrol et
     @Test
     @DisplayName("Ürün detay sayfası bilgileri testi")
     public void testProductDetailInformation() {
-        System.out.println("\n📋 Test: Ürün detay sayfası bilgileri testi");
+        System.out.println("\nÜrün detay sayfası bilgileri testi");
         System.out.println("----------------------------------------");
         
         utils.searchProduct("laptop");
         utils.clickFirstProduct();
-        
-        // Ürün başlığını kontrol et
+
         String productTitle = utils.getProductTitle();
         assertNotNull(productTitle, "Ürün başlığı null olmamalı");
         assertFalse(productTitle.trim().isEmpty(), "Ürün başlığı boş olmamalı");
-        
-        // Ürün fiyatını kontrol et
+
         String productPrice = utils.getProductPrice();
         assertNotNull(productPrice, "Ürün fiyatı null olmamalı");
-        
-        // Sayfa URL'sini kontrol et
+
         String currentUrl = utils.getCurrentUrl();
         assertTrue(currentUrl.contains("amazon.com.tr"), "URL Amazon Turkey içermeli");
         
-        System.out.println("📦 Ürün: " + productTitle);
-        System.out.println("💰 Fiyat: " + productPrice);
-        System.out.println("🌐 URL: " + currentUrl);
-        System.out.println("✅ Ürün detay bilgileri testi başarılı");
+        System.out.println("Ürün: " + productTitle);
+        System.out.println("Fiyat: " + productPrice);
+        System.out.println("URL: " + currentUrl);
+        System.out.println("Ürün detay bilgileri testi başarılı");
     }
 
-    // Test: Sepete ekleme işlemi
     @Test
     @DisplayName("Sepete ekleme işlemi testi")
     public void testAddToCartProcess() {
-        System.out.println("\n📋 Test: Sepete ekleme işlemi testi");
+        System.out.println("\nTest: Sepete ekleme işlemi testi");
         System.out.println("----------------------------------------");
         
         utils.searchProduct("kitap");
@@ -132,68 +123,64 @@ public class AmazonAdvancedTest {
         
         boolean addedToCart = utils.addToCartAdvanced();
         assertTrue(addedToCart, "Ürün sepete eklenebilmeli");
-        
-        // Sepetteki ürün sayısını kontrol et
+
         int cartCount = utils.getCartItemCount();
         System.out.println("🛒 Sepetteki ürün sayısı: " + cartCount);
         
         System.out.println("✅ Sepete ekleme işlemi testi başarılı");
     }
 
-    // Test: Sepete gitme ve ürün kontrolü
     @Test
     @DisplayName("Sepete gitme ve ürün kontrolü testi")
     public void testGoToCartAndCheckItems() {
-        System.out.println("\n📋 Test: Sepete gitme ve ürün kontrolü testi");
+        System.out.println("\nTest: Sepete gitme ve ürün kontrolü testi");
         System.out.println("----------------------------------------");
         
-        // Önce bir ürün ekle
+        // ürün ekle
         utils.searchProduct("kalem");
         utils.clickFirstProduct();
         utils.addToCartAdvanced();
         
-        // Sepete git
+        // Sepete gitmek
         boolean cartOpened = utils.goToCart();
+
         assertTrue(cartOpened, "Sepet sayfası açılabilmeli");
         
         // Sepetteki ürünleri listele
         List<WebElement> cartItems = utils.getCartItems();
-        System.out.println("🛒 Sepetteki ürün sayısı: " + cartItems.size());
+        System.out.println("Sepetteki ürün sayısı: " + cartItems.size());
         
         if (!cartItems.isEmpty()) {
-            System.out.println("✅ Sepete gitme ve ürün kontrolü testi başarılı");
+            System.out.println("Sepete gitme ve ürün kontrolü testi başarılı");
         } else {
-            System.out.println("⚠️ Sepet boş görünüyor");
+            System.out.println("Sepet boş görünüyor????");
         }
     }
 
-    // Test: Filtreleme işlemi
     @Test
     @DisplayName("Filtreleme işlemi testi")
     public void testFilteringProcess() {
-        System.out.println("\n📋 Test: Filtreleme işlemi testi");
+        System.out.println("\nTest: Filtreleme işlemi testi");
         System.out.println("----------------------------------------");
         
         utils.searchProduct("telefon");
         
         List<WebElement> filterOptions = utils.getFilterOptions();
         if (!filterOptions.isEmpty()) {
-            System.out.println("🔍 Bulunan filtre sayısı: " + filterOptions.size());
+            System.out.println("filtre sayısı: " + filterOptions.size());
             
             boolean filterApplied = utils.applyFilter(0);
             assertTrue(filterApplied, "İlk filtre uygulanabilmeli");
-            
-            // Filtrelenmiş sonuçları kontrol et
+
             List<WebElement> filteredResults = utils.getSearchResults();
             assertFalse(filteredResults.isEmpty(), "Filtrelenmiş sonuçlar görünür olmalı");
             
-            System.out.println("✅ Filtreleme işlemi testi başarılı - " + filteredResults.size() + " filtrelenmiş sonuç");
+            System.out.println("Filtreleme işlemi testi başarılı - " + filteredResults.size() + " filtrelenmiş sonuç");
         } else {
-            System.out.println("⚠️ Filtreleme seçenekleri bulunamadı");
+            System.out.println("Filtreleme seçenekleri bulunamadı");
         }
     }
 
-    // Test: Responsive tasarım kontrolü
     @ParameterizedTest
     @CsvSource({
         "375, 667, iPhone",
@@ -202,7 +189,7 @@ public class AmazonAdvancedTest {
     })
     @DisplayName("Responsive tasarım testi")
     public void testResponsiveDesign(int width, int height, String device) {
-        System.out.println("\n📋 Parametreli Test: " + device + " responsive tasarım testi");
+        System.out.println("\nParameterized Test: " + device + " responsive tasarım testi");
         System.out.println("----------------------------------------");
         
         utils.setWindowSize(width, height);
@@ -217,34 +204,34 @@ public class AmazonAdvancedTest {
         if (width <= 768) {
             assertTrue(utils.isElementVisible(By.id("nav-hamburger-menu")), 
                       device + " için hamburger menü görünür olmalı");
-            System.out.println("📱 " + device + " için mobil menü görünür");
+            System.out.println(device + " için mobil menü görünür");
         }
         
         utils.maximizeWindow();
-        System.out.println("✅ " + device + " responsive tasarım testi başarılı");
+        System.out.println( device + " responsive tasarım testi başarılı");
     }
 
-    // Test: Performans testi
+    // PERFORMANS testi
     @Test
     @DisplayName("Performans testi")
     public void testPerformance() {
-        System.out.println("\n📋 Test: Performans testi");
+        System.out.println("\ntest: Performans testi");
         System.out.println("----------------------------------------");
         
         long loadTime = utils.measurePageLoadTime();
         
-        // Sayfa yükleme süresinin makul olduğunu kontrol et
+        // Sayfa yükleme süresinin ok olduğunu kontrol et
         assertTrue(loadTime < 10000, "Sayfa 10 saniyeden kısa sürede yüklenmeli. Süre: " + loadTime + "ms");
         
-        System.out.println("⏱️ Ana sayfa yükleme süresi: " + loadTime + "ms");
-        System.out.println("✅ Performans testi başarılı");
+        System.out.println("Ana sayfa yükleme süresi: " + loadTime + "ms");
+        System.out.println("Performans testi başarılı oh ");
     }
 
-    // Test: Çoklu sekme işlemleri
+    //Çoklu sekme işlemleri testi
     @Test
     @DisplayName("Çoklu sekme işlemleri testi")
     public void testMultipleTabs() {
-        System.out.println("\n📋 Test: Çoklu sekme işlemleri testi");
+        System.out.println("\nest: Çoklu sekme işlemleri testi");
         System.out.println("----------------------------------------");
         
         String originalUrl = utils.getCurrentUrl();
@@ -261,21 +248,19 @@ public class AmazonAdvancedTest {
         utils.switchToTab(0);
         assertEquals(originalUrl, utils.getCurrentUrl(), "Orijinal sekmede doğru URL olmalı");
         
-        // Yeni sekmeyi kapat
+        // Yeni sekmeyi kapat byü
         utils.closeCurrentTab();
         utils.switchToTab(0);
         
-        System.out.println("✅ Çoklu sekme işlemleri testi başarılı");
+        System.out.println("çoklu sekme işlemleri testi başarılı");
     }
 
-    // Test: Scroll işlemleri
     @Test
     @DisplayName("Scroll işlemleri testi")
     public void testScrolling() {
-        System.out.println("\n📋 Test: Scroll işlemleri testi");
+        System.out.println("\nTest: Scroll işlemleri testi");
         System.out.println("----------------------------------------");
-        
-        // Sayfanın sonuna scroll yap
+
         utils.scrollToBottom();
         
         // Scroll pozisyonunu kontrol et
@@ -290,73 +275,70 @@ public class AmazonAdvancedTest {
         Long newScrollPosition = (Long) js.executeScript("return window.pageYOffset");
         assertEquals(0, newScrollPosition, "Sayfa başına dönülmüş olmalı");
         
-        System.out.println("📜 Scroll pozisyonu: " + scrollPosition + "px");
-        System.out.println("✅ Scroll işlemleri testi başarılı");
+        System.out.println("Scroll pozisyonu: " + scrollPosition + "px");
+        System.out.println("Scroll işlemleri testi başarılı");
     }
 
-    // Test: Element etkileşimleri
     @Test
-    @DisplayName("Element etkileşimleri testi")
+    @DisplayName("Element etkileşimleri testi ")
     public void testElementInteractions() {
-        System.out.println("\n📋 Test: Element etkileşimleri testi");
+        System.out.println("\ntest Element etkileşimleri testi");
         System.out.println("----------------------------------------");
         
-        // Arama kutusunun tıklanabilir olduğunu kontrol et
+        // Arama kutusu tıklanabilir
         assertTrue(utils.isElementClickable(By.id("twotabsearchtextbox")), 
                   "Arama kutusu tıklanabilir olmalı");
         
-        // Arama butonunun tıklanabilir olduğunu kontrol et
+        // Arama butonu tıklanabilir ?
         assertTrue(utils.isElementClickable(By.id("nav-search-submit-button")), 
                   "Arama butonu tıklanabilir olmalı");
         
-        // Sepet ikonunun görünür olduğunu kontrol et
+        // Sepet ikonu görünür ?
         assertTrue(utils.isElementVisible(By.id("nav-cart")), 
                   "Sepet ikonu görünür olmalı");
         
-        System.out.println("✅ Element etkileşimleri testi başarılı");
+        System.out.println("Element etkileşimleri testi başarılı");
     }
 
-    // Test: URL doğrulama
     @Test
     @DisplayName("URL doğrulama testi")
     public void testUrlValidation() {
-        System.out.println("\n📋 Test: URL doğrulama testi");
+        System.out.println("\nTest: URL doğrulama testi");
         System.out.println("----------------------------------------");
         
         String currentUrl = utils.getCurrentUrl();
         
         // URL'nin Amazon Turkey olduğunu kontrol et
         assertTrue(currentUrl.contains("amazon.com.tr"), "URL Amazon Turkey içermeli");
+        //güvenli mi?
         assertTrue(currentUrl.startsWith("https://"), "URL HTTPS protokolü kullanmalı");
         
-        System.out.println("🌐 URL: " + currentUrl);
-        System.out.println("✅ URL doğrulama testi başarılı");
+        System.out.println("URL: " + currentUrl);
+        System.out.println("URL doğrulama testi başarılı");
     }
 
-    // Test: Sayfa başlığı doğrulama
     @Test
     @DisplayName("Sayfa başlığı doğrulama testi")
     public void testPageTitleValidation() {
-        System.out.println("\n📋 Test: Sayfa başlığı doğrulama testi");
+        System.out.println("\nTest: Sayfa başlığı doğrulama testi");
         System.out.println("----------------------------------------");
         
         String pageTitle = utils.getPageTitle();
         
-        // Sayfa başlığının geçerli olduğunu kontrol et
+        // Sayfa başlığı geçerli ?
         assertNotNull(pageTitle, "Sayfa başlığı null olmamalı");
         assertFalse(pageTitle.trim().isEmpty(), "Sayfa başlığı boş olmamalı");
         assertTrue(pageTitle.contains("Amazon") || pageTitle.contains("amazon"), 
                   "Sayfa başlığı Amazon içermeli");
         
-        System.out.println("📄 Sayfa başlığı: " + pageTitle);
-        System.out.println("✅ Sayfa başlığı doğrulama testi başarılı");
+        System.out.println("Sayfa başlığı: " + pageTitle);
+        System.out.println("Sayfa başlığı doğrulama testi başarılı");
     }
 
-    // Test: Giriş yapma işlemi
     @Test
     @DisplayName("Giriş yapma işlemi testi")
     public void testLoginProcess() {
-        System.out.println("\n📋 Test: Giriş yapma işlemi testi");
+        System.out.println("\ntest: Giriş yapma işlemi testi");
         System.out.println("----------------------------------------");
         
         // Giriş sayfasına git
@@ -366,37 +348,36 @@ public class AmazonAdvancedTest {
         utils.enterEmail("your-email@example.com");
         utils.clickContinueButton();
         
-        System.out.println("⚠️ Robot kontrolü için manuel müdahale gerekiyor!");
-        System.out.println("Robot kontrolünü tamamladıktan sonra test devam edecek...");
+        System.out.println("Robot kontrolü için gellll!!!!!!!!!");
         
-        // Robot kontrolü için 30 saniye bekle
+        // Robot kontrolü için bekle
         utils.waitForSeconds(30);
         
         // Şifre girişi
         utils.enterPassword("your-password");
         utils.clickSignInButton();
         
-        // Giriş başarılı mı kontrol et
+        // Giriş başarılı mı kontrol et!
         boolean isLoggedIn = utils.isUserLoggedIn();
         assertTrue(isLoggedIn, "Kullanıcı başarıyla giriş yapabilmeli");
         
-        System.out.println("✅ Giriş yapma işlemi testi başarılı");
+        System.out.println("Giriş yapma işlemi testi başarılı");
     }
 
     @AfterAll
     public static void teardown() {
-        System.out.println("\n🔒 Gelişmiş testler tamamlanıyor...");
+        System.out.println("\nADVANCED testler tamamlanıyor...");
         System.out.println("==============================================");
         
         if (utils != null) {
             utils.closeBrowser();
         }
         
-        System.out.println("🎉 Tüm gelişmiş testler tamamlandı!");
+        System.out.println("Tüm illeri gelişmiş testler tamamlandı! ehehe");
         System.out.println("==============================================");
         
-        // Programı kapat
-        System.out.println("🔒 Program kapatılıyor...");
+        // Programı kapat byü
+        System.out.println("Program kapatılıyor...");
         System.exit(0);
     }
 } 

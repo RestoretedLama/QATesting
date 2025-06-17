@@ -15,7 +15,7 @@ public class AmazonTestUtils {
     }
     
     /**
-     * Test sırasında bekleme süresi (görünürlük için)
+     * (görünürlük için)
      */
     public void testDelay() {
         try {
@@ -26,7 +26,7 @@ public class AmazonTestUtils {
     }
     
     /**
-     * Uzun bekleme süresi (önemli işlemler için)
+     * Uzun bekleme süresi (önemli şeyler için)
      */
     public void longDelay() {
         try {
@@ -35,12 +35,13 @@ public class AmazonTestUtils {
             Thread.currentThread().interrupt();
         }
     }
+
     
     /**
-     * Cookie banner'ını ve popup'ları kapat
+     * Cookie banner'ını ve popup'ları hallet
      */
     public void handleCookieBannerAndPopups() {
-        System.out.println("🍪 Cookie banner ve popup'lar kontrol ediliyor...");
+        System.out.println("Cookie banner ve popup'lar");
         
         try {
             // Cookie banner'ını kapat
@@ -65,13 +66,13 @@ public class AmazonTestUtils {
                     for (WebElement button : cookieButtons) {
                         if (button.isDisplayed() && button.isEnabled()) {
                             button.click();
-                            System.out.println("✅ Cookie banner kapatıldı: " + selector);
+                            System.out.println("Cookie banner kapatıldı " + selector);
                             testDelay();
                             break;
                         }
                     }
                 } catch (Exception e) {
-                    // Bu seçici çalışmadı, diğerini dene
+                    // Bu selector çalışmadı, diğerini dene
                     continue;
                 }
             }
@@ -96,13 +97,13 @@ public class AmazonTestUtils {
                     for (WebElement button : popupButtons) {
                         if (button.isDisplayed() && button.isEnabled()) {
                             button.click();
-                            System.out.println("✅ Popup kapatıldı: " + selector);
+                            System.out.println("Popup kapatıldı: " + selector);
                             testDelay();
                             break;
                         }
                     }
                 } catch (Exception e) {
-                    // Bu seçici çalışmadı, diğerini dene
+                    // Bu selector çalışmadı, diğerini dene
                     continue;
                 }
             }
@@ -111,30 +112,29 @@ public class AmazonTestUtils {
             try {
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("document.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Escape'}));");
-                System.out.println("✅ ESC tuşu gönderildi");
+                System.out.println("ESC tuşu gönderildi");
                 testDelay();
             } catch (Exception e) {
-                // ESC tuşu çalışmadı
+                // ESC tuşu çalışmadı?
             }
             
         } catch (Exception e) {
-            System.out.println("⚠️ Cookie banner/popup kapatma hatası: " + e.getMessage());
+            System.out.println("Cookie banner/popup kapatma hatası: " + e.getMessage());
         }
     }
     
     /**
-     * Ana sayfaya git ve yüklenmesini bekle
+     * Ana sayfaya git yüklenmesini bekle
      */
     public void navigateToHomePage() {
-        System.out.println("🌐 Ana sayfaya gidiliyor...");
+        System.out.println("Ana sayfaya gidiliyo");
         driver.get("https://www.amazon.com.tr/");
         waitForPageLoad();
         
         // Cookie banner'ını ve popup'ları kapat
         handleCookieBannerAndPopups();
-        
         testDelay();
-        System.out.println("✅ Ana sayfa yüklendi");
+        System.out.println("Ana sayfa yüklendi");
     }
     
     /**
@@ -148,7 +148,7 @@ public class AmazonTestUtils {
      * Ürün ara
      */
     public void searchProduct(String searchTerm) {
-        System.out.println("🔍 '" + searchTerm + "' aranıyor...");
+        System.out.println(searchTerm + "aranıyor");
         WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
         searchBox.clear();
         searchBox.sendKeys(searchTerm);
@@ -159,7 +159,7 @@ public class AmazonTestUtils {
         
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-component-type='s-search-results']")));
         testDelay();
-        System.out.println("✅ Arama tamamlandı");
+        System.out.println("Arama tamamlandı");
     }
     
     /**
@@ -170,24 +170,24 @@ public class AmazonTestUtils {
     }
     
     /**
-     * İlk ürünü seç ve detay sayfasına git
+     * İlk ürünü seç detay sayfasına git
      */
     public boolean clickFirstProduct() {
-        System.out.println("📦 İlk ürün seçiliyor...");
+        System.out.println("İlk ürün seçiliyo");
         try {
             List<WebElement> products = driver.findElements(By.cssSelector("[data-component-type='s-search-results'] .s-result-item h2 a"));
             if (!products.isEmpty()) {
                 products.get(0).click();
                 wait.until(ExpectedConditions.presenceOfElementLocated(By.id("productTitle")));
                 testDelay();
-                System.out.println("✅ Ürün detay sayfası açıldı");
+                System.out.println("Ürün detay sayfası açıldı");
                 return true;
             } else {
-                System.out.println("❌ Arama sonucunda ürün bulunamadı");
+                System.out.println("Arama sonucunda ürün bulunamadı");
                 return false;
             }
         } catch (Exception e) {
-            System.out.println("❌ İlk ürün seçilemedi: " + e.getMessage());
+            System.out.println("İlk ürün seçilemedi: " + e.getMessage());
             return false;
         }
     }
@@ -216,42 +216,42 @@ public class AmazonTestUtils {
      * Sepete ekle - Gelişmiş versiyon
      */
     public boolean addToCartAdvanced() {
-        System.out.println("🛒 Sepete ekleniyor (gelişmiş versiyon)...");
+        System.out.println("Sepete ekleniyor (gelişmiş versiyon)...");
         try {
-            // Önce cookie banner'ını ve popup'ları kapat
+            // cookie banner'ını ve popup'ları kapat
             handleCookieBannerAndPopups();
             
-            // Strateji 1: Standart sepete ekle butonu
+            // Strateji 1 Standart sepete ekle butonu
             if (tryStandardAddToCart()) {
                 return true;
             }
             
-            // Strateji 2: JavaScript ile sepete ekle
+            // Strateji 2  JavaScript ile sepete ekle
             if (tryJavaScriptAddToCart()) {
                 return true;
             }
             
-            // Strateji 3: Farklı seçicilerle sepete ekle
+            // Strateji 3 Farklı seçicilerle sepete ekle
             if (tryAlternativeAddToCart()) {
                 return true;
             }
             
-            // Strateji 4: Form submit ile sepete ekle
+            // Strateji 4 Form submit ile sepete ekle
             if (tryFormSubmitAddToCart()) {
                 return true;
             }
             
-            System.out.println("❌ Hiçbir sepete ekleme stratejisi çalışmadı");
+            System.out.println("Hiçbir sepete ekleme stratejisi çalışmadı");
             return false;
             
         } catch (Exception e) {
-            System.out.println("❌ Sepete ekleme hatası: " + e.getMessage());
+            System.out.println("Sepete ekleme hatası: " + e.getMessage());
             return false;
         }
     }
     
     /**
-     * Standart sepete ekle butonu ile dene
+     * Standart sepete ekle butonuyla dene
      */
     private boolean tryStandardAddToCart() {
         try {
@@ -272,9 +272,9 @@ public class AmazonTestUtils {
                 try {
                     WebElement button = driver.findElement(By.cssSelector(selector));
                     if (button.isDisplayed() && button.isEnabled()) {
-                        System.out.println("🎯 Standart buton bulundu: " + selector);
+                        System.out.println("*Standart buton bulundu: " + selector);
                         button.click();
-                        System.out.println("✅ Standart butona tıklandı");
+                        System.out.println("*Standart butona tıklandı");
                         waitForAddToCartConfirmation();
                         return true;
                     }
@@ -293,7 +293,7 @@ public class AmazonTestUtils {
      */
     private boolean tryJavaScriptAddToCart() {
         try {
-            System.out.println("🔧 JavaScript ile sepete ekleme deneniyor...");
+            System.out.println("JavaScript ile sepete ekleme deneniyor...");
             JavascriptExecutor js = (JavascriptExecutor) driver;
             
             // JavaScript ile sepete ekle butonunu bul ve tıkla
@@ -309,7 +309,7 @@ public class AmazonTestUtils {
             for (String script : jsScripts) {
                 try {
                     js.executeScript(script);
-                    System.out.println("✅ JavaScript ile sepete ekleme başarılı");
+                    System.out.println("JavaScript ile sepete ekleme başarılı");
                     waitForAddToCartConfirmation();
                     return true;
                 } catch (Exception e) {
@@ -327,7 +327,7 @@ public class AmazonTestUtils {
      */
     private boolean tryAlternativeAddToCart() {
         try {
-            System.out.println("🔄 Alternatif seçiciler deneniyor...");
+            System.out.println("Alternatif seçiciler deneniyor...");
             
             // XPath ile farklı butonları dene
             String[] xpathSelectors = {
@@ -345,9 +345,9 @@ public class AmazonTestUtils {
                 try {
                     WebElement button = driver.findElement(By.xpath(xpath));
                     if (button.isDisplayed() && button.isEnabled()) {
-                        System.out.println("🎯 Alternatif buton bulundu: " + xpath);
+                        System.out.println("Alternatif buton bulundu: " + xpath);
                         button.click();
-                        System.out.println("✅ Alternatif butona tıklandı");
+                        System.out.println("Alternatif butona tıklandı");
                         waitForAddToCartConfirmation();
                         return true;
                     }
@@ -366,13 +366,13 @@ public class AmazonTestUtils {
      */
     private boolean tryFormSubmitAddToCart() {
         try {
-            System.out.println("📝 Form submit deneniyor...");
+            System.out.println("Form submit deneniyor...");
             
             // Form elementini bul
             WebElement form = driver.findElement(By.cssSelector("form[action*='cart'], form[action*='add']"));
             if (form != null) {
                 form.submit();
-                System.out.println("✅ Form submit başarılı");
+                System.out.println("Form submit başarılı");
                 waitForAddToCartConfirmation();
                 return true;
             }
@@ -383,7 +383,7 @@ public class AmazonTestUtils {
     }
     
     /**
-     * Sepete ekleme onayını bekle
+     * Sepete ekleme onayını beklemek
      */
     private void waitForAddToCartConfirmation() {
         try {
@@ -399,26 +399,25 @@ public class AmazonTestUtils {
             for (String selector : confirmationSelectors) {
                 try {
                     wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector)));
-                    System.out.println("✅ Sepete eklendi mesajı görüldü: " + selector);
+                    System.out.println("Sepete eklendi mesajı görüldü: " + selector);
                     break;
                 } catch (Exception e) {
                     continue;
                 }
             }
-            
-            // Sepet sayısının artıp artmadığını kontrol et
+
             Thread.sleep(2000);
             int cartCount = getCartItemCount();
             if (cartCount > 0) {
-                System.out.println("✅ Sepete eklendi (sepet sayısı: " + cartCount + ")");
+                System.out.println("Sepete eklendi (sepet sayısı: " + cartCount + ")");
             } else {
-                System.out.println("⚠️ Sepete ekleme durumu belirsiz");
+                System.out.println("Sepete ekleme durumu belirsiz");
             }
             
             longDelay();
             
         } catch (Exception e) {
-            System.out.println("⚠️ Sepete ekleme onayı beklenemedi: " + e.getMessage());
+            System.out.println("sepete ekleme onayı beklenemedi: " + e.getMessage());
         }
     }
     
@@ -426,19 +425,17 @@ public class AmazonTestUtils {
      * Sepete git
      */
     public boolean navigateToCart() {
-        System.out.println("🛒 Sepet sayfasına gidiliyor...");
+        System.out.println("Sepet sayfasına gidiliyor...");
         try {
-            // Sepet ikonuna tıkla
             WebElement cartIcon = driver.findElement(By.id("nav-cart"));
             cartIcon.click();
-            
-            // Sepet sayfasının yüklenmesini bekle
+
             wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sc-active-cart")));
             testDelay();
-            System.out.println("✅ Sepet sayfası açıldı");
+            System.out.println("Sepet sayfası açıldı");
             return true;
         } catch (Exception e) {
-            System.out.println("❌ Sepet sayfasına gidilemedi: " + e.getMessage());
+            System.out.println("Sepet sayfasına gidilemedi: " + e.getMessage());
             return false;
         }
     }
@@ -447,68 +444,63 @@ public class AmazonTestUtils {
      * Sepetten ürün kaldır (ilk ürünü)
      */
     public boolean removeFromCart() {
-        return removeFromCart(0); // İlk ürünü kaldır
+        return removeFromCart(0);
     }
     
     /**
      * Sepete git
      */
     public boolean goToCart() {
-        System.out.println("🛒 Sepete gidiliyor...");
+        System.out.println("Sepete gidiliyor...");
         try {
             // Farklı sepet butonlarını dene
             WebElement cartButton = null;
-            
-            // 1. Ana sepet butonu
+
             try {
                 cartButton = driver.findElement(By.id("nav-cart"));
             } catch (NoSuchElementException e) {
-                // 2. Alternatif sepet butonu
                 try {
                     cartButton = driver.findElement(By.cssSelector("[data-feature-id='nav-cart']"));
                 } catch (NoSuchElementException e2) {
-                    // 3. Aria-label ile sepet butonu
                     try {
                         cartButton = driver.findElement(By.cssSelector("[aria-label*='Sepet'], [aria-label*='Cart']"));
                     } catch (NoSuchElementException e3) {
-                        // 4. Text içeren sepet linki
                         try {
                             cartButton = driver.findElement(By.xpath("//a[contains(text(), 'Sepet') or contains(text(), 'Cart')]"));
                         } catch (NoSuchElementException e4) {
-                            System.out.println("❌ Sepet butonu bulunamadı");
+                            System.out.println("Sepet butonu bulunamadı");
                             return false;
                         }
                     }
                 }
             }
-            
             if (cartButton != null && cartButton.isDisplayed() && cartButton.isEnabled()) {
                 cartButton.click();
-                System.out.println("✅ Sepet butonuna tıklandı");
+                System.out.println("Sepet butonuna tıklandı");
                 
                 // Sepet sayfasının yüklendiğini bekle
                 try {
                     wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".sc-cart-header, .a-page-title")));
-                    System.out.println("✅ Sepet sayfası açıldı");
+                    System.out.println("Sepet sayfası açıldı");
                 } catch (Exception e) {
                     // Alternatif sepet sayfası elementlerini kontrol et
                     try {
                         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".sc-list, .a-list-item")));
-                        System.out.println("✅ Sepet sayfası açıldı (alternatif)");
+                        System.out.println("Sepet sayfası açıldı (alternatife)");
                     } catch (Exception e2) {
-                        System.out.println("⚠️ Sepet sayfası yükleme durumu belirsiz");
+                        System.out.println("Sepet sayfası yükleme durumu belirsiz");
                     }
                 }
                 
                 longDelay();
                 return true;
             } else {
-                System.out.println("❌ Sepet butonu tıklanamıyor");
+                System.out.println("Sepet butonu tıklanamıyor");
                 return false;
             }
             
         } catch (Exception e) {
-            System.out.println("❌ Sepete gitme hatası: " + e.getMessage());
+            System.out.println("Sepete gitme hatası " + e.getMessage());
             return false;
         }
     }
@@ -520,20 +512,15 @@ public class AmazonTestUtils {
         try {
             // Farklı sepet sayısı elementlerini dene
             WebElement cartCount = null;
-            
-            // 1. Ana sepet sayısı
             try {
                 cartCount = driver.findElement(By.id("nav-cart-count"));
             } catch (NoSuchElementException e) {
-                // 2. Alternatif sepet sayısı
                 try {
                     cartCount = driver.findElement(By.cssSelector("[data-feature-id='nav-cart-count']"));
                 } catch (NoSuchElementException e2) {
-                    // 3. Aria-label ile sepet sayısı
                     try {
                         cartCount = driver.findElement(By.cssSelector("[aria-label*='sepet'], [aria-label*='cart']"));
                     } catch (NoSuchElementException e3) {
-                        // 4. Text içeren sepet sayısı
                         try {
                             cartCount = driver.findElement(By.xpath("//span[contains(text(), 'sepet') or contains(text(), 'cart')]"));
                         } catch (NoSuchElementException e4) {
@@ -562,7 +549,7 @@ public class AmazonTestUtils {
      */
     public List<WebElement> getCartItems() {
         try {
-            // Farklı sepet ürün elementlerini dene
+            // Farklı sepet ürünleri
             List<WebElement> cartItems = driver.findElements(By.cssSelector(".sc-list-item"));
             if (cartItems.isEmpty()) {
                 cartItems = driver.findElements(By.cssSelector(".a-list-item"));
@@ -580,9 +567,9 @@ public class AmazonTestUtils {
      * Sepetten ürün sil
      */
     public boolean removeFromCart(int itemIndex) {
-        System.out.println("🗑️ Sepetten ürün siliniyor...");
+        System.out.println("Sepetten ürün siliniyor");
         try {
-            // Farklı silme butonlarını dene
+            // Farklı silme butonlarını
             List<WebElement> removeButtons = driver.findElements(By.cssSelector(".sc-action-delete"));
             if (removeButtons.isEmpty()) {
                 removeButtons = driver.findElements(By.cssSelector("[data-feature-id='sc-action-delete']"));
@@ -597,12 +584,12 @@ public class AmazonTestUtils {
             if (itemIndex < removeButtons.size()) {
                 removeButtons.get(itemIndex).click();
                 longDelay();
-                System.out.println("✅ Ürün sepetten silindi");
+                System.out.println("Ürün sepetten silindi");
                 return true;
             }
             return false;
         } catch (Exception e) {
-            System.out.println("❌ Ürün silinemedi: " + e.getMessage());
+            System.out.println("Ürün silinemedi " + e.getMessage());
             return false;
         }
     }
@@ -611,28 +598,29 @@ public class AmazonTestUtils {
      * Kategori menüsünü aç
      */
     public void openCategoryMenu() {
-        System.out.println("📋 Kategori menüsü açılıyor...");
+        System.out.println("Kategori menüsü açılıyor");
         WebElement hamburgerMenu = driver.findElement(By.id("nav-hamburger-menu"));
         hamburgerMenu.click();
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#hmenu-content")));
         testDelay();
-        System.out.println("✅ Kategori menüsü açıldı");
+        System.out.println("Kategori menüsü açıldı");
     }
     
     /**
      * Belirtilen kategoriye git
      */
     public boolean navigateToCategory(String categoryName) {
-        System.out.println("📂 '" + categoryName + "' kategorisine gidiliyor...");
+        System.out.println(categoryName + " kategorisine gidiliyor");
         try {
             WebElement category = driver.findElement(By.xpath("//a[contains(text(), '" + categoryName + "')]"));
             category.click();
             wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".a-page-title")));
             testDelay();
-            System.out.println("✅ Kategori sayfası açıldı");
+            System.out.println("Kategori sayfası açıldı ");
             return true;
         } catch (NoSuchElementException e) {
-            System.out.println("❌ Kategori bulunamadı: " + categoryName);
+
+            System.out.println("Kategori bulunamadı " + categoryName);
             return false;
         }
     }
@@ -641,20 +629,18 @@ public class AmazonTestUtils {
      * Sayfayı scroll et
      */
     public void scrollToBottom() {
-        System.out.println("📜 Sayfa aşağı kaydırılıyor...");
+        System.out.println("Sayfa aşağı kaydırılıyor");
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
         wait.until(ExpectedConditions.jsReturnsValue(
                 "return window.pageYOffset + window.innerHeight >= document.body.scrollHeight - 10"));
         testDelay();
-        System.out.println("✅ Sayfa sonuna ulaşıldı");
+        System.out.println("Sayfa sonuna ulaşıldı");
     }
     
-    /**
-     * Pencere boyutunu değiştir
-     */
+
     public void setWindowSize(int width, int height) {
-        System.out.println("📱 Pencere boyutu değiştiriliyor: " + width + "x" + height);
+        System.out.println("Pencere boyutu değiştiriliyor  " + width + "x" + height);
         driver.manage().window().setSize(new Dimension(width, height));
         testDelay();
     }
@@ -663,16 +649,13 @@ public class AmazonTestUtils {
      * Pencereyi maksimize et
      */
     public void maximizeWindow() {
-        System.out.println("🖥️ Pencere maksimize ediliyor...");
+        System.out.println("Pencere maksimise ediliyor...");
         driver.manage().window().maximize();
         testDelay();
     }
-    
-    /**
-     * Yeni sekme aç
-     */
+
     public void openNewTab(String url) {
-        System.out.println("🆕 Yeni sekme açılıyor...");
+        System.out.println("Yeni sekme açılıyor...");
         ((JavascriptExecutor) driver).executeScript("window.open('" + url + "', '_blank');");
         testDelay();
     }
@@ -681,37 +664,31 @@ public class AmazonTestUtils {
      * Sekmeler arası geçiş yap
      */
     public void switchToTab(int tabIndex) {
-        System.out.println("🔄 Sekme " + tabIndex + "'e geçiliyor...");
+        System.out.println("Sekme " + tabIndex + "'e geçiliyor...");
         String[] windowHandles = driver.getWindowHandles().toArray(new String[0]);
         if (tabIndex < windowHandles.length) {
             driver.switchTo().window(windowHandles[tabIndex]);
             testDelay();
         }
     }
-    
-    /**
-     * Sekme kapat
-     */
+
     public void closeCurrentTab() {
-        System.out.println("❌ Sekme kapatılıyor...");
+        System.out.println("Sekme kapatılıyor...");
         driver.close();
         testDelay();
     }
     
-    /**
-     * Element görünür mü kontrol et
-     */
+
     public boolean isElementVisible(By locator) {
         try {
             return driver.findElement(locator).isDisplayed();
         } catch (NoSuchElementException e) {
             return false;
         }
+
     }
     
-    /**
-     * Element tıklanabilir mi kontrol et
-     */
+
     public boolean isElementClickable(By locator) {
         try {
             wait.until(ExpectedConditions.elementToBeClickable(locator));
@@ -721,23 +698,17 @@ public class AmazonTestUtils {
         }
     }
     
-    /**
-     * Sayfa başlığını al
-     */
+
     public String getPageTitle() {
         return driver.getTitle();
     }
     
-    /**
-     * Mevcut URL'yi al
-     */
+
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
     
-    /**
-     * Sayfa yükleme süresini ölç
-     */
+
     public long measurePageLoadTime() {
         long startTime = System.currentTimeMillis();
         waitForPageLoad();
@@ -745,50 +716,43 @@ public class AmazonTestUtils {
         return endTime - startTime;
     }
     
-    /**
-     * Filtreleme seçeneklerini al
-     */
+
     public List<WebElement> getFilterOptions() {
         return driver.findElements(By.cssSelector("#departments .a-spacing-micro"));
     }
-    
-    /**
-     * Belirtilen filtreyi uygula
-     */
+
     public boolean applyFilter(int filterIndex) {
-        System.out.println("🔍 Filtre uygulanıyor...");
+        System.out.println("Filtre uygulanıyor");
         try {
             List<WebElement> filters = getFilterOptions();
             if (filterIndex < filters.size()) {
                 filters.get(filterIndex).click();
                 waitForPageLoad();
                 testDelay();
-                System.out.println("✅ Filtre uygulandı");
+                System.out.println("Filtre uygulandı");
                 return true;
             }
             return false;
         } catch (Exception e) {
-            System.out.println("❌ Filtre uygulanamadı");
+            System.out.println("Filtre uygulanamadı");
             return false;
         }
     }
     
-    /**
-     * Tarayıcıyı kapat
-     */
+
     public void closeBrowser() {
-        System.out.println("🔒 Tarayıcı kapatılıyor...");
+        System.out.println("Tarayıcı kapatılıyor...");
         if (driver != null) {
             driver.quit();
         }
-        System.out.println("✅ Tarayıcı kapatıldı");
+        System.out.println("Tarayıcı kapatıldı");
     }
     
     /**
      * Sepete ekle
      */
     public boolean addToCart() {
-        System.out.println("🛒 Sepete ekleniyor...");
+        System.out.println("Sepete ekleniyor...");
         return addToCartAdvanced();
     }
     
@@ -796,57 +760,51 @@ public class AmazonTestUtils {
      * Giriş sayfasına git
      */
     public void navigateToLoginPage() {
-        System.out.println("🔑 Giriş sayfasına gidiliyor...");
+        System.out.println("Giriş sayfasına gidiliyor...");
         driver.get("https://www.amazon.com.tr/ap/signin");
         waitForPageLoad();
         testDelay();
-        System.out.println("✅ Giriş sayfası yüklendi");
+        System.out.println("Giriş sayfası yüklendi");
     }
 
-    /**
-     * E-posta adresini gir
-     */
     public void enterEmail(String email) {
-        System.out.println("📧 E-posta adresi giriliyor...");
+        System.out.println("E-posta adresi giriliyor...");
         WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ap_email")));
         emailInput.clear();
         emailInput.sendKeys(email);
         testDelay();
-        System.out.println("✅ E-posta adresi girildi");
+        System.out.println("E-posta adresi girildi");
     }
 
-    /**
-     * Devam et butonuna tıkla
-     */
     public void clickContinueButton() {
-        System.out.println("➡️ Devam et butonuna tıklanıyor...");
+        System.out.println("Devam et butonuna tıklanıyor...");
         WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("continue")));
         continueButton.click();
         testDelay();
-        System.out.println("✅ Devam et butonuna tıklandı");
+        System.out.println("Devam et butonuna tıklandı");
     }
 
     /**
      * Şifreyi gir
      */
     public void enterPassword(String password) {
-        System.out.println("🔒 Şifre giriliyor...");
+        System.out.println("Şifre giriliyor...");
         WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ap_password")));
         passwordInput.clear();
         passwordInput.sendKeys(password);
         testDelay();
-        System.out.println("✅ Şifre girildi");
+        System.out.println("Şifre girildi");
     }
 
     /**
      * Giriş yap butonuna tıkla
      */
     public void clickSignInButton() {
-        System.out.println("🔑 Giriş yap butonuna tıklanıyor...");
+        System.out.println("Giriş yap butonuna tıklanıyor...");
         WebElement signInButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("signInSubmit")));
         signInButton.click();
         testDelay();
-        System.out.println("✅ Giriş yap butonuna tıklandı");
+        System.out.println("Giriş yap butonuna tıklandı");
     }
 
     /**
