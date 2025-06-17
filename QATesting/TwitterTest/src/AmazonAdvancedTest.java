@@ -127,7 +127,7 @@ public class AmazonAdvancedTest {
         int cartCount = utils.getCartItemCount();
         System.out.println("🛒 Sepetteki ürün sayısı: " + cartCount);
         
-        System.out.println("✅ Sepete ekleme işlemi testi başarılı");
+        System.out.println("Sepete ekleme işlemi testi başarılı");
     }
 
     @Test
