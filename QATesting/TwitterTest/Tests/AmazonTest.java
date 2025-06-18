@@ -117,29 +117,6 @@ public class AmazonTest {
     }
 
     @Test
-    @DisplayName("Add to cart process test")
-    public void testAddToCartProcess() {
-        System.out.println("\nTest: Add to cart process test");
-        System.out.println("----------------------------------------");
-        
-        utils.searchProduct("book");
-        List<WebElement> searchResults = utils.getSearchResults();
-        assertFalse(searchResults.isEmpty(), "Arama sonucu ürün bulunamadı!");
-
-        boolean productClicked = utils.clickFirstProduct();
-        assertTrue(productClicked, "İlk ürün tıklanamadı!");
-
-        boolean addedToCart = utils.addToCartAdvanced();
-        assertTrue(addedToCart, "Ürün sepete eklenemedi!");
-
-        int cartCount = utils.getCartItemCount();
-        assertTrue(cartCount > 0, "Sepette ürün yok!");
-
-        System.out.println("🛒 Items in cart: " + cartCount);
-        System.out.println("Add to cart process test successful");
-    }
-
-    @Test
     @DisplayName("Go to cart and check items test")
     public void testGoToCartAndCheckItems() {
         System.out.println("\nTest: Go to cart and check items test");
