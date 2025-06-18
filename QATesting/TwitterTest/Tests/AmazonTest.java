@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -94,9 +96,9 @@ public class AmazonTest {
     public void testProductDetailInformation() {
         System.out.println("\nProduct detail page information test");
         System.out.println("----------------------------------------");
-        
-        utils.searchProduct("laptop");
-        utils.clickFirstProduct();
+
+        // Arama ve ilk gerçek ürünü tıkla
+        assertTrue(utils.clickFirstRealProduct("laptop"), "İlk gerçek ürün tıklanamadı!");
 
         String productTitle = utils.getProductTitle();
         assertNotNull(productTitle, "Product title should not be null");
@@ -107,35 +109,17 @@ public class AmazonTest {
 
         String currentUrl = utils.getCurrentUrl();
         assertTrue(currentUrl.contains("amazon.com.tr"), "URL should contain Amazon Turkey");
-        
-        System.out.println("Product " + productTitle);
-        System.out.println("Price " + productPrice);
-        System.out.println("URL " + currentUrl);
+
+        System.out.println("Product: " + productTitle);
+        System.out.println("Price: " + productPrice);
+        System.out.println("URL: " + currentUrl);
         System.out.println("Product detail information test successful");
-    }
-
-    @Test
-    @DisplayName("Add to cart process test")
-    public void testAddToCartProcess() {
-        System.out.println("\nAdd to cart process test");
-        System.out.println("----------------------------------------");
-        
-        utils.searchProduct("book");
-        utils.clickFirstProduct();
-        
-        boolean addedToCart = utils.addToCartAdvanced();
-        assertTrue(addedToCart, "Product should be added to cart");
-
-        int cartCount = utils.getCartItemCount();
-        System.out.println("Items in cart: " + cartCount);
-        
-        System.out.println("Add to cart process test successful");
     }
 
     @Test
     @DisplayName("Go to cart and check items test")
     public void testGoToCartAndCheckItems() {
-        System.out.println("\nGo to cart and check items test");
+        System.out.println("\nTest: Go to cart and check items test");
         System.out.println("----------------------------------------");
         
         utils.searchProduct("pen");
@@ -159,7 +143,7 @@ public class AmazonTest {
     @Test
     @DisplayName("Filtering process test")
     public void testFilteringProcess() {
-        System.out.println("\nFiltering process test");
+        System.out.println("\nTest: Filtering process test");
         System.out.println("----------------------------------------");
         
         utils.searchProduct("phone");
@@ -200,7 +184,7 @@ public class AmazonTest {
         
         if (width <= 768) {
             assertTrue(utils.isElementVisible(By.id("nav-hamburger-menu")), 
-                      "Hamburger menu should be visible for  " + device);
+                      "Hamburger menu should be visible for " + device);
             System.out.println("Mobile menu visible for " + device);
         }
         
@@ -211,7 +195,7 @@ public class AmazonTest {
     @Test
     @DisplayName("Performance test")
     public void testPerformance() {
-        System.out.println("\n Performance test");
+        System.out.println("\ntest: Performance test");
         System.out.println("----------------------------------------");
         
         long loadTime = utils.measurePageLoadTime();
@@ -225,7 +209,7 @@ public class AmazonTest {
     @Test
     @DisplayName("Multiple tabs operations test")
     public void testMultipleTabs() {
-        System.out.println("\nMultiple tabs operations test");
+        System.out.println("\nest: Multiple tabs operations test");
         System.out.println("----------------------------------------");
         
         String originalUrl = utils.getCurrentUrl();
@@ -270,7 +254,7 @@ public class AmazonTest {
     @Test
     @DisplayName("Element interactions test ")
     public void testElementInteractions() {
-        System.out.println("\n Element interactions test");
+        System.out.println("\ntest Element interactions test");
         System.out.println("----------------------------------------");
         
         assertTrue(utils.isElementClickable(By.id("twotabsearchtextbox")), 
@@ -288,7 +272,7 @@ public class AmazonTest {
     @Test
     @DisplayName("URL validation test")
     public void testUrlValidation() {
-        System.out.println("\n URL validation test");
+        System.out.println("\nTest: URL validation test");
         System.out.println("----------------------------------------");
         
         String currentUrl = utils.getCurrentUrl();
@@ -296,14 +280,14 @@ public class AmazonTest {
         assertTrue(currentUrl.contains("amazon.com.tr"), "URL should contain Amazon Turkey");
         assertTrue(currentUrl.startsWith("https://"), "URL should use HTTPS protocol");
         
-        System.out.println("URL " + currentUrl);
+        System.out.println("URL: " + currentUrl);
         System.out.println("URL validation test successful");
     }
 
     @Test
     @DisplayName("Page title validation test")
     public void testPageTitleValidation() {
-        System.out.println("\nPage title validation test");
+        System.out.println("\nTest: Page title validation test");
         System.out.println("----------------------------------------");
         
         String pageTitle = utils.getPageTitle();
@@ -313,14 +297,14 @@ public class AmazonTest {
         assertTrue(pageTitle.contains("Amazon") || pageTitle.contains("amazon"), 
                   "Page title should contain Amazon");
         
-        System.out.println("Page title " + pageTitle);
+        System.out.println("Page title: " + pageTitle);
         System.out.println("Page title validation test successful");
     }
 
     @Test
     @DisplayName("Login process test")
     public void testLoginProcess() {
-        System.out.println("\nLogin process test");
+        System.out.println("\ntest: Login process test");
         System.out.println("----------------------------------------");
         
         utils.navigateToLoginPage();
@@ -341,9 +325,20 @@ public class AmazonTest {
         System.out.println("Login process test successful");
     }
 
+    @Test
+    @DisplayName("Add to cart process test with new method")
+    public void testAddToCartProcessWithNewMethod() {
+        System.out.println("\nTest: Add to cart process test with new method");
+        System.out.println("----------------------------------------");
+        
+        assertTrue(utils.addFirstProductToCart("book"));
+        
+        System.out.println("Add to cart process test with new method successful");
+    }
+
     @AfterAll
     public static void teardown() {
-        System.out.println("\nADVANCED tests completing");
+        System.out.println("\nADVANCED tests completing...");
         System.out.println("==============================================");
         
         if (utils != null) {
@@ -353,7 +348,97 @@ public class AmazonTest {
         System.out.println("All advanced tests completed! ehehe");
         System.out.println("==============================================");
         
-        System.out.println("Program closing");
+        System.out.println("Program closing...");
         System.exit(0);
+    }
+
+    public boolean addFirstProductToCart(String searchTerm) {
+        try {
+            driver.get("https://www.amazon.com.tr/");
+            utils.waitForPageLoad();
+            utils.handleCookieBannerAndPopups();
+            utils.testDelay();
+
+            // Arama
+            WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
+            searchBox.clear();
+            searchBox.sendKeys(searchTerm);
+            driver.findElement(By.id("nav-search-submit-button")).click();
+            utils.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-component-type='s-search-result']")));
+            utils.testDelay();
+
+            // Gerçek ürün detayına giden ilk linki bul
+            List<WebElement> results = driver.findElements(By.cssSelector("[data-component-type='s-search-result']"));
+            WebElement firstProductLink = null;
+            String productText = "";
+            for (WebElement result : results) {
+                // Önce <h2> altındaki <a> ile dene
+                try {
+                    WebElement h2 = result.findElement(By.tagName("h2"));
+                    WebElement link = h2.findElement(By.tagName("a"));
+                    String href = link.getAttribute("href");
+                    if (href != null && href.contains("/dp/") && link.isDisplayed() && link.isEnabled()) {
+                        firstProductLink = link;
+                        productText = link.getText();
+                        break;
+                    }
+                } catch (Exception ignore) {}
+                // Olmazsa kutudaki tüm <a> etiketlerini dene
+                if (firstProductLink == null) {
+                    List<WebElement> links = result.findElements(By.tagName("a"));
+                    for (WebElement link : links) {
+                        String href = link.getAttribute("href");
+                        if (href != null && href.contains("/dp/") && link.isDisplayed() && link.isEnabled()) {
+                            firstProductLink = link;
+                            productText = link.getText();
+                            break;
+                        }
+                    }
+                }
+                if (firstProductLink != null) break;
+            }
+            if (firstProductLink == null) {
+                System.out.println("Hiçbir gerçek ürün linki bulunamadı!");
+                return false;
+            }
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", firstProductLink);
+            utils.testDelay();
+            System.out.println("Tıklanan ürün: " + productText);
+            firstProductLink.click();
+            utils.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("productTitle")));
+            utils.testDelay();
+
+            // Sepete ekle butonunu bul ve tıkla
+            WebElement addToCartBtn = null;
+            String[] selectors = {
+                "#add-to-cart-button",
+                "input[name='submit.add-to-cart']",
+                "button[name='submit.add-to-cart']"
+            };
+            for (String selector : selectors) {
+                try {
+                    addToCartBtn = driver.findElement(By.cssSelector(selector));
+                    if (addToCartBtn.isDisplayed() && addToCartBtn.isEnabled()) {
+                        break;
+                    }
+                } catch (Exception ignore) {}
+            }
+            if (addToCartBtn == null) {
+                System.out.println("Sepete ekle butonu yok!");
+                return false;
+            }
+            addToCartBtn.click();
+            System.out.println("Sepete ekle tıklandı");
+            boolean confirmed = utils.waitForAddToCartConfirmation();
+            if (confirmed) {
+                System.out.println("Ürün sepete eklendi!");
+            } else {
+                System.out.println("Sepete ekleme onayı alınamadı!");
+            }
+            return confirmed;
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+            return false;
+        }
     }
 } 

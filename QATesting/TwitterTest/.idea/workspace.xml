@@ -7,11 +7,6 @@
     <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/AmazonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/AmazonTestUtilsCoverageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonTestUtilsCoverageTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SimpleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRunner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,12 +37,15 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.AmazonTestUtilsCoverageTest.executor": "Coverage",
-    "Application.Main.executor": "Coverage",
+    "Application.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.AmazonAdvancedTest.executor": "Coverage",
-    "JUnit.AmazonAdvancedTest.testProductSearchWithDifferentTerms.executor": "Run",
     "JUnit.AmazonTest.executor": "Coverage",
+    "JUnit.AmazonTest.testAddToCartProcess.executor": "Run",
+    "JUnit.AmazonTest.testAddToCartProcessWithNewMethod.executor": "Run",
+    "JUnit.AmazonTest.testGoToCartAndCheckItems.executor": "Run",
     "JUnit.AmazonTest.testLoginProcess.executor": "Run",
+    "JUnit.AmazonTest.testProductDetailInformation.executor": "Run",
     "JUnit.AmazonTest.testProductSearchWithDifferentTerms.executor": "Run",
     "JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin.executor": "Run",
     "JUnit.BlueSkyLoginTest.executor": "Run",
@@ -61,7 +59,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "elctual",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/enisa/Downloads/selenium-java-4.32.0",
     "node.js.detected.package.eslint": "true",
@@ -77,14 +75,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AmazonAdvancedTest.testProductSearchWithDifferentTerms">
-    <configuration name="AmazonTestUtilsCoverageTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
-      <module name="TwitterTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.AmazonTest.testProductDetailInformation">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="TwitterTest" />
@@ -92,30 +83,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonAdvancedTest.testProductSearchWithDifferentTerms" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonTest.testAddToCartProcess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="METHOD_NAME" value="testProductSearchWithDifferentTerms(java.lang.String)" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
+      <option name="METHOD_NAME" value="testAddToCartProcess" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonTest.testAddToCartProcessWithNewMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="testAddToCartProcessWithNewMethod" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonTestUtilsCoverageTest.testInvalidEmailLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonTest.testGoToCartAndCheckItems" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
-      <option name="METHOD_NAME" value="testInvalidEmailLogin" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
+      <option name="METHOD_NAME" value="testGoToCartAndCheckItems" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AmazonTest.testProductDetailInformation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TwitterTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
+      <option name="METHOD_NAME" value="testProductDetailInformation" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -123,21 +125,13 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AmazonAdvancedTest.testProductSearchWithDifferentTerms" />
-        <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin" />
-        <item itemvalue="Application.AmazonTestUtilsCoverageTest" />
+        <item itemvalue="JUnit.AmazonTest.testProductDetailInformation" />
+        <item itemvalue="JUnit.AmazonTest.testAddToCartProcess" />
+        <item itemvalue="JUnit.AmazonTest.testAddToCartProcessWithNewMethod" />
+        <item itemvalue="JUnit.AmazonTest.testGoToCartAndCheckItems" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.AmazonTest" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -165,7 +159,7 @@
       <workItem from="1750190328255" duration="38000" />
       <workItem from="1750191083376" duration="11000" />
       <workItem from="1750193613167" duration="354000" />
-      <workItem from="1750257953738" duration="1277000" />
+      <workItem from="1750279747223" duration="1513000" />
     </task>
     <servers />
   </component>
