@@ -12,23 +12,21 @@ import static org.junit.platform.engine.discovery.DiscoverySelectors.selectMetho
 public class TestRunner {
     
     public static void main(String[] args) {
-        System.out.println("Amazon Turkey Website Test Bot Başlatılıyor...");
+        System.out.println("Amazon Turkey Website Test Bot Starting...");
         System.out.println("==============================================");
         
-        // Test sınıflarını çalıştır
         try {
-            // runTestClass(Class.forName("AmazonTurkeyTest")); // Artık yok, kaldırıldı
             runTestClass(Class.forName("AmazonAdvancedTest"));
         } catch (ClassNotFoundException e) {
-            System.err.println("Test sınıfları bulunamadı: " + e.getMessage());
-            System.err.println("Lütfen test sınıflarının doğru konumda olduğunu kontrol edin.");
+            System.err.println("Test classes not found: " + e.getMessage());
+            System.err.println("Please check that test classes are in the correct location.");
         }
         
-        System.out.println("\nTüm testler tamamlandı!");
+        System.out.println("\nAll tests completed!");
     }
     
     private static void runTestClass(Class<?> testClass) {
-        System.out.println("\n" + testClass.getSimpleName() + " sınıfı çalıştırılıyor...");
+        System.out.println("\nRunning " + testClass.getSimpleName() + " class...");
         
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
                 .request()
@@ -43,26 +41,23 @@ public class TestRunner {
         
         TestExecutionSummary summary = listener.getSummary();
         
-        System.out.println("Test Sonuçları:");
-        System.out.println("- Toplam test sayısı: " + summary.getTestsFoundCount());
-        System.out.println("- Başarılı testler: " + summary.getTestsSucceededCount());
-        System.out.println("- Başarısız testler: " + summary.getTestsFailedCount());
-        System.out.println("- Atlanan testler: " + summary.getTestsSkippedCount());
+        System.out.println("Test Results:");
+        System.out.println("- Total test count: " + summary.getTestsFoundCount());
+        System.out.println("- Successful tests: " + summary.getTestsSucceededCount());
+        System.out.println("- Failed tests: " + summary.getTestsFailedCount());
+        System.out.println("- Skipped tests: " + summary.getTestsSkippedCount());
         
         if (summary.getTestsFailedCount() > 0) {
-            System.out.println("\nBaşarısız testler:");
+            System.out.println("\nFailed tests:");
             summary.getFailures().forEach(failure -> {
                 System.out.println("- " + failure.getTestIdentifier().getDisplayName());
-                System.out.println("  Hata: " + failure.getException().getMessage());
+                System.out.println("  Error: " + failure.getException().getMessage());
             });
         }
     }
     
-    /**
-     * Belirli bir test metodunu çalıştır
-     */
     public static void runSpecificTest(Class<?> testClass, String testMethodName) {
-        System.out.println("\n" + testClass.getSimpleName() + "." + testMethodName + " çalıştırılıyor...");
+        System.out.println("\nRunning " + testClass.getSimpleName() + "." + testMethodName + "...");
         
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
                 .request()
@@ -76,31 +71,28 @@ public class TestRunner {
         launcher.execute(request);
         
         TestExecutionSummary summary = listener.getSummary();
-        System.out.println("Test tamamlandı. Başarılı: " + summary.getTestsSucceededCount() + 
-                          ", Başarısız: " + summary.getTestsFailedCount());
+        System.out.println("Test completed. Successful: " + summary.getTestsSucceededCount() + 
+                          ", Failed: " + summary.getTestsFailedCount());
     }
     
-    /**
-     * Tüm testleri çalıştır ve rapor oluştur
-     */
     public static void runAllTestsWithReport() {
-        System.out.println("Amazon Turkey Website Test Raporu");
+        System.out.println("Amazon Turkey Website Test Report");
         System.out.println("=================================");
-        System.out.println("Test Tarihi: " + java.time.LocalDateTime.now());
-        System.out.println("Test Hedefi: https://www.amazon.com.tr/");
+        System.out.println("Test Date: " + java.time.LocalDateTime.now());
+        System.out.println("Test Target: https://www.amazon.com.tr/");
         System.out.println();
-        // Test sınıflarını çalıştır
+        
         try {
             runTestClass(Class.forName("AmazonAdvancedTest"));
         } catch (ClassNotFoundException e) {
-            System.err.println("Test sınıfları bulunamadı: " + e.getMessage());
-            System.err.println("Lütfen test sınıflarının doğru konumda olduğunu kontrol edin.");
+            System.err.println("Test classes not found: " + e.getMessage());
+            System.err.println("Please check that test classes are in the correct location.");
             System.exit(1);
         }
         System.out.println("\n" + "=".repeat(50));
-        System.out.println("Test Raporu Tamamlandı");
+        System.out.println("Test Report Completed");
         System.out.println("=".repeat(50));
-        System.out.println("🔒 Program kapatılıyor...");
+        System.out.println("🔒 Program closing...");
         System.exit(0);
     }
 } 
