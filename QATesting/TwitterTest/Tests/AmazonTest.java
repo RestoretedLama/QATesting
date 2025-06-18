@@ -121,14 +121,19 @@ public class AmazonTest {
         System.out.println("----------------------------------------");
         
         utils.searchProduct("book");
-        utils.clickFirstProduct();
-        
+        List<WebElement> searchResults = utils.getSearchResults();
+        assertFalse(searchResults.isEmpty(), "Arama sonucu ürün bulunamadı!");
+
+        boolean productClicked = utils.clickFirstProduct();
+        assertTrue(productClicked, "İlk ürün tıklanamadı!");
+
         boolean addedToCart = utils.addToCartAdvanced();
-        assertTrue(addedToCart, "Product should be added to cart");
+        assertTrue(addedToCart, "Ürün sepete eklenemedi!");
 
         int cartCount = utils.getCartItemCount();
+        assertTrue(cartCount > 0, "Sepette ürün yok!");
+
         System.out.println("🛒 Items in cart: " + cartCount);
-        
         System.out.println("Add to cart process test successful");
     }
 
@@ -339,6 +344,17 @@ public class AmazonTest {
         assertTrue(isLoggedIn, "User should be able to login successfully");
         
         System.out.println("Login process test successful");
+    }
+
+    @Test
+    @DisplayName("Add to cart process test with new method")
+    public void testAddToCartProcessWithNewMethod() {
+        System.out.println("\nTest: Add to cart process test with new method");
+        System.out.println("----------------------------------------");
+        
+        assertTrue(utils.addFirstProductToCart("book"));
+        
+        System.out.println("Add to cart process test with new method successful");
     }
 
     @AfterAll

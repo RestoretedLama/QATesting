@@ -7,13 +7,7 @@
     <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/AmazonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AmazonTestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonTestUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/SimpleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestCompilation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestCompilation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestConfig.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRunner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,10 +38,13 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "Application.AmazonTestUtilsCoverageTest.executor": "Coverage",
-    "Application.Main.executor": "Coverage",
+    "Application.Main.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.AmazonAdvancedTest.executor": "Coverage",
     "JUnit.AmazonTest.executor": "Coverage",
+    "JUnit.AmazonTest.testAddToCartProcess.executor": "Run",
+    "JUnit.AmazonTest.testAddToCartProcessWithNewMethod.executor": "Run",
+    "JUnit.AmazonTest.testGoToCartAndCheckItems.executor": "Run",
     "JUnit.AmazonTest.testLoginProcess.executor": "Run",
     "JUnit.AmazonTest.testProductSearchWithDifferentTerms.executor": "Run",
     "JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin.executor": "Run",
@@ -62,7 +59,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "elctual",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/enisa/Downloads/selenium-java-4.32.0",
     "node.js.detected.package.eslint": "true",
@@ -78,35 +75,10 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin">
-    <configuration name="AmazonTestUtilsCoverageTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
-      <module name="TwitterTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
+  <component name="RunManager" selected="JUnit.AmazonTest.testAddToCartProcessWithNewMethod">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="TwitterTest" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AmazonAdvancedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TwitterTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="TEST_OBJECT" value="class" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AmazonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TwitterTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -121,23 +93,45 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="AmazonTest.testAddToCartProcess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TwitterTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
+      <option name="METHOD_NAME" value="testAddToCartProcess" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AmazonTest.testAddToCartProcessWithNewMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TwitterTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
+      <option name="METHOD_NAME" value="testAddToCartProcessWithNewMethod" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AmazonTest.testGoToCartAndCheckItems" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TwitterTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
+      <option name="METHOD_NAME" value="testGoToCartAndCheckItems" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin" />
-        <item itemvalue="Application.AmazonTestUtilsCoverageTest" />
+        <item itemvalue="JUnit.AmazonTest.testAddToCartProcessWithNewMethod" />
+        <item itemvalue="JUnit.AmazonTest.testAddToCartProcess" />
+        <item itemvalue="JUnit.AmazonTest.testGoToCartAndCheckItems" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.AmazonTest" />
-        <item itemvalue="JUnit.AmazonAdvancedTest" />
+        <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
-        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -165,11 +159,36 @@
       <workItem from="1750190328255" duration="38000" />
       <workItem from="1750191083376" duration="11000" />
       <workItem from="1750193613167" duration="354000" />
+      <workItem from="1750279747223" duration="1513000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Tests/AmazonTest.java</url>
+          <line>118</line>
+          <properties class="AmazonTest" method="testAddToCartProcess">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Tests/AmazonTest.java</url>
+          <line>350</line>
+          <properties class="AmazonTest" method="testAddToCartProcessWithNewMethod">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TwitterTest$AmazonTestUtilsCoverageTest.ic" NAME="AmazonTestUtilsCoverageTest Coverage Results" MODIFIED="1750249918845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
