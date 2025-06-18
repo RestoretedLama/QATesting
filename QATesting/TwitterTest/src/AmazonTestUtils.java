@@ -728,4 +728,66 @@ public class AmazonTestUtils {
             return false;
         }
     }
+
+    public boolean clickFirstRealProduct(String searchTerm) {
+        try {
+            driver.get("https://www.amazon.com.tr/");
+            waitForPageLoad();
+            handleCookieBannerAndPopups();
+            testDelay();
+
+            // Arama
+            WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
+            searchBox.clear();
+            searchBox.sendKeys(searchTerm);
+            driver.findElement(By.id("nav-search-submit-button")).click();
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-component-type='s-search-result']")));
+            testDelay();
+
+            // Gerçek ürün detayına giden ilk linki bul
+            List<WebElement> results = driver.findElements(By.cssSelector("[data-component-type='s-search-result']"));
+            WebElement firstProductLink = null;
+            String productText = "";
+            for (WebElement result : results) {
+                // Önce <h2> altındaki <a> ile dene
+                try {
+                    WebElement h2 = result.findElement(By.tagName("h2"));
+                    WebElement link = h2.findElement(By.tagName("a"));
+                    String href = link.getAttribute("href");
+                    if (href != null && href.contains("/dp/") && link.isDisplayed() && link.isEnabled()) {
+                        firstProductLink = link;
+                        productText = link.getText();
+                        break;
+                    }
+                } catch (Exception ignore) {}
+                // Olmazsa kutudaki tüm <a> etiketlerini dene
+                if (firstProductLink == null) {
+                    List<WebElement> links = result.findElements(By.tagName("a"));
+                    for (WebElement link : links) {
+                        String href = link.getAttribute("href");
+                        if (href != null && href.contains("/dp/") && link.isDisplayed() && link.isEnabled()) {
+                            firstProductLink = link;
+                            productText = link.getText();
+                            break;
+                        }
+                    }
+                }
+                if (firstProductLink != null) break;
+            }
+            if (firstProductLink == null) {
+                System.out.println("Hiçbir gerçek ürün linki bulunamadı!");
+                return false;
+            }
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", firstProductLink);
+            testDelay();
+            System.out.println("Tıklanan ürün: " + productText);
+            firstProductLink.click();
+            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("productTitle")));
+            testDelay();
+            return true;
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+            return false;
+        }
+    }
 } 

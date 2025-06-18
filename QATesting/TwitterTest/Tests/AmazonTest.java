@@ -96,9 +96,9 @@ public class AmazonTest {
     public void testProductDetailInformation() {
         System.out.println("\nProduct detail page information test");
         System.out.println("----------------------------------------");
-        
-        utils.searchProduct("laptop");
-        utils.clickFirstProduct();
+
+        // Arama ve ilk gerçek ürünü tıkla
+        assertTrue(utils.clickFirstRealProduct("laptop"), "İlk gerçek ürün tıklanamadı!");
 
         String productTitle = utils.getProductTitle();
         assertNotNull(productTitle, "Product title should not be null");
@@ -109,7 +109,7 @@ public class AmazonTest {
 
         String currentUrl = utils.getCurrentUrl();
         assertTrue(currentUrl.contains("amazon.com.tr"), "URL should contain Amazon Turkey");
-        
+
         System.out.println("Product: " + productTitle);
         System.out.println("Price: " + productPrice);
         System.out.println("URL: " + currentUrl);
