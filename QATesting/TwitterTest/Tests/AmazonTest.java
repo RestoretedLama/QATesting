@@ -309,14 +309,14 @@ public class AmazonTest {
         
         utils.navigateToLoginPage();
         
-        utils.enterEmail("your-email@example.com");
+        utils.enterEmail("iloveselfcare@gmail.com");
         utils.clickContinueButton();
         
         System.out.println("Waiting for robot check!!!!!!!!!");
         
         utils.waitForSeconds(30);
         
-        utils.enterPassword("your-password");
+        utils.enterPassword("PS5nxQ8Dfa3HsgV");
         utils.clickSignInButton();
         
         boolean isLoggedIn = utils.isUserLoggedIn();
