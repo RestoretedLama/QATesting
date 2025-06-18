@@ -6,7 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/AmazonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AmazonTestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonTestUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SimpleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestCompilation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestCompilation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRunner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,38 +41,51 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.Main.executor&quot;: &quot;Run&quot;,
-    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.BlueSkyLoginTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BlueSkyTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.BlueskyLoginTest.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.GoogleSearchTest.testGoogleSearch.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.TwitterLoginTest.executor&quot;: &quot;Run&quot;,
-    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
-    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;elctual&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/enisa/Downloads/selenium-java-4.32.0&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/enisa/OneDrive/Masaüstü/javaProjelerim/TwitterTest/src/Main.java&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.24482758&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.AmazonTestUtilsCoverageTest.executor": "Coverage",
+    "Application.Main.executor": "Coverage",
+    "Downloaded.Files.Path.Enabled": "false",
+    "JUnit.AmazonAdvancedTest.executor": "Coverage",
+    "JUnit.AmazonTest.executor": "Coverage",
+    "JUnit.AmazonTest.testLoginProcess.executor": "Run",
+    "JUnit.AmazonTest.testProductSearchWithDifferentTerms.executor": "Run",
+    "JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin.executor": "Run",
+    "JUnit.BlueSkyLoginTest.executor": "Run",
+    "JUnit.BlueSkyTest.executor": "Run",
+    "JUnit.BlueskyLoginTest.executor": "Run",
+    "JUnit.GoogleSearchTest.testGoogleSearch.executor": "Run",
+    "JUnit.TwitterLoginTest.executor": "Run",
+    "Repository.Attach.Annotations": "false",
+    "Repository.Attach.JavaDocs": "false",
+    "Repository.Attach.Sources": "false",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "git-widget-placeholder": "elctual",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/enisa/Downloads/selenium-java-4.32.0",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "onboarding.tips.debug.path": "C:/Users/enisa/OneDrive/Masaüstü/javaProjelerim/TwitterTest/src/Main.java",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.24482758",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="JUnit.AmazonTest.testCategoryNavigation">
+}]]></component>
+  <component name="RunManager" selected="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin">
+    <configuration name="AmazonTestUtilsCoverageTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
+      <module name="TwitterTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="TwitterTest" />
@@ -73,51 +93,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonTest.testCategoryNavigation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonAdvancedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="METHOD_NAME" value="testCategoryNavigation(java.lang.String,boolean)" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AmazonTest.testProductSearchWithDifferentTerms" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TwitterTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="METHOD_NAME" value="testProductSearchWithDifferentTerms(java.lang.String)" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="BlueSkyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TwitterTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BlueSkyTest" />
+      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
       <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BlueskyLoginTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="BlueskyLoginTest" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
       <option name="TEST_OBJECT" value="class" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="AmazonTestUtilsCoverageTest.testInvalidEmailLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="TwitterTest" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
+      <option name="METHOD_NAME" value="testInvalidEmailLogin" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AmazonTest.testCategoryNavigation" />
-        <item itemvalue="JUnit.AmazonTest.testProductSearchWithDifferentTerms" />
+        <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin" />
+        <item itemvalue="Application.AmazonTestUtilsCoverageTest" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.BlueSkyTest" />
-        <item itemvalue="JUnit.BlueskyLoginTest" />
+        <item itemvalue="JUnit.AmazonTest" />
+        <item itemvalue="JUnit.AmazonAdvancedTest" />
       </list>
     </recent_temporary>
   </component>
@@ -160,5 +170,11 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TwitterTest$AmazonTestUtilsCoverageTest.ic" NAME="AmazonTestUtilsCoverageTest Coverage Results" MODIFIED="1750249918845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/TwitterTest$AmazonTest.ic" NAME="AmazonTest Coverage Results" MODIFIED="1750249339346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/TwitterTest$AmazonAdvancedTest.ic" NAME="AmazonAdvancedTest Coverage Results" MODIFIED="1750249286963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/TwitterTest$Main.ic" NAME="Main Coverage Results" MODIFIED="1750249431797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

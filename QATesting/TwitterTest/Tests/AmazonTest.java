@@ -40,148 +40,143 @@ public class AmazonTest {
         utils.navigateToHomePage();
     }
 
-    //Farklı ürünler için arama testi
     @ParameterizedTest
-    @ValueSource(strings = {"laptop", "telefon", "kitap", "ayakkabı", "kulaklık"})
-    @DisplayName("Farklı ürünler için arama testi")
+    @ValueSource(strings = {"laptop", "phone", "book", "shoes", "headphones"})
+    @DisplayName("Product search test with different terms")
     public void testProductSearchWithDifferentTerms(String searchTerm) {
-        System.out.println("\n'" + searchTerm + "' arama testi");
+        System.out.println("\n'" + searchTerm + "' search test");
         System.out.println("----------------------------------------");
         
         utils.searchProduct(searchTerm);
         
         List<WebElement> searchResults = utils.getSearchResults();
-        assertFalse(searchResults.isEmpty(), searchTerm + " için arama sonuçları görünmeli");
+        assertFalse(searchResults.isEmpty(), searchTerm + " search results should be visible");
         
         String pageTitle = utils.getPageTitle();
         assertTrue(pageTitle.toLowerCase().contains(searchTerm.toLowerCase()) || 
                   pageTitle.contains("Amazon"), 
-                  "Sayfa başlığı arama terimini veya Amazon'u içermeli");
+                  "Page title should contain search term or Amazon");
         
-        System.out.println("'" + searchTerm + "' arama testi başarılı - " + searchResults.size() + " sonuç");
+        System.out.println("'" + searchTerm + "' search test successful - " + searchResults.size() + " results");
     }
 
-    // farklı kategoriler için navigasyon testi
     @ParameterizedTest
     @CsvSource({
-        "Elektronik, true",
-        "Kitap, true", 
-        "Moda, true",
-        "Spor, true",
-        "Ev ve Yaşam, true"
+        "Electronics, true",
+        "Books, true", 
+        "Fashion, true",
+        "Sports, true",
+        "Home and Living, true"
     })
-    @DisplayName("Kategori navigasyonu testi")
+    @DisplayName("Category navigation test")
     public void testCategoryNavigation(String categoryName, boolean expectedResult) {
-        System.out.println("\n'" + categoryName + "' kategori testi");
+        System.out.println("\n'" + categoryName + "' category test");
         System.out.println("----------------------------------------");
         
         utils.openCategoryMenu();
         
         boolean result = utils.navigateToCategory(categoryName);
-        assertEquals(expectedResult, result, categoryName + " kategorisine navigasyon " + 
-                    (expectedResult ? "başarılı" : "başarısız") + " olmalı");
+        assertEquals(expectedResult, result, categoryName + " category navigation should be " + 
+                    (expectedResult ? "successful" : "unsuccessful"));
         
         if (result) {
             String pageTitle = utils.getPageTitle();
             assertTrue(pageTitle.contains(categoryName) || pageTitle.contains("Amazon"), 
-                      "Kategori sayfası doğru şekilde yüklenmeli");
-            System.out.println("'" + categoryName + "' kategori testi başarılı");
+                      "Category page should load correctly");
+            System.out.println("'" + categoryName + "' category test successful");
         } else {
-            System.out.println("'" + categoryName + "' kategori testi başarısız");
+            System.out.println("'" + categoryName + "' category test failed");
         }
     }
 
     @Test
-    @DisplayName("Ürün detay sayfası bilgileri testi")
+    @DisplayName("Product detail page information test")
     public void testProductDetailInformation() {
-        System.out.println("\nÜrün detay sayfası bilgileri testi");
+        System.out.println("\nProduct detail page information test");
         System.out.println("----------------------------------------");
         
         utils.searchProduct("laptop");
         utils.clickFirstProduct();
 
         String productTitle = utils.getProductTitle();
-        assertNotNull(productTitle, "Ürün başlığı null olmamalı");
-        assertFalse(productTitle.trim().isEmpty(), "Ürün başlığı boş olmamalı");
+        assertNotNull(productTitle, "Product title should not be null");
+        assertFalse(productTitle.trim().isEmpty(), "Product title should not be empty");
 
         String productPrice = utils.getProductPrice();
-        assertNotNull(productPrice, "Ürün fiyatı null olmamalı");
+        assertNotNull(productPrice, "Product price should not be null");
 
         String currentUrl = utils.getCurrentUrl();
-        assertTrue(currentUrl.contains("amazon.com.tr"), "URL Amazon Turkey içermeli");
+        assertTrue(currentUrl.contains("amazon.com.tr"), "URL should contain Amazon Turkey");
         
-        System.out.println("Ürün: " + productTitle);
-        System.out.println("Fiyat: " + productPrice);
+        System.out.println("Product: " + productTitle);
+        System.out.println("Price: " + productPrice);
         System.out.println("URL: " + currentUrl);
-        System.out.println("Ürün detay bilgileri testi başarılı");
+        System.out.println("Product detail information test successful");
     }
 
     @Test
-    @DisplayName("Sepete ekleme işlemi testi")
+    @DisplayName("Add to cart process test")
     public void testAddToCartProcess() {
-        System.out.println("\nTest: Sepete ekleme işlemi testi");
+        System.out.println("\nTest: Add to cart process test");
         System.out.println("----------------------------------------");
         
-        utils.searchProduct("kitap");
+        utils.searchProduct("book");
         utils.clickFirstProduct();
         
         boolean addedToCart = utils.addToCartAdvanced();
-        assertTrue(addedToCart, "Ürün sepete eklenebilmeli");
+        assertTrue(addedToCart, "Product should be added to cart");
 
         int cartCount = utils.getCartItemCount();
-        System.out.println("🛒 Sepetteki ürün sayısı: " + cartCount);
+        System.out.println("🛒 Items in cart: " + cartCount);
         
-        System.out.println("Sepete ekleme işlemi testi başarılı");
+        System.out.println("Add to cart process test successful");
     }
 
     @Test
-    @DisplayName("Sepete gitme ve ürün kontrolü testi")
+    @DisplayName("Go to cart and check items test")
     public void testGoToCartAndCheckItems() {
-        System.out.println("\nTest: Sepete gitme ve ürün kontrolü testi");
+        System.out.println("\nTest: Go to cart and check items test");
         System.out.println("----------------------------------------");
         
-        // ürün ekle
-        utils.searchProduct("kalem");
+        utils.searchProduct("pen");
         utils.clickFirstProduct();
         utils.addToCartAdvanced();
         
-        // Sepete gitmek
         boolean cartOpened = utils.goToCart();
 
-        assertTrue(cartOpened, "Sepet sayfası açılabilmeli");
+        assertTrue(cartOpened, "Cart page should open");
         
-        // Sepetteki ürünleri listele
         List<WebElement> cartItems = utils.getCartItems();
-        System.out.println("Sepetteki ürün sayısı: " + cartItems.size());
+        System.out.println("Items in cart: " + cartItems.size());
         
         if (!cartItems.isEmpty()) {
-            System.out.println("Sepete gitme ve ürün kontrolü testi başarılı");
+            System.out.println("Go to cart and check items test successful");
         } else {
-            System.out.println("Sepet boş görünüyor????");
+            System.out.println("Cart appears to be empty????");
         }
     }
 
     @Test
-    @DisplayName("Filtreleme işlemi testi")
+    @DisplayName("Filtering process test")
     public void testFilteringProcess() {
-        System.out.println("\nTest: Filtreleme işlemi testi");
+        System.out.println("\nTest: Filtering process test");
         System.out.println("----------------------------------------");
         
-        utils.searchProduct("telefon");
+        utils.searchProduct("phone");
         
         List<WebElement> filterOptions = utils.getFilterOptions();
         if (!filterOptions.isEmpty()) {
-            System.out.println("filtre sayısı: " + filterOptions.size());
+            System.out.println("filter count: " + filterOptions.size());
             
             boolean filterApplied = utils.applyFilter(0);
-            assertTrue(filterApplied, "İlk filtre uygulanabilmeli");
+            assertTrue(filterApplied, "First filter should be applicable");
 
             List<WebElement> filteredResults = utils.getSearchResults();
-            assertFalse(filteredResults.isEmpty(), "Filtrelenmiş sonuçlar görünür olmalı");
+            assertFalse(filteredResults.isEmpty(), "Filtered results should be visible");
             
-            System.out.println("Filtreleme işlemi testi başarılı - " + filteredResults.size() + " filtrelenmiş sonuç");
+            System.out.println("Filtering process test successful - " + filteredResults.size() + " filtered results");
         } else {
-            System.out.println("Filtreleme seçenekleri bulunamadı");
+            System.out.println("Filtering options not found");
         }
     }
 
@@ -191,197 +186,174 @@ public class AmazonTest {
         "768, 1024, iPad", 
         "1920, 1080, Desktop"
     })
-    @DisplayName("Responsive tasarım testi")
+    @DisplayName("Responsive design test")
     public void testResponsiveDesign(int width, int height, String device) {
-        System.out.println("\nParameterized Test: " + device + " responsive tasarım testi");
+        System.out.println("\nParameterized Test: " + device + " responsive design test");
         System.out.println("----------------------------------------");
         
         utils.setWindowSize(width, height);
         
-        // Temel elementlerin görünür olduğunu kontrol et
         assertTrue(utils.isElementVisible(By.id("nav-logo-sprites")), 
-                  device + " için Amazon logosu görünür olmalı");
+                  "Amazon logo should be visible for " + device);
         assertTrue(utils.isElementVisible(By.id("nav-search")), 
-                  device + " için arama kutusu görünür olmalı");
+                  "Search box should be visible for " + device);
         
-        // Mobil görünümde hamburger menünün görünür olduğunu kontrol et
         if (width <= 768) {
             assertTrue(utils.isElementVisible(By.id("nav-hamburger-menu")), 
-                      device + " için hamburger menü görünür olmalı");
-            System.out.println(device + " için mobil menü görünür");
+                      "Hamburger menu should be visible for " + device);
+            System.out.println("Mobile menu visible for " + device);
         }
         
         utils.maximizeWindow();
-        System.out.println( device + " responsive tasarım testi başarılı");
+        System.out.println( device + " responsive design test successful");
     }
 
-    // PERFORMANS testi
     @Test
-    @DisplayName("Performans testi")
+    @DisplayName("Performance test")
     public void testPerformance() {
-        System.out.println("\ntest: Performans testi");
+        System.out.println("\ntest: Performance test");
         System.out.println("----------------------------------------");
         
         long loadTime = utils.measurePageLoadTime();
         
-        // Sayfa yükleme süresinin ok olduğunu kontrol et
-        assertTrue(loadTime < 10000, "Sayfa 10 saniyeden kısa sürede yüklenmeli. Süre: " + loadTime + "ms");
+        assertTrue(loadTime < 10000, "Page should load in less than 10 seconds. Time: " + loadTime + "ms");
         
-        System.out.println("Ana sayfa yükleme süresi: " + loadTime + "ms");
-        System.out.println("Performans testi başarılı oh ");
+        System.out.println("Home page load time: " + loadTime + "ms");
+        System.out.println("Performance test successful oh ");
     }
 
-    //Çoklu sekme işlemleri testi
     @Test
-    @DisplayName("Çoklu sekme işlemleri testi")
+    @DisplayName("Multiple tabs operations test")
     public void testMultipleTabs() {
-        System.out.println("\nest: Çoklu sekme işlemleri testi");
+        System.out.println("\nest: Multiple tabs operations test");
         System.out.println("----------------------------------------");
         
         String originalUrl = utils.getCurrentUrl();
         
-        // Yeni sekme aç
         utils.openNewTab("https://www.amazon.com.tr/");
         utils.switchToTab(1);
         
-        // Yeni sekmede sayfanın yüklendiğini kontrol et
         utils.waitForPageLoad();
-        assertTrue(utils.getPageTitle().contains("Amazon"), "Yeni sekmede Amazon sayfası yüklenmeli");
+        assertTrue(utils.getPageTitle().contains("Amazon"), "Amazon page should load in new tab");
         
-        // Orijinal sekmeye geri dön
         utils.switchToTab(0);
-        assertEquals(originalUrl, utils.getCurrentUrl(), "Orijinal sekmede doğru URL olmalı");
+        assertEquals(originalUrl, utils.getCurrentUrl(), "Original tab should have correct URL");
         
-        // Yeni sekmeyi kapat byü
         utils.closeCurrentTab();
         utils.switchToTab(0);
         
-        System.out.println("çoklu sekme işlemleri testi başarılı");
+        System.out.println("multiple tabs operations test successful");
     }
 
     @Test
-    @DisplayName("Scroll işlemleri testi")
+    @DisplayName("Scroll operations test")
     public void testScrolling() {
-        System.out.println("\nTest: Scroll işlemleri testi");
+        System.out.println("\nTest: Scroll operations test");
         System.out.println("----------------------------------------");
 
         utils.scrollToBottom();
         
-        // Scroll pozisyonunu kontrol et
         JavascriptExecutor js = (JavascriptExecutor) driver;
         Long scrollPosition = (Long) js.executeScript("return window.pageYOffset");
         
-        assertTrue(scrollPosition > 0, "Sayfa scroll edilmiş olmalı");
+        assertTrue(scrollPosition > 0, "Page should be scrolled");
         
-        // Sayfanın başına geri dön
         js.executeScript("window.scrollTo(0, 0)");
         
         Long newScrollPosition = (Long) js.executeScript("return window.pageYOffset");
-        assertEquals(0, newScrollPosition, "Sayfa başına dönülmüş olmalı");
+        assertEquals(0, newScrollPosition, "Page should return to top");
         
-        System.out.println("Scroll pozisyonu: " + scrollPosition + "px");
-        System.out.println("Scroll işlemleri testi başarılı");
+        System.out.println("Scroll position: " + scrollPosition + "px");
+        System.out.println("Scroll operations test successful");
     }
 
     @Test
-    @DisplayName("Element etkileşimleri testi ")
+    @DisplayName("Element interactions test ")
     public void testElementInteractions() {
-        System.out.println("\ntest Element etkileşimleri testi");
+        System.out.println("\ntest Element interactions test");
         System.out.println("----------------------------------------");
         
-        // Arama kutusu tıklanabilir
         assertTrue(utils.isElementClickable(By.id("twotabsearchtextbox")), 
-                  "Arama kutusu tıklanabilir olmalı");
+                  "Search box should be clickable");
         
-        // Arama butonu tıklanabilir ?
         assertTrue(utils.isElementClickable(By.id("nav-search-submit-button")), 
-                  "Arama butonu tıklanabilir olmalı");
+                  "Search button should be clickable");
         
-        // Sepet ikonu görünür ?
         assertTrue(utils.isElementVisible(By.id("nav-cart")), 
-                  "Sepet ikonu görünür olmalı");
+                  "Cart icon should be visible");
         
-        System.out.println("Element etkileşimleri testi başarılı");
+        System.out.println("Element interactions test successful");
     }
 
     @Test
-    @DisplayName("URL doğrulama testi")
+    @DisplayName("URL validation test")
     public void testUrlValidation() {
-        System.out.println("\nTest: URL doğrulama testi");
+        System.out.println("\nTest: URL validation test");
         System.out.println("----------------------------------------");
         
         String currentUrl = utils.getCurrentUrl();
         
-        // URL'nin Amazon Turkey olduğunu kontrol et
-        assertTrue(currentUrl.contains("amazon.com.tr"), "URL Amazon Turkey içermeli");
-        //güvenli mi?
-        assertTrue(currentUrl.startsWith("https://"), "URL HTTPS protokolü kullanmalı");
+        assertTrue(currentUrl.contains("amazon.com.tr"), "URL should contain Amazon Turkey");
+        assertTrue(currentUrl.startsWith("https://"), "URL should use HTTPS protocol");
         
         System.out.println("URL: " + currentUrl);
-        System.out.println("URL doğrulama testi başarılı");
+        System.out.println("URL validation test successful");
     }
 
     @Test
-    @DisplayName("Sayfa başlığı doğrulama testi")
+    @DisplayName("Page title validation test")
     public void testPageTitleValidation() {
-        System.out.println("\nTest: Sayfa başlığı doğrulama testi");
+        System.out.println("\nTest: Page title validation test");
         System.out.println("----------------------------------------");
         
         String pageTitle = utils.getPageTitle();
         
-        // Sayfa başlığı geçerli ?
-        assertNotNull(pageTitle, "Sayfa başlığı null olmamalı");
-        assertFalse(pageTitle.trim().isEmpty(), "Sayfa başlığı boş olmamalı");
+        assertNotNull(pageTitle, "Page title should not be null");
+        assertFalse(pageTitle.trim().isEmpty(), "Page title should not be empty");
         assertTrue(pageTitle.contains("Amazon") || pageTitle.contains("amazon"), 
-                  "Sayfa başlığı Amazon içermeli");
+                  "Page title should contain Amazon");
         
-        System.out.println("Sayfa başlığı: " + pageTitle);
-        System.out.println("Sayfa başlığı doğrulama testi başarılı");
+        System.out.println("Page title: " + pageTitle);
+        System.out.println("Page title validation test successful");
     }
 
     @Test
-    @DisplayName("Giriş yapma işlemi testi")
+    @DisplayName("Login process test")
     public void testLoginProcess() {
-        System.out.println("\ntest: Giriş yapma işlemi testi");
+        System.out.println("\ntest: Login process test");
         System.out.println("----------------------------------------");
         
-        // Giriş sayfasına git
         utils.navigateToLoginPage();
         
-        // E-posta girişi
         utils.enterEmail("your-email@example.com");
         utils.clickContinueButton();
         
-        System.out.println("Robot kontrolü için gellll!!!!!!!!!");
+        System.out.println("Waiting for robot check!!!!!!!!!");
         
-        // Robot kontrolü için bekle
         utils.waitForSeconds(30);
         
-        // Şifre girişi
         utils.enterPassword("your-password");
         utils.clickSignInButton();
         
-        // Giriş başarılı mı kontrol et!
         boolean isLoggedIn = utils.isUserLoggedIn();
-        assertTrue(isLoggedIn, "Kullanıcı başarıyla giriş yapabilmeli");
+        assertTrue(isLoggedIn, "User should be able to login successfully");
         
-        System.out.println("Giriş yapma işlemi testi başarılı");
+        System.out.println("Login process test successful");
     }
 
     @AfterAll
     public static void teardown() {
-        System.out.println("\nADVANCED testler tamamlanıyor...");
+        System.out.println("\nADVANCED tests completing...");
         System.out.println("==============================================");
         
         if (utils != null) {
             utils.closeBrowser();
         }
         
-        System.out.println("Tüm illeri gelişmiş testler tamamlandı! ehehe");
+        System.out.println("All advanced tests completed! ehehe");
         System.out.println("==============================================");
         
-        // Programı kapat byü
-        System.out.println("Program kapatılıyor...");
+        System.out.println("Program closing...");
         System.exit(0);
     }
 } 

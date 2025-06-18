@@ -3,44 +3,43 @@
 public class Main {
     public static void main(String[] args) {
         System.out.println("=== Amazon Turkey Website Test Bot ===");
-        System.out.println("Bu uygulama Amazon Turkey web sitesini test eder.");
+        System.out.println("This application tests the Amazon Turkey website.");
         System.out.println();
-        System.out.println("🔧 Özellikler:");
-        System.out.println("  • Yavaş ve görünür test yürütme");
-        System.out.println("  • Sepete ekleme ve sepete gitme testleri");
-        System.out.println("  • Otomatik tarayıcı kapatma");
-        System.out.println("  • Detaylı test raporları");
+        System.out.println("    Features:");
+        System.out.println("  • Slow and visible test execution");
+        System.out.println("  • Add to cart and go to cart tests");
+        System.out.println("  • Automatic browser closing");
+        System.out.println("  • Detailed test reports");
         System.out.println();
-        
-        // Test çalıştırıcıyı başlat
+
         try {
-            System.out.println("🚀 Testler başlatılıyor...");
-            System.out.println("Hedef URL: https://www.amazon.com.tr/");
-            System.out.println("⏱️ Testler yavaş yürütülecek (görünürlük için)");
-            System.out.println("🛒 Sepet işlemleri test edilecek");
-            System.out.println("🔒 Testler bitince tarayıcı otomatik kapanacak");
+            System.out.println(" Tests starting...");
+            System.out.println(" Target URL: https://www.amazon.com.tr/");
+            System.out.println(" Tests will run slowly (for visibility)");
+            System.out.println(" Cart operations will be tested");
+            System.out.println(" Browser will close automatically when tests complete");
             System.out.println();
             
-            // TestRunner'ı çalıştır
+
             TestRunner.runAllTestsWithReport();
             
         } catch (Exception e) {
-            System.err.println("❌ Test çalıştırılırken hata oluştu: " + e.getMessage());
-            System.err.println("Lütfen aşağıdakileri kontrol edin:");
-            System.err.println("1. İnternet bağlantınızın aktif olduğunu");
-            System.err.println("2. Chrome tarayıcısının yüklü olduğunu");
-            System.err.println("3. Selenium bağımlılıklarının doğru yüklendiğini");
+            System.err.println(" Error occurred while running tests: " + e.getMessage());
+            System.err.println("Please check the following:");
+            System.err.println("1. Your internet connection is active");
+            System.err.println("2. Chrome browser is installed");
+            System.err.println("3. Selenium dependencies are correctly installed");
             e.printStackTrace();
         }
         
         System.out.println();
-        System.out.println("🎉 Program tamamlandı!");
-        System.out.println("📊 Test sonuçları yukarıda görüntülendi.");
-        System.out.println("🔒 Tarayıcı otomatik olarak kapatıldı.");
+        System.out.println(" Program completed!");
+        System.out.println(" Test results displayed above.");
+        System.out.println(" Browser closed automatically.");
         System.out.println();
-        System.out.println("Uygulama kapatılıyor...");
+        System.out.println("Application closing...");
         
-        // Uygulama otomatik olarak kapanır
+
         System.exit(0);
     }
 }

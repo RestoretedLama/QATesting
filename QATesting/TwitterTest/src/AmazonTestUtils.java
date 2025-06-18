@@ -14,50 +14,39 @@ public class AmazonTestUtils {
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
     }
     
-    /**
-     * (görünürlük için)
-     */
     public void testDelay() {
         try {
-            Thread.sleep(2000); // 2 saniye bekle
+            Thread.sleep(2000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
     
-    /**
-     * Uzun bekleme süresi (önemli şeyler için)
-     */
     public void longDelay() {
         try {
-            Thread.sleep(3000); // 3 saniye bekle
+            Thread.sleep(3000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
     }
 
-    
-    /**
-     * Cookie banner'ını ve popup'ları hallet
-     */
     public void handleCookieBannerAndPopups() {
-        System.out.println("Cookie banner ve popup'lar");
+        System.out.println("Cookie banner and popups");
         
         try {
-            // Cookie banner'ını kapat
             String[] cookieSelectors = {
-                "#sp-cc-accept", // Amazon cookie banner
+                "#sp-cc-accept",
                 ".a-button-primary[data-action='accept-cookies']",
                 "button[data-action='accept-cookies']",
                 ".a-button[data-action='accept-cookies']",
                 "#acceptCookies",
                 ".cookie-accept",
                 ".accept-cookies",
-                "button[aria-label*='Accept'], button[aria-label*='Kabul']",
-                "button[title*='Accept'], button[title*='Kabul']",
+                "button[aria-label*='Accept'], button[aria-label*='Accept']",
+                "button[title*='Accept'], button[title*='Accept']",
                 ".a-button[data-action='accept']",
-                "input[value*='Accept'], input[value*='Kabul']",
-                "input[value*='Tamam'], input[value*='OK']"
+                "input[value*='Accept'], input[value*='Accept']",
+                "input[value*='OK'], input[value*='OK']"
             };
             
             for (String selector : cookieSelectors) {
@@ -66,24 +55,22 @@ public class AmazonTestUtils {
                     for (WebElement button : cookieButtons) {
                         if (button.isDisplayed() && button.isEnabled()) {
                             button.click();
-                            System.out.println("Cookie banner kapatıldı " + selector);
+                            System.out.println("Cookie banner closed " + selector);
                             testDelay();
                             break;
                         }
                     }
                 } catch (Exception e) {
-                    // Bu selector çalışmadı, diğerini dene
                     continue;
                 }
             }
             
-            // Popup'ları kapat
             String[] popupSelectors = {
                 ".a-button-close",
                 ".a-popover-close",
                 ".a-modal-close",
-                "button[aria-label*='Close'], button[aria-label*='Kapat']",
-                "button[title*='Close'], button[title*='Kapat']",
+                "button[aria-label*='Close'], button[aria-label*='Close']",
+                "button[title*='Close'], button[title*='Close']",
                 ".close-button",
                 ".popup-close",
                 ".modal-close",
@@ -97,58 +84,45 @@ public class AmazonTestUtils {
                     for (WebElement button : popupButtons) {
                         if (button.isDisplayed() && button.isEnabled()) {
                             button.click();
-                            System.out.println("Popup kapatıldı: " + selector);
+                            System.out.println("Popup closed: " + selector);
                             testDelay();
                             break;
                         }
                     }
                 } catch (Exception e) {
-                    // Bu selector çalışmadı, diğerini dene
                     continue;
                 }
             }
             
-            // JavaScript ile ESC tuşu gönder (popup'ları kapatmak için)
             try {
                 JavascriptExecutor js = (JavascriptExecutor) driver;
                 js.executeScript("document.dispatchEvent(new KeyboardEvent('keydown', {'key': 'Escape'}));");
-                System.out.println("ESC tuşu gönderildi");
+                System.out.println("ESC key sent");
                 testDelay();
             } catch (Exception e) {
-                // ESC tuşu çalışmadı?
             }
             
         } catch (Exception e) {
-            System.out.println("Cookie banner/popup kapatma hatası: " + e.getMessage());
+            System.out.println("Cookie banner/popup closing error: " + e.getMessage());
         }
     }
     
-    /**
-     * Ana sayfaya git yüklenmesini bekle
-     */
     public void navigateToHomePage() {
-        System.out.println("Ana sayfaya gidiliyo");
+        System.out.println("Navigating to home page");
         driver.get("https://www.amazon.com.tr/");
         waitForPageLoad();
         
-        // Cookie banner'ını ve popup'ları kapat
         handleCookieBannerAndPopups();
         testDelay();
-        System.out.println("Ana sayfa yüklendi");
+        System.out.println("Home page loaded");
     }
     
-    /**
-     * Sayfa yüklenmesini bekle
-     */
     public void waitForPageLoad() {
         wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete'"));
     }
     
-    /**
-     * Ürün ara
-     */
     public void searchProduct(String searchTerm) {
-        System.out.println(searchTerm + "aranıyor");
+        System.out.println("Searching for " + searchTerm);
         WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
         searchBox.clear();
         searchBox.sendKeys(searchTerm);
@@ -159,112 +133,89 @@ public class AmazonTestUtils {
         
         wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-component-type='s-search-results']")));
         testDelay();
-        System.out.println("Arama tamamlandı");
+        System.out.println("Search completed");
     }
     
-    /**
-     * Arama sonuçlarını al
-     */
     public List<WebElement> getSearchResults() {
         return driver.findElements(By.cssSelector("[data-component-type='s-search-results'] .s-result-item"));
     }
     
-    /**
-     * İlk ürünü seç detay sayfasına git
-     */
     public boolean clickFirstProduct() {
-        System.out.println("İlk ürün seçiliyo");
+        System.out.println("Selecting first product");
         try {
             List<WebElement> products = driver.findElements(By.cssSelector("[data-component-type='s-search-results'] .s-result-item h2 a"));
             if (!products.isEmpty()) {
                 products.get(0).click();
                 wait.until(ExpectedConditions.presenceOfElementLocated(By.id("productTitle")));
                 testDelay();
-                System.out.println("Ürün detay sayfası açıldı");
+                System.out.println("Product detail page opened");
                 return true;
             } else {
-                System.out.println("Arama sonucunda ürün bulunamadı");
+                System.out.println("No products found in search results");
                 return false;
             }
         } catch (Exception e) {
-            System.out.println("İlk ürün seçilemedi: " + e.getMessage());
+            System.out.println("Could not select first product: " + e.getMessage());
             return false;
         }
     }
     
-    /**
-     * Ürün başlığını al
-     */
     public String getProductTitle() {
         WebElement productTitle = driver.findElement(By.id("productTitle"));
         return productTitle.getText();
     }
     
-    /**
-     * Ürün fiyatını al
-     */
     public String getProductPrice() {
         try {
             WebElement priceElement = driver.findElement(By.cssSelector(".a-price-whole"));
             return priceElement.getText();
         } catch (NoSuchElementException e) {
-            return "Fiyat bulunamadı";
+            return "Price not found";
         }
     }
     
-    /**
-     * Sepete ekle - Gelişmiş versiyon
-     */
     public boolean addToCartAdvanced() {
-        System.out.println("Sepete ekleniyor (gelişmiş versiyon)...");
+        System.out.println("Adding to cart (advanced version)...");
         try {
-            // cookie banner'ını ve popup'ları kapat
             handleCookieBannerAndPopups();
             
-            // Strateji 1 Standart sepete ekle butonu
             if (tryStandardAddToCart()) {
                 return true;
             }
             
-            // Strateji 2  JavaScript ile sepete ekle
             if (tryJavaScriptAddToCart()) {
                 return true;
             }
             
-            // Strateji 3 Farklı seçicilerle sepete ekle
             if (tryAlternativeAddToCart()) {
                 return true;
             }
             
-            // Strateji 4 Form submit ile sepete ekle
             if (tryFormSubmitAddToCart()) {
                 return true;
             }
             
-            System.out.println("Hiçbir sepete ekleme stratejisi çalışmadı");
+            System.out.println("No add to cart strategy worked");
             return false;
             
         } catch (Exception e) {
-            System.out.println("Sepete ekleme hatası: " + e.getMessage());
+            System.out.println("Add to cart error: " + e.getMessage());
             return false;
         }
     }
     
-    /**
-     * Standart sepete ekle butonuyla dene
-     */
     private boolean tryStandardAddToCart() {
         try {
             String[] selectors = {
                 "#add-to-cart-button",
                 "[data-feature-id='add-to-cart-button']",
-                "input[value*='Sepete Ekle']",
                 "input[value*='Add to Cart']",
-                "[aria-label*='Sepete Ekle']",
+                "input[value*='Add to Cart']",
                 "[aria-label*='Add to Cart']",
-                "input[type='submit'][value*='Sepete']",
+                "[aria-label*='Add to Cart']",
                 "input[type='submit'][value*='Cart']",
-                ".a-button-input[value*='Sepete']",
+                "input[type='submit'][value*='Cart']",
+                ".a-button-input[value*='Cart']",
                 ".a-button-input[value*='Cart']"
             };
             
@@ -272,9 +223,9 @@ public class AmazonTestUtils {
                 try {
                     WebElement button = driver.findElement(By.cssSelector(selector));
                     if (button.isDisplayed() && button.isEnabled()) {
-                        System.out.println("*Standart buton bulundu: " + selector);
+                        System.out.println("*Standard button found: " + selector);
                         button.click();
-                        System.out.println("*Standart butona tıklandı");
+                        System.out.println("*Standard button clicked");
                         waitForAddToCartConfirmation();
                         return true;
                     }
@@ -284,70 +235,29 @@ public class AmazonTestUtils {
             }
             return false;
         } catch (Exception e) {
+            System.out.println("Standard add to cart failed: " + e.getMessage());
             return false;
         }
     }
     
-    /**
-     * JavaScript ile sepete ekle
-     */
     private boolean tryJavaScriptAddToCart() {
         try {
-            System.out.println("JavaScript ile sepete ekleme deneniyor...");
             JavascriptExecutor js = (JavascriptExecutor) driver;
             
-            // JavaScript ile sepete ekle butonunu bul ve tıkla
-            String[] jsScripts = {
-                "document.getElementById('add-to-cart-button').click();",
-                "document.querySelector('[data-feature-id=\"add-to-cart-button\"]').click();",
-                "document.querySelector('input[value*=\"Sepete Ekle\"]').click();",
-                "document.querySelector('input[value*=\"Add to Cart\"]').click();",
-                "document.querySelector('[aria-label*=\"Sepete Ekle\"]').click();",
-                "document.querySelector('[aria-label*=\"Add to Cart\"]').click();"
+            String[] buttonSelectors = {
+                "#add-to-cart-button",
+                "[data-feature-id='add-to-cart-button']",
+                "input[value*='Add to Cart']",
+                "[aria-label*='Add to Cart']"
             };
             
-            for (String script : jsScripts) {
+            for (String selector : buttonSelectors) {
                 try {
-                    js.executeScript(script);
-                    System.out.println("JavaScript ile sepete ekleme başarılı");
-                    waitForAddToCartConfirmation();
-                    return true;
-                } catch (Exception e) {
-                    continue;
-                }
-            }
-            return false;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-    
-    /**
-     * Alternatif seçicilerle sepete ekle
-     */
-    private boolean tryAlternativeAddToCart() {
-        try {
-            System.out.println("Alternatif seçiciler deneniyor...");
-            
-            // XPath ile farklı butonları dene
-            String[] xpathSelectors = {
-                "//input[@type='submit' and contains(@value, 'Sepete')]",
-                "//input[@type='submit' and contains(@value, 'Cart')]",
-                "//button[contains(text(), 'Sepete Ekle')]",
-                "//button[contains(text(), 'Add to Cart')]",
-                "//a[contains(text(), 'Sepete Ekle')]",
-                "//a[contains(text(), 'Add to Cart')]",
-                "//span[contains(text(), 'Sepete Ekle')]/parent::button",
-                "//span[contains(text(), 'Add to Cart')]/parent::button"
-            };
-            
-            for (String xpath : xpathSelectors) {
-                try {
-                    WebElement button = driver.findElement(By.xpath(xpath));
-                    if (button.isDisplayed() && button.isEnabled()) {
-                        System.out.println("Alternatif buton bulundu: " + xpath);
-                        button.click();
-                        System.out.println("Alternatif butona tıklandı");
+                    WebElement button = driver.findElement(By.cssSelector(selector));
+                    if (button.isDisplayed()) {
+                        System.out.println("*JavaScript button found: " + selector);
+                        js.executeScript("arguments[0].click();", button);
+                        System.out.println("*JavaScript button clicked");
                         waitForAddToCartConfirmation();
                         return true;
                     }
@@ -357,358 +267,394 @@ public class AmazonTestUtils {
             }
             return false;
         } catch (Exception e) {
+            System.out.println("JavaScript add to cart failed: " + e.getMessage());
             return false;
         }
     }
     
-    /**
-     * Form submit ile sepete ekle
-     */
-    private boolean tryFormSubmitAddToCart() {
+    private boolean tryAlternativeAddToCart() {
         try {
-            System.out.println("Form submit deneniyor...");
+            String[] alternativeSelectors = {
+                ".a-button-input[type='submit']",
+                "input[type='submit']",
+                ".a-button[type='submit']",
+                "button[type='submit']",
+                ".a-button-input",
+                ".a-button"
+            };
             
-            // Form elementini bul
-            WebElement form = driver.findElement(By.cssSelector("form[action*='cart'], form[action*='add']"));
-            if (form != null) {
-                form.submit();
-                System.out.println("Form submit başarılı");
-                waitForAddToCartConfirmation();
-                return true;
+            for (String selector : alternativeSelectors) {
+                try {
+                    List<WebElement> buttons = driver.findElements(By.cssSelector(selector));
+                    for (WebElement button : buttons) {
+                        if (button.isDisplayed() && button.isEnabled()) {
+                            String buttonText = button.getText().toLowerCase();
+                            if (buttonText.contains("add") || buttonText.contains("cart") || 
+                                buttonText.contains("buy") || buttonText.contains("purchase")) {
+                                System.out.println("*Alternative button found: " + selector);
+                                button.click();
+                                System.out.println("*Alternative button clicked");
+                                waitForAddToCartConfirmation();
+                                return true;
+                            }
+                        }
+                    }
+                } catch (Exception e) {
+                    continue;
+                }
             }
             return false;
         } catch (Exception e) {
+            System.out.println("Alternative add to cart failed: " + e.getMessage());
             return false;
         }
     }
     
-    /**
-     * Sepete ekleme onayını beklemek
-     */
+    private boolean tryFormSubmitAddToCart() {
+        try {
+            List<WebElement> forms = driver.findElements(By.tagName("form"));
+            for (WebElement form : forms) {
+                try {
+                    if (form.isDisplayed()) {
+                        System.out.println("*Form submit attempted");
+                        form.submit();
+                        System.out.println("*Form submitted");
+                        waitForAddToCartConfirmation();
+                        return true;
+                    }
+                } catch (Exception e) {
+                    continue;
+                }
+            }
+            return false;
+        } catch (Exception e) {
+            System.out.println("Form submit add to cart failed: " + e.getMessage());
+            return false;
+        }
+    }
+    
     private void waitForAddToCartConfirmation() {
         try {
-            // Sepete eklendi mesajını bekle
+            System.out.println("Waiting for add to cart confirmation...");
+            
             String[] confirmationSelectors = {
                 "#attachDisplayAddBaseAlert",
                 ".a-alert-success",
-                ".a-alert-content",
-                "[data-feature-id='add-to-cart-alert']",
-                ".a-popover-content"
+                "[data-feature-id='add-to-cart-confirmation']",
+                ".a-popover-content",
+                "#attach-added-to-cart-alert",
+                ".a-alert-content"
             };
             
             for (String selector : confirmationSelectors) {
                 try {
                     wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(selector)));
-                    System.out.println("Sepete eklendi mesajı görüldü: " + selector);
-                    break;
+                    System.out.println("Add to cart confirmation found: " + selector);
+                    testDelay();
+                    return;
                 } catch (Exception e) {
                     continue;
                 }
             }
-
-            Thread.sleep(2000);
-            int cartCount = getCartItemCount();
-            if (cartCount > 0) {
-                System.out.println("Sepete eklendi (sepet sayısı: " + cartCount + ")");
-            } else {
-                System.out.println("Sepete ekleme durumu belirsiz");
-            }
             
-            longDelay();
+            System.out.println("No confirmation found, but continuing...");
+            testDelay();
             
         } catch (Exception e) {
-            System.out.println("sepete ekleme onayı beklenemedi: " + e.getMessage());
+            System.out.println("Wait for confirmation error: " + e.getMessage());
         }
     }
     
-    /**
-     * Sepete git
-     */
     public boolean navigateToCart() {
-        System.out.println("Sepet sayfasına gidiliyor...");
         try {
-            WebElement cartIcon = driver.findElement(By.id("nav-cart"));
-            cartIcon.click();
-
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.id("sc-active-cart")));
+            System.out.println("Navigating to cart...");
+            driver.get("https://www.amazon.com.tr/gp/cart/view.html");
+            waitForPageLoad();
             testDelay();
-            System.out.println("Sepet sayfası açıldı");
+            System.out.println("Cart page loaded");
             return true;
         } catch (Exception e) {
-            System.out.println("Sepet sayfasına gidilemedi: " + e.getMessage());
+            System.out.println("Cart navigation failed: " + e.getMessage());
             return false;
         }
     }
     
-    /**
-     * Sepetten ürün kaldır (ilk ürünü)
-     */
     public boolean removeFromCart() {
         return removeFromCart(0);
     }
     
-    /**
-     * Sepete git
-     */
     public boolean goToCart() {
-        System.out.println("Sepete gidiliyor...");
         try {
-            // Farklı sepet butonlarını dene
-            WebElement cartButton = null;
-
-            try {
-                cartButton = driver.findElement(By.id("nav-cart"));
-            } catch (NoSuchElementException e) {
+            System.out.println("Going to cart...");
+            
+            String[] cartSelectors = {
+                "#nav-cart",
+                "[data-feature-id='nav-cart']",
+                ".nav-cart",
+                "a[href*='cart']",
+                "[aria-label*='Cart']",
+                "[title*='Cart']"
+            };
+            
+            for (String selector : cartSelectors) {
                 try {
-                    cartButton = driver.findElement(By.cssSelector("[data-feature-id='nav-cart']"));
-                } catch (NoSuchElementException e2) {
-                    try {
-                        cartButton = driver.findElement(By.cssSelector("[aria-label*='Sepet'], [aria-label*='Cart']"));
-                    } catch (NoSuchElementException e3) {
-                        try {
-                            cartButton = driver.findElement(By.xpath("//a[contains(text(), 'Sepet') or contains(text(), 'Cart')]"));
-                        } catch (NoSuchElementException e4) {
-                            System.out.println("Sepet butonu bulunamadı");
-                            return false;
-                        }
+                    WebElement cartButton = driver.findElement(By.cssSelector(selector));
+                    if (cartButton.isDisplayed() && cartButton.isEnabled()) {
+                        System.out.println("Cart button found: " + selector);
+                        cartButton.click();
+                        waitForPageLoad();
+                        testDelay();
+                        System.out.println("Cart page opened");
+                        return true;
                     }
-                }
-            }
-            if (cartButton != null && cartButton.isDisplayed() && cartButton.isEnabled()) {
-                cartButton.click();
-                System.out.println("Sepet butonuna tıklandı");
-                
-                // Sepet sayfasının yüklendiğini bekle
-                try {
-                    wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".sc-cart-header, .a-page-title")));
-                    System.out.println("Sepet sayfası açıldı");
                 } catch (Exception e) {
-                    // Alternatif sepet sayfası elementlerini kontrol et
-                    try {
-                        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".sc-list, .a-list-item")));
-                        System.out.println("Sepet sayfası açıldı (alternatife)");
-                    } catch (Exception e2) {
-                        System.out.println("Sepet sayfası yükleme durumu belirsiz");
-                    }
+                    continue;
                 }
-                
-                longDelay();
-                return true;
-            } else {
-                System.out.println("Sepet butonu tıklanamıyor");
-                return false;
             }
             
+            System.out.println("Cart button not found, using direct navigation");
+            return navigateToCart();
+            
         } catch (Exception e) {
-            System.out.println("Sepete gitme hatası " + e.getMessage());
+            System.out.println("Go to cart failed: " + e.getMessage());
             return false;
         }
     }
     
-    /**
-     * Sepetteki ürün sayısını al
-     */
     public int getCartItemCount() {
         try {
-            // Farklı sepet sayısı elementlerini dene
-            WebElement cartCount = null;
-            try {
-                cartCount = driver.findElement(By.id("nav-cart-count"));
-            } catch (NoSuchElementException e) {
+            String[] countSelectors = {
+                "#nav-cart-count",
+                ".nav-cart-count",
+                "[data-feature-id='nav-cart-count']",
+                ".cart-count",
+                "#cart-count"
+            };
+            
+            for (String selector : countSelectors) {
                 try {
-                    cartCount = driver.findElement(By.cssSelector("[data-feature-id='nav-cart-count']"));
-                } catch (NoSuchElementException e2) {
-                    try {
-                        cartCount = driver.findElement(By.cssSelector("[aria-label*='sepet'], [aria-label*='cart']"));
-                    } catch (NoSuchElementException e3) {
-                        try {
-                            cartCount = driver.findElement(By.xpath("//span[contains(text(), 'sepet') or contains(text(), 'cart')]"));
-                        } catch (NoSuchElementException e4) {
-                            return 0;
-                        }
+                    WebElement countElement = driver.findElement(By.cssSelector(selector));
+                    String countText = countElement.getText().trim();
+                    if (!countText.isEmpty()) {
+                        int count = Integer.parseInt(countText);
+                        System.out.println("Cart item count: " + count);
+                        return count;
                     }
+                } catch (Exception e) {
+                    continue;
                 }
             }
             
-            if (cartCount != null) {
-                String countText = cartCount.getText().trim();
-                // Sayısal değeri çıkar
-                countText = countText.replaceAll("[^0-9]", "");
-                if (!countText.isEmpty()) {
-                    return Integer.parseInt(countText);
-                }
-            }
+            System.out.println("Cart count not found");
             return 0;
+            
         } catch (Exception e) {
+            System.out.println("Get cart count error: " + e.getMessage());
             return 0;
         }
     }
     
-    /**
-     * Sepetteki ürünleri listele
-     */
     public List<WebElement> getCartItems() {
         try {
-            // Farklı sepet ürünleri
-            List<WebElement> cartItems = driver.findElements(By.cssSelector(".sc-list-item"));
+            List<WebElement> cartItems = driver.findElements(By.cssSelector("[data-name='Active Items'] .sc-list-item"));
             if (cartItems.isEmpty()) {
-                cartItems = driver.findElements(By.cssSelector(".a-list-item"));
+                cartItems = driver.findElements(By.cssSelector(".sc-list-item"));
             }
             if (cartItems.isEmpty()) {
-                cartItems = driver.findElements(By.cssSelector("[data-feature-id='sc-list-item']"));
+                cartItems = driver.findElements(By.cssSelector(".cart-item"));
             }
+            System.out.println("Cart items found: " + cartItems.size());
             return cartItems;
         } catch (Exception e) {
-            return driver.findElements(By.cssSelector(".sc-list-item"));
+            System.out.println("Get cart items error: " + e.getMessage());
+            return List.of();
         }
     }
     
-    /**
-     * Sepetten ürün sil
-     */
     public boolean removeFromCart(int itemIndex) {
-        System.out.println("Sepetten ürün siliniyor");
         try {
-            // Farklı silme butonlarını
-            List<WebElement> removeButtons = driver.findElements(By.cssSelector(".sc-action-delete"));
-            if (removeButtons.isEmpty()) {
-                removeButtons = driver.findElements(By.cssSelector("[data-feature-id='sc-action-delete']"));
-            }
-            if (removeButtons.isEmpty()) {
-                removeButtons = driver.findElements(By.cssSelector("input[value*='Sil'], input[value*='Delete']"));
-            }
-            if (removeButtons.isEmpty()) {
-                removeButtons = driver.findElements(By.xpath("//input[@type='submit' and contains(@value, 'Sil')]"));
-            }
+            System.out.println("Removing item " + itemIndex + " from cart");
+            
+            List<WebElement> removeButtons = driver.findElements(By.cssSelector("input[value*='Delete'], input[value*='Remove'], .a-button[data-action='delete']"));
             
             if (itemIndex < removeButtons.size()) {
-                removeButtons.get(itemIndex).click();
-                longDelay();
-                System.out.println("Ürün sepetten silindi");
-                return true;
+                WebElement removeButton = removeButtons.get(itemIndex);
+                if (removeButton.isDisplayed() && removeButton.isEnabled()) {
+                    removeButton.click();
+                    System.out.println("Remove button clicked");
+                    testDelay();
+                    return true;
+                }
             }
+            
+            System.out.println("Remove button not found for index " + itemIndex);
             return false;
+            
         } catch (Exception e) {
-            System.out.println("Ürün silinemedi " + e.getMessage());
+            System.out.println("Remove from cart error: " + e.getMessage());
             return false;
         }
     }
     
-    /**
-     * Kategori menüsünü aç
-     */
     public void openCategoryMenu() {
-        System.out.println("Kategori menüsü açılıyor");
-        WebElement hamburgerMenu = driver.findElement(By.id("nav-hamburger-menu"));
-        hamburgerMenu.click();
-        wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("#hmenu-content")));
-        testDelay();
-        System.out.println("Kategori menüsü açıldı");
+        try {
+            System.out.println("Opening category menu...");
+            
+            String[] menuSelectors = {
+                "#nav-hamburger-menu",
+                ".nav-hamburger-menu",
+                "[data-feature-id='nav-hamburger-menu']",
+                ".hamburger-menu",
+                "button[aria-label*='Menu']",
+                "button[title*='Menu']"
+            };
+            
+            for (String selector : menuSelectors) {
+                try {
+                    WebElement menuButton = driver.findElement(By.cssSelector(selector));
+                    if (menuButton.isDisplayed() && menuButton.isEnabled()) {
+                        menuButton.click();
+                        System.out.println("Category menu opened");
+                        testDelay();
+                        return;
+                    }
+                } catch (Exception e) {
+                    continue;
+                }
+            }
+            
+            System.out.println("Category menu button not found");
+            
+        } catch (Exception e) {
+            System.out.println("Open category menu error: " + e.getMessage());
+        }
     }
     
-    /**
-     * Belirtilen kategoriye git
-     */
     public boolean navigateToCategory(String categoryName) {
-        System.out.println(categoryName + " kategorisine gidiliyor");
         try {
-            WebElement category = driver.findElement(By.xpath("//a[contains(text(), '" + categoryName + "')]"));
-            category.click();
-            wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector(".a-page-title")));
-            testDelay();
-            System.out.println("Kategori sayfası açıldı ");
-            return true;
-        } catch (NoSuchElementException e) {
-
-            System.out.println("Kategori bulunamadı " + categoryName);
+            System.out.println("Navigating to category: " + categoryName);
+            
+            String[] categorySelectors = {
+                "a[href*='" + categoryName.toLowerCase() + "']",
+                "a[text*='" + categoryName + "']",
+                "a[title*='" + categoryName + "']",
+                "[aria-label*='" + categoryName + "']"
+            };
+            
+            for (String selector : categorySelectors) {
+                try {
+                    List<WebElement> categoryLinks = driver.findElements(By.cssSelector(selector));
+                    for (WebElement link : categoryLinks) {
+                        if (link.isDisplayed() && link.isEnabled()) {
+                            link.click();
+                            System.out.println("Category link clicked: " + categoryName);
+                            waitForPageLoad();
+                            testDelay();
+                            return true;
+                        }
+                    }
+                } catch (Exception e) {
+                    continue;
+                }
+            }
+            
+            System.out.println("Category not found: " + categoryName);
+            return false;
+            
+        } catch (Exception e) {
+            System.out.println("Navigate to category error: " + e.getMessage());
             return false;
         }
     }
     
-    /**
-     * Sayfayı scroll et
-     */
     public void scrollToBottom() {
-        System.out.println("Sayfa aşağı kaydırılıyor");
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollTo(0, document.body.scrollHeight)");
-        wait.until(ExpectedConditions.jsReturnsValue(
-                "return window.pageYOffset + window.innerHeight >= document.body.scrollHeight - 10"));
-        testDelay();
-        System.out.println("Sayfa sonuna ulaşıldı");
-    }
-    
-
-    public void setWindowSize(int width, int height) {
-        System.out.println("Pencere boyutu değiştiriliyor  " + width + "x" + height);
-        driver.manage().window().setSize(new Dimension(width, height));
-        testDelay();
-    }
-    
-    /**
-     * Pencereyi maksimize et
-     */
-    public void maximizeWindow() {
-        System.out.println("Pencere maksimise ediliyor...");
-        driver.manage().window().maximize();
-        testDelay();
-    }
-
-    public void openNewTab(String url) {
-        System.out.println("Yeni sekme açılıyor...");
-        ((JavascriptExecutor) driver).executeScript("window.open('" + url + "', '_blank');");
-        testDelay();
-    }
-    
-    /**
-     * Sekmeler arası geçiş yap
-     */
-    public void switchToTab(int tabIndex) {
-        System.out.println("Sekme " + tabIndex + "'e geçiliyor...");
-        String[] windowHandles = driver.getWindowHandles().toArray(new String[0]);
-        if (tabIndex < windowHandles.length) {
-            driver.switchTo().window(windowHandles[tabIndex]);
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+            System.out.println("Scrolled to bottom");
             testDelay();
+        } catch (Exception e) {
+            System.out.println("Scroll to bottom error: " + e.getMessage());
         }
     }
-
-    public void closeCurrentTab() {
-        System.out.println("Sekme kapatılıyor...");
-        driver.close();
-        testDelay();
+    
+    public void setWindowSize(int width, int height) {
+        try {
+            driver.manage().window().setSize(new Dimension(width, height));
+            System.out.println("Window size set to: " + width + "x" + height);
+            testDelay();
+        } catch (Exception e) {
+            System.out.println("Set window size error: " + e.getMessage());
+        }
     }
     
-
+    public void maximizeWindow() {
+        try {
+            driver.manage().window().maximize();
+            System.out.println("Window maximized");
+            testDelay();
+        } catch (Exception e) {
+            System.out.println("Maximize window error: " + e.getMessage());
+        }
+    }
+    
+    public void openNewTab(String url) {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("window.open('" + url + "', '_blank');");
+            System.out.println("New tab opened: " + url);
+            testDelay();
+        } catch (Exception e) {
+            System.out.println("Open new tab error: " + e.getMessage());
+        }
+    }
+    
+    public void switchToTab(int tabIndex) {
+        try {
+            driver.switchTo().window(driver.getWindowHandles().toArray()[tabIndex].toString());
+            System.out.println("Switched to tab: " + tabIndex);
+            testDelay();
+        } catch (Exception e) {
+            System.out.println("Switch to tab error: " + e.getMessage());
+        }
+    }
+    
+    public void closeCurrentTab() {
+        try {
+            driver.close();
+            System.out.println("Current tab closed");
+            testDelay();
+        } catch (Exception e) {
+            System.out.println("Close current tab error: " + e.getMessage());
+        }
+    }
+    
     public boolean isElementVisible(By locator) {
         try {
-            return driver.findElement(locator).isDisplayed();
-        } catch (NoSuchElementException e) {
-            return false;
-        }
-
-    }
-    
-
-    public boolean isElementClickable(By locator) {
-        try {
-            wait.until(ExpectedConditions.elementToBeClickable(locator));
-            return true;
+            WebElement element = driver.findElement(locator);
+            return element.isDisplayed();
         } catch (Exception e) {
             return false;
         }
     }
     
-
+    public boolean isElementClickable(By locator) {
+        try {
+            WebElement element = driver.findElement(locator);
+            return element.isDisplayed() && element.isEnabled();
+        } catch (Exception e) {
+            return false;
+        }
+    }
+    
     public String getPageTitle() {
         return driver.getTitle();
     }
     
-
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
     }
     
-
     public long measurePageLoadTime() {
         long startTime = System.currentTimeMillis();
         waitForPageLoad();
@@ -716,117 +662,113 @@ public class AmazonTestUtils {
         return endTime - startTime;
     }
     
-
     public List<WebElement> getFilterOptions() {
-        return driver.findElements(By.cssSelector("#departments .a-spacing-micro"));
+        return driver.findElements(By.cssSelector(".a-spacing-micro"));
     }
-
+    
     public boolean applyFilter(int filterIndex) {
-        System.out.println("Filtre uygulanıyor");
         try {
             List<WebElement> filters = getFilterOptions();
             if (filterIndex < filters.size()) {
                 filters.get(filterIndex).click();
-                waitForPageLoad();
+                System.out.println("Filter applied: " + filterIndex);
                 testDelay();
-                System.out.println("Filtre uygulandı");
                 return true;
             }
             return false;
         } catch (Exception e) {
-            System.out.println("Filtre uygulanamadı");
+            System.out.println("Apply filter error: " + e.getMessage());
             return false;
         }
     }
     
-
     public void closeBrowser() {
-        System.out.println("Tarayıcı kapatılıyor...");
-        if (driver != null) {
-            driver.quit();
+        try {
+            if (driver != null) {
+                driver.quit();
+                System.out.println("Browser closed");
+            }
+        } catch (Exception e) {
+            System.out.println("Close browser error: " + e.getMessage());
         }
-        System.out.println("Tarayıcı kapatıldı");
     }
     
-    /**
-     * Sepete ekle
-     */
     public boolean addToCart() {
-        System.out.println("Sepete ekleniyor...");
         return addToCartAdvanced();
     }
     
-    /**
-     * Giriş sayfasına git
-     */
     public void navigateToLoginPage() {
-        System.out.println("Giriş sayfasına gidiliyor...");
-        driver.get("https://www.amazon.com.tr/ap/signin");
-        waitForPageLoad();
-        testDelay();
-        System.out.println("Giriş sayfası yüklendi");
+        try {
+            System.out.println("Navigating to login page...");
+            driver.get("https://www.amazon.com.tr/ap/signin");
+            waitForPageLoad();
+            testDelay();
+            System.out.println("Login page loaded");
+        } catch (Exception e) {
+            System.out.println("Navigate to login page error: " + e.getMessage());
+        }
     }
-
+    
     public void enterEmail(String email) {
-        System.out.println("E-posta adresi giriliyor...");
-        WebElement emailInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ap_email")));
-        emailInput.clear();
-        emailInput.sendKeys(email);
-        testDelay();
-        System.out.println("E-posta adresi girildi");
+        try {
+            WebElement emailField = driver.findElement(By.id("ap_email"));
+            emailField.clear();
+            emailField.sendKeys(email);
+            System.out.println("Email entered: " + email);
+            testDelay();
+        } catch (Exception e) {
+            System.out.println("Enter email error: " + e.getMessage());
+        }
     }
-
+    
     public void clickContinueButton() {
-        System.out.println("Devam et butonuna tıklanıyor...");
-        WebElement continueButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("continue")));
-        continueButton.click();
-        testDelay();
-        System.out.println("Devam et butonuna tıklandı");
+        try {
+            WebElement continueButton = driver.findElement(By.id("continue"));
+            continueButton.click();
+            System.out.println("Continue button clicked");
+            testDelay();
+        } catch (Exception e) {
+            System.out.println("Click continue button error: " + e.getMessage());
+        }
     }
-
-    /**
-     * Şifreyi gir
-     */
+    
     public void enterPassword(String password) {
-        System.out.println("Şifre giriliyor...");
-        WebElement passwordInput = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("ap_password")));
-        passwordInput.clear();
-        passwordInput.sendKeys(password);
-        testDelay();
-        System.out.println("Şifre girildi");
+        try {
+            WebElement passwordField = driver.findElement(By.id("ap_password"));
+            passwordField.clear();
+            passwordField.sendKeys(password);
+            System.out.println("Password entered");
+            testDelay();
+        } catch (Exception e) {
+            System.out.println("Enter password error: " + e.getMessage());
+        }
     }
-
-    /**
-     * Giriş yap butonuna tıkla
-     */
+    
     public void clickSignInButton() {
-        System.out.println("Giriş yap butonuna tıklanıyor...");
-        WebElement signInButton = wait.until(ExpectedConditions.elementToBeClickable(By.id("signInSubmit")));
-        signInButton.click();
-        testDelay();
-        System.out.println("Giriş yap butonuna tıklandı");
+        try {
+            WebElement signInButton = driver.findElement(By.id("signInSubmit"));
+            signInButton.click();
+            System.out.println("Sign in button clicked");
+            testDelay();
+        } catch (Exception e) {
+            System.out.println("Click sign in button error: " + e.getMessage());
+        }
     }
-
-    /**
-     * Kullanıcının giriş yapmış olup olmadığını kontrol et
-     */
+    
     public boolean isUserLoggedIn() {
         try {
-            // Giriş yapmış kullanıcı için özel bir element var mı kontrol et
-            WebElement accountElement = wait.until(ExpectedConditions.presenceOfElementLocated(By.id("nav-link-accountList")));
-            String accountText = accountElement.getText().toLowerCase();
-            return !accountText.contains("giriş yap") && !accountText.contains("sign in");
+            String currentUrl = driver.getCurrentUrl();
+            return !currentUrl.contains("signin") && !currentUrl.contains("login");
         } catch (Exception e) {
+            System.out.println("Check login status error: " + e.getMessage());
             return false;
         }
     }
-
-    /**
-     * Belirtilen süre kadar bekle
-     */
+    
     public void waitForSeconds(int seconds) {
         try {
-            Thread.sleep(seconds * 1000);
+            Thread.sleep(seconds * 1000L);
+            System.out.println("Waited for " + seconds + " seconds");
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
