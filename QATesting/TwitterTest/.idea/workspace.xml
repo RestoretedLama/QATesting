@@ -6,7 +6,8 @@
   <component name="ChangeListManager">
     <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/AmazonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AmazonTestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonTestUtils.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +49,9 @@
     "JUnit.AmazonTest.testProductDetailInformation.executor": "Run",
     "JUnit.AmazonTest.testProductSearchWithDifferentTerms.executor": "Run",
     "JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin.executor": "Run",
+    "JUnit.AmazonTestUtilsCoverageTest.testInvalidPasswordLogin.executor": "Run",
+    "JUnit.AmazonTestUtilsCoverageTest.testRegistrationPage.executor": "Run",
+    "JUnit.AmazonTestUtilsCoverageTest.testWishlistCreation.executor": "Run",
     "JUnit.BlueSkyLoginTest.executor": "Run",
     "JUnit.BlueSkyTest.executor": "Run",
     "JUnit.BlueskyLoginTest.executor": "Run",
@@ -75,7 +79,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AmazonTest.testProductDetailInformation">
+  <component name="RunManager" selected="JUnit.AmazonTestUtilsCoverageTest.testInvalidPasswordLogin">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="TwitterTest" />
@@ -83,41 +87,41 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonTest.testAddToCartProcess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonTestUtilsCoverageTest.testInvalidEmailLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="METHOD_NAME" value="testAddToCartProcess" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
+      <option name="METHOD_NAME" value="testInvalidEmailLogin" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonTest.testAddToCartProcessWithNewMethod" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonTestUtilsCoverageTest.testInvalidPasswordLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="METHOD_NAME" value="testAddToCartProcessWithNewMethod" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
+      <option name="METHOD_NAME" value="testInvalidPasswordLogin" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonTest.testGoToCartAndCheckItems" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonTestUtilsCoverageTest.testRegistrationPage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="METHOD_NAME" value="testGoToCartAndCheckItems" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
+      <option name="METHOD_NAME" value="testRegistrationPage" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonTest.testProductDetailInformation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonTestUtilsCoverageTest.testWishlistCreation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="METHOD_NAME" value="testProductDetailInformation" />
+      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
+      <option name="METHOD_NAME" value="testWishlistCreation" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -125,11 +129,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AmazonTest.testProductDetailInformation" />
-        <item itemvalue="JUnit.AmazonTest.testAddToCartProcess" />
-        <item itemvalue="JUnit.AmazonTest.testAddToCartProcessWithNewMethod" />
-        <item itemvalue="JUnit.AmazonTest.testGoToCartAndCheckItems" />
+        <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testInvalidPasswordLogin" />
+        <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin" />
+        <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testRegistrationPage" />
         <item itemvalue="Application.Main" />
+        <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testWishlistCreation" />
       </list>
     </recent_temporary>
   </component>
@@ -165,6 +169,26 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Main.java</url>
+          <line>2</line>
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/Tests/AmazonTestUtilsCoverageTest.java</url>
+          <line>308</line>
+          <properties class="AmazonTestUtilsCoverageTest" method="testInvalidEmailLogin">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/TwitterTest$AmazonTestUtilsCoverageTest.ic" NAME="AmazonTestUtilsCoverageTest Coverage Results" MODIFIED="1750249918845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />

@@ -26,6 +26,9 @@ public class AmazonAdvancedTest {
         options.addArguments("--disable-dev-shm-usage");
         options.addArguments("--disable-web-security");
         options.addArguments("--allow-running-insecure-content");
+        options.addArguments("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36");
+        options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        options.setExperimentalOption("useAutomationExtension", false);
         
         driver = new ChromeDriver(options);
         utils = new AmazonTestUtils(driver);
