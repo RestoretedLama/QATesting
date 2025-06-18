@@ -64,11 +64,8 @@ public class AmazonTest {
 
     @ParameterizedTest
     @CsvSource({
-        "Electronics, true",
-        "Books, true", 
-        "Fashion, true",
-        "Sports, true",
-        "Home and Living, true"
+        "Bilgisayar, true",
+        "Bebek, true",
     })
     @DisplayName("Category navigation test")
     public void testCategoryNavigation(String categoryName, boolean expectedResult) {

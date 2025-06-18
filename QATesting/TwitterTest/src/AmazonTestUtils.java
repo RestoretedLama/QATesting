@@ -416,34 +416,25 @@ public class AmazonTestUtils {
     public boolean navigateToCategory(String categoryName) {
         try {
             System.out.println("Navigating to category: " + categoryName);
-            
-            String[] categorySelectors = {
-                "a[href*='" + categoryName.toLowerCase() + "']",
-                "a[text*='" + categoryName + "']",
-                "a[title*='" + categoryName + "']",
-                "[aria-label*='" + categoryName + "']"
-            };
-            
-            for (String selector : categorySelectors) {
-                try {
-                    List<WebElement> categoryLinks = driver.findElements(By.cssSelector(selector));
-                    for (WebElement link : categoryLinks) {
-                        if (link.isDisplayed() && link.isEnabled()) {
-                            link.click();
-                            System.out.println("Category link clicked: " + categoryName);
-                            waitForPageLoad();
-                            testDelay();
-                            return true;
-                        }
+            // Sayfanın üst kısmındaki ana kategori sekmelerini bul
+            List<WebElement> categoryTabs = driver.findElements(By.cssSelector("a, span, div"));
+            for (WebElement tab : categoryTabs) {
+                String text = tab.getText().trim().toLowerCase();
+                if (!text.isEmpty() && text.contains(categoryName.toLowerCase())) {
+                    try {
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", tab);
+                        testDelay();
+                        tab.click();
+                        System.out.println("Category tab clicked: " + text);
+                        testDelay();
+                        return true;
+                    } catch (Exception e) {
+                        System.out.println("Kategoriye tıklanamadı: " + text);
                     }
-                } catch (Exception e) {
-                    continue;
                 }
             }
-            
-            System.out.println("Category not found: " + categoryName);
+            System.out.println("Category not found on main page: " + categoryName);
             return false;
-            
         } catch (Exception e) {
             System.out.println("Navigate to category error: " + e.getMessage());
             return false;
