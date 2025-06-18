@@ -321,22 +321,22 @@ public class AmazonAdvancedTest {
     public void testLoginProcess() {
         System.out.println("\ntest: Login process test");
         System.out.println("----------------------------------------");
-        
+
         utils.navigateToLoginPage();
-        
-        utils.enterEmail("your-email@example.com");
+
+        utils.enterEmail("iloveselfcare@gmail.com");
         utils.clickContinueButton();
-        
+
         System.out.println("Waiting for robot check!!!!!!!!!");
-        
+
         utils.waitForSeconds(30);
-        
-        utils.enterPassword("your-password");
+
+        utils.enterPassword("PS5nxQ8Dfa3HsgV");
         utils.clickSignInButton();
-        
+
         boolean isLoggedIn = utils.isUserLoggedIn();
         assertTrue(isLoggedIn, "User should be able to login successfully");
-        
+
         System.out.println("Login process test successful");
     }
 
