@@ -5,10 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Tests/AmazonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AmazonTestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonTestUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SimpleTest.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestCompilation.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestConfig.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -81,7 +81,14 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AmazonTest.testCategoryNavigation">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Main" />
+      <module name="TwitterTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="AmazonTestUtilsCoverageTest.testInvalidEmailLogin" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
@@ -97,16 +104,6 @@
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
       <option name="METHOD_NAME" value="testInvalidPasswordLogin" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AmazonTestUtilsCoverageTest.testRegistrationPage" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TwitterTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
-      <option name="METHOD_NAME" value="testRegistrationPage" />
       <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
@@ -134,11 +131,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.AmazonTest.testCategoryNavigation" />
         <item itemvalue="JUnit.AmazonTest.testLoginProcess" />
         <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testInvalidPasswordLogin" />
         <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin" />
-        <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testRegistrationPage" />
       </list>
     </recent_temporary>
   </component>
