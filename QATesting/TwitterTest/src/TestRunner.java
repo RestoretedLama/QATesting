@@ -12,7 +12,7 @@ import static org.junit.platform.engine.discovery.DiscoverySelectors.selectMetho
 public class TestRunner {
     
     public static void main(String[] args) {
-        System.out.println("Amazon Turkey Website Test Bot Starting...");
+        System.out.println("Amazon Turkey Website Test Bot Starting");
         System.out.println("==============================================");
         
         try {
@@ -26,7 +26,7 @@ public class TestRunner {
     }
     
     private static void runTestClass(Class<?> testClass) {
-        System.out.println("\nRunning " + testClass.getSimpleName() + " class...");
+        System.out.println("\nRunning " + testClass.getSimpleName() + " class");
         
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
                 .request()
@@ -42,22 +42,22 @@ public class TestRunner {
         TestExecutionSummary summary = listener.getSummary();
         
         System.out.println("Test Results:");
-        System.out.println("- Total test count: " + summary.getTestsFoundCount());
-        System.out.println("- Successful tests: " + summary.getTestsSucceededCount());
-        System.out.println("- Failed tests: " + summary.getTestsFailedCount());
-        System.out.println("- Skipped tests: " + summary.getTestsSkippedCount());
+        System.out.println("- Total test count " + summary.getTestsFoundCount());
+        System.out.println("- Successful tests " + summary.getTestsSucceededCount());
+        System.out.println("- Failed tests " + summary.getTestsFailedCount());
+        System.out.println("- Skipped tests " + summary.getTestsSkippedCount());
         
         if (summary.getTestsFailedCount() > 0) {
-            System.out.println("\nFailed tests:");
+            System.out.println("\nFailed tests");
             summary.getFailures().forEach(failure -> {
                 System.out.println("- " + failure.getTestIdentifier().getDisplayName());
-                System.out.println("  Error: " + failure.getException().getMessage());
+                System.out.println("  Error " + failure.getException().getMessage());
             });
         }
     }
     
     public static void runSpecificTest(Class<?> testClass, String testMethodName) {
-        System.out.println("\nRunning " + testClass.getSimpleName() + "." + testMethodName + "...");
+        System.out.println("\nRunning " + testClass.getSimpleName() + "." + testMethodName );
         
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
                 .request()
@@ -72,14 +72,14 @@ public class TestRunner {
         
         TestExecutionSummary summary = listener.getSummary();
         System.out.println("Test completed. Successful: " + summary.getTestsSucceededCount() + 
-                          ", Failed: " + summary.getTestsFailedCount());
+                          ", Failed " + summary.getTestsFailedCount());
     }
     
     public static void runAllTestsWithReport() {
         System.out.println("Amazon Turkey Website Test Report");
         System.out.println("=================================");
-        System.out.println("Test Date: " + java.time.LocalDateTime.now());
-        System.out.println("Test Target: https://www.amazon.com.tr/");
+        System.out.println("Test Date " + java.time.LocalDateTime.now());
+        System.out.println("Test Target https://www.amazon.com.tr/");
         System.out.println();
         
         try {
@@ -92,7 +92,7 @@ public class TestRunner {
         System.out.println("\n" + "=".repeat(50));
         System.out.println("Test Report Completed");
         System.out.println("=".repeat(50));
-        System.out.println("🔒 Program closing...");
+        System.out.println("Program closing byü");
         System.exit(0);
     }
 } 

@@ -7,11 +7,9 @@
     <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/AmazonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Tests/AmazonTestUtilsCoverageTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonTestUtilsCoverageTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AmazonTestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonTestUtils.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/SimpleTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/SimpleTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/TestCompilation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestCompilation.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TestConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestConfig.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRunner.java" afterDir="false" />
     </list>
@@ -47,6 +45,7 @@
     "Application.Main.executor": "Coverage",
     "Downloaded.Files.Path.Enabled": "false",
     "JUnit.AmazonAdvancedTest.executor": "Coverage",
+    "JUnit.AmazonAdvancedTest.testProductSearchWithDifferentTerms.executor": "Run",
     "JUnit.AmazonTest.executor": "Coverage",
     "JUnit.AmazonTest.testLoginProcess.executor": "Run",
     "JUnit.AmazonTest.testProductSearchWithDifferentTerms.executor": "Run",
@@ -78,7 +77,7 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin">
+  <component name="RunManager" selected="JUnit.AmazonAdvancedTest.testProductSearchWithDifferentTerms">
     <configuration name="AmazonTestUtilsCoverageTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
       <module name="TwitterTest" />
@@ -93,11 +92,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonAdvancedTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonAdvancedTest.testProductSearchWithDifferentTerms" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="TEST_OBJECT" value="class" />
+      <option name="METHOD_NAME" value="testProductSearchWithDifferentTerms(java.lang.String)" />
+      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -123,11 +123,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.AmazonAdvancedTest.testProductSearchWithDifferentTerms" />
         <item itemvalue="JUnit.AmazonTestUtilsCoverageTest.testInvalidEmailLogin" />
         <item itemvalue="Application.AmazonTestUtilsCoverageTest" />
         <item itemvalue="Application.Main" />
         <item itemvalue="JUnit.AmazonTest" />
-        <item itemvalue="JUnit.AmazonAdvancedTest" />
       </list>
     </recent_temporary>
   </component>
@@ -165,6 +165,7 @@
       <workItem from="1750190328255" duration="38000" />
       <workItem from="1750191083376" duration="11000" />
       <workItem from="1750193613167" duration="354000" />
+      <workItem from="1750257953738" duration="1277000" />
     </task>
     <servers />
   </component>

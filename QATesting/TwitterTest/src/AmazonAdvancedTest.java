@@ -105,8 +105,8 @@ public class AmazonAdvancedTest {
         assertTrue(currentUrl.contains("amazon.com.tr"), "URL should contain Amazon Turkey");
         
         System.out.println("Product: " + productTitle);
-        System.out.println("Price: " + productPrice);
-        System.out.println("URL: " + currentUrl);
+        System.out.println("Price: "   + productPrice);
+        System.out.println("URL: "     + currentUrl);
         System.out.println("Product detail information test successful");
     }
 
@@ -212,7 +212,7 @@ public class AmazonAdvancedTest {
         
         long loadTime = utils.measurePageLoadTime();
         
-        assertTrue(loadTime < 10000, "Page should load in less than 10 seconds. Time: " + loadTime + "ms");
+        assertTrue(loadTime < 10000, "Page should load in less than 10 seconds! Time: " + loadTime + "ms ");
         
         System.out.println("Home page load time: " + loadTime + "ms");
         System.out.println("Performance test successful oh ");
@@ -221,7 +221,7 @@ public class AmazonAdvancedTest {
     @Test
     @DisplayName("Multiple tabs operations test")
     public void testMultipleTabs() {
-        System.out.println("\nest: Multiple tabs operations test");
+        System.out.println("\ntest: Multiple tabs operations test");
         System.out.println("----------------------------------------");
         
         String originalUrl = utils.getCurrentUrl();
@@ -321,14 +321,14 @@ public class AmazonAdvancedTest {
         
         utils.navigateToLoginPage();
         
-        utils.enterEmail("your-email@example.com");
+        utils.enterEmail("iloveselfcare@gmail.com");
         utils.clickContinueButton();
         
         System.out.println("Waiting for robot check!!!!!!!!!");
         
         utils.waitForSeconds(30);
         
-        utils.enterPassword("your-password");
+        utils.enterPassword("PS5nxQ8Dfa3HsgV");
         utils.clickSignInButton();
         
         boolean isLoggedIn = utils.isUserLoggedIn();
@@ -339,7 +339,7 @@ public class AmazonAdvancedTest {
 
     @AfterAll
     public static void teardown() {
-        System.out.println("\nADVANCED tests completing...");
+        System.out.println("\nADVANCED tests completing");
         System.out.println("==============================================");
         
         if (utils != null) {
@@ -349,7 +349,7 @@ public class AmazonAdvancedTest {
         System.out.println("All advanced tests completed! ehehe");
         System.out.println("==============================================");
         
-        System.out.println("Program closing...");
+        System.out.println("Program closing");
         System.exit(0);
     }
 } 

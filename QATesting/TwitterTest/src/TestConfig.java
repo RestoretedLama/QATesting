@@ -11,11 +11,11 @@ public class TestConfig {
     };
 
     public static final int DEFAULT_WAIT_TIMEOUT = 20; // saniye
-    public static final int PAGE_LOAD_TIMEOUT = 10; // saniye
-    public static final int IMPLICIT_WAIT = 5; // saniye
+    public static final int PAGE_LOAD_TIMEOUT = 10;
+    public static final int IMPLICIT_WAIT = 5;
 
-    public static final long MAX_PAGE_LOAD_TIME = 10000; // milisaniye
-    public static final long MAX_ELEMENT_WAIT_TIME = 5000; // milisaniye
+    public static final long MAX_PAGE_LOAD_TIME = 10000;
+    public static final long MAX_ELEMENT_WAIT_TIME = 5000;
     
 
     public static final String[] CHROME_ARGUMENTS = {
@@ -73,7 +73,7 @@ public class TestConfig {
     
 
     public static boolean isTestEnvironmentReady() {
-        // İnternet bağlantısı kontrolü (basit)
+        // İnternet bağlantısı kontrolü (basit olan )
         try {
             java.net.InetAddress.getByName("www.google.com");
             return true;
@@ -84,7 +84,7 @@ public class TestConfig {
     
 
     public static void printTestConfiguration() {
-        System.out.println("=== Test Configuration ===");
+        System.out.println("=== Test Configuration  ===");
         System.out.println("Target URL: " + AMAZON_TURKEY_URL);
         System.out.println("Wait Timeout: " + DEFAULT_WAIT_TIMEOUT + " seconds");
         System.out.println("Page Load Timeout: " + PAGE_LOAD_TIMEOUT + " seconds");
@@ -98,7 +98,7 @@ public class TestConfig {
     }
 
     public static void validateTestEnvironment() {
-        System.out.println("Validating test environment...");
+        System.out.println("Validating test environment");
         
         if (!isTestEnvironmentReady()) {
             throw new RuntimeException("Internet connection not found!");
@@ -106,11 +106,11 @@ public class TestConfig {
         
         // Java versiyonu kontrolü
         String javaVersion = System.getProperty("java.version");
-        System.out.println("Java Version: " + javaVersion);
+        System.out.println("Java Version " + javaVersion);
         
         // İşletim sistemi bilgisi
         String osName = System.getProperty("os.name");
-        System.out.println("Operating System: " + osName);
+        System.out.println("Operating System " + osName);
         
         System.out.println("Test environment ready!");
     }

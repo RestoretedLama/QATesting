@@ -39,7 +39,7 @@ public class AmazonTestUtilsCoverageTest {
     @DisplayName("Registration page test")
     public void testRegistrationPage() {
         testCount++;
-        System.out.println("Test " + testCount + ": Registration page testing");
+        System.out.println("Test " + testCount + " Registration page testing");
         
         try {
             driver.get("https://www.amazon.com/ap/signin?openid.pape.max_auth_age=900&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fyourstore%2Fhome%3Fpath%3D%252Fgp%252Fyourstore%252Fhome%26useRedirectOnSuccess%3D1%26signIn%3D1%26action%3Dsign-out%26ref_%3Dnav_AccountFlyout_signout&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0");
@@ -72,7 +72,7 @@ public class AmazonTestUtilsCoverageTest {
                             link.click();
                             registrationLinkFound = true;
                             passedTests++;
-                            System.out.println("Alternative registration link found: " + linkText);
+                            System.out.println("Alternative registration link found " + linkText);
                             break;
                         }
                     }
@@ -88,7 +88,7 @@ public class AmazonTestUtilsCoverageTest {
             String currentUrl = driver.getCurrentUrl();
             if (currentUrl.contains("register") || currentUrl.contains("signup") || currentUrl.contains("create")) {
                 passedTests++;
-                System.out.println("Registration page loaded successfully");
+                System.out.println("Registration page loaded  successfully");
             } else {
                 failedTests++;
                 System.out.println("Registration page failed to load");
@@ -104,7 +104,7 @@ public class AmazonTestUtilsCoverageTest {
     @DisplayName("Registration form fields test")
     public void testRegistrationFormFields() {
         testCount++;
-        System.out.println("Test " + testCount + ": Registration form fields testing");
+        System.out.println("Test " + testCount + " Registration form fields testing");
         
         try {
             driver.get("https://www.amazon.com/ap/signin?openid.pape.max_auth_age=900&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fyourstore%2Fhome%3Fpath%3D%252Fgp%252Fyourstore%252Fhome%26useRedirectOnSuccess%3D1%26signIn%3D1%26action%3Dsign-out%26ref_%3Dnav_AccountFlyout_signout&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0");
@@ -154,7 +154,7 @@ public class AmazonTestUtilsCoverageTest {
             
         } catch (Exception e) {
             failedTests++;
-            System.out.println("Registration form fields test failed: " + e.getMessage());
+            System.out.println("Registration form fields test failed " + e.getMessage());
         }
     }
 
@@ -162,7 +162,7 @@ public class AmazonTestUtilsCoverageTest {
     @DisplayName("Registration error messages test")
     public void testRegistrationErrorMessages() {
         testCount++;
-        System.out.println("Test " + testCount + ": Registration error messages testing");
+        System.out.println("Test " + testCount + " Registration error messages testing");
         
         try {
             driver.get("https://www.amazon.com/ap/signin?openid.pape.max_auth_age=900&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fyourstore%2Fhome%3Fpath%3D%252Fgp%252Fyourstore%252Fhome%26useRedirectOnSuccess%3D1%26signIn%3D1%26action%3Dsign-out%26ref_%3Dnav_AccountFlyout_signout&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0");
@@ -197,7 +197,7 @@ public class AmazonTestUtilsCoverageTest {
                             errorText.contains("empty") || errorText.contains("empty") ||
                             errorText.contains("fill") || errorText.contains("fill")) {
                             passedTests++;
-                            System.out.println("Registration form error message correct: " + errorText);
+                            System.out.println("Registration form error message correct " + errorText);
                             errorFound = true;
                             break;
                         }
@@ -215,7 +215,7 @@ public class AmazonTestUtilsCoverageTest {
             
         } catch (Exception e) {
             failedTests++;
-            System.out.println("Registration error messages test failed: " + e.getMessage());
+            System.out.println("Registration error messages test failed " + e.getMessage());
         }
     }
 
@@ -223,7 +223,7 @@ public class AmazonTestUtilsCoverageTest {
     @DisplayName("Wishlist creation test")
     public void testWishlistCreation() {
         testCount++;
-        System.out.println("Test " + testCount + ": Wishlist creation testing");
+        System.out.println("Test " + testCount + " Wishlist creation testing");
         
         try {
             utils.navigateToHomePage();
@@ -262,7 +262,7 @@ public class AmazonTestUtilsCoverageTest {
     @DisplayName("Shopping cart limits test")
     public void testShoppingCartLimits() {
         testCount++;
-        System.out.println("Test " + testCount + ": Shopping cart limits testing");
+        System.out.println("Test " + testCount + " Shopping cart limits testing");
         
         try {
             utils.navigateToHomePage();
@@ -284,7 +284,7 @@ public class AmazonTestUtilsCoverageTest {
                 if (utils.clickFirstProduct()) {
                     if (utils.addToCartAdvanced()) {
                         addedCount++;
-                        System.out.println("Product added: " + product + " (Total: " + addedCount + ")");
+                        System.out.println("Product added " + product + " (Total " + addedCount + ")");
                     }
                 }
             }
@@ -300,7 +300,7 @@ public class AmazonTestUtilsCoverageTest {
             
         } catch (Exception e) {
             failedTests++;
-            System.out.println("Shopping cart limits test failed: " + e.getMessage());
+            System.out.println("Shopping cart limits test failed " + e.getMessage());
         }
     }
 
@@ -308,7 +308,7 @@ public class AmazonTestUtilsCoverageTest {
     @DisplayName("Invalid email login test")
     public void testInvalidEmailLogin() {
         testCount++;
-        System.out.println("Test " + testCount + ": Invalid email login testing");
+        System.out.println("Test " + testCount + " Invalid email login testing");
         
         try {
             utils.navigateToLoginPage();
@@ -339,7 +339,7 @@ public class AmazonTestUtilsCoverageTest {
             
         } catch (Exception e) {
             failedTests++;
-            System.out.println("Invalid email test failed: " + e.getMessage());
+            System.out.println("Invalid email test failed " + e.getMessage());
         }
     }
 
@@ -347,7 +347,7 @@ public class AmazonTestUtilsCoverageTest {
     @DisplayName("Invalid password login test")
     public void testInvalidPasswordLogin() {
         testCount++;
-        System.out.println("Test " + testCount + ": Invalid password login testing");
+        System.out.println("Test " + testCount + " Invalid password login testing");
         
         try {
             utils.navigateToLoginPage();
@@ -383,7 +383,7 @@ public class AmazonTestUtilsCoverageTest {
             
         } catch (Exception e) {
             failedTests++;
-            System.out.println("Invalid password test failed: " + e.getMessage());
+            System.out.println("Invalid password test failed " + e.getMessage());
         }
     }
 
@@ -468,7 +468,7 @@ public class AmazonTestUtilsCoverageTest {
             
         } catch (Exception e) {
             failedTests++;
-            System.out.println("Cart operations limit test failed: " + e.getMessage());
+            System.out.println("Cart operations limit test failed " + e.getMessage());
         }
     }
 
@@ -494,7 +494,7 @@ public class AmazonTestUtilsCoverageTest {
             
         } catch (Exception e) {
             failedTests++;
-            System.out.println("Category navigation error test failed: " + e.getMessage());
+            System.out.println("Category navigation error test failed " + e.getMessage());
         }
     }
 
@@ -502,7 +502,7 @@ public class AmazonTestUtilsCoverageTest {
     @DisplayName("Performance limit test")
     public void testPerformanceLimits() {
         testCount++;
-        System.out.println("Test " + testCount + ": Performance limit test");
+        System.out.println("Test " + testCount + " Performance limit test");
         
         try {
             long startTime = System.currentTimeMillis();
@@ -569,7 +569,7 @@ public class AmazonTestUtilsCoverageTest {
             test.testPerformanceLimits();
             
         } catch (Exception e) {
-            System.err.println("Error occurred while running tests: " + e.getMessage());
+            System.err.println("Error occurred while running tests " + e.getMessage());
             e.printStackTrace();
         } finally {
             teardown();

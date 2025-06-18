@@ -108,16 +108,16 @@ public class AmazonTest {
         String currentUrl = utils.getCurrentUrl();
         assertTrue(currentUrl.contains("amazon.com.tr"), "URL should contain Amazon Turkey");
         
-        System.out.println("Product: " + productTitle);
-        System.out.println("Price: " + productPrice);
-        System.out.println("URL: " + currentUrl);
+        System.out.println("Product " + productTitle);
+        System.out.println("Price " + productPrice);
+        System.out.println("URL " + currentUrl);
         System.out.println("Product detail information test successful");
     }
 
     @Test
     @DisplayName("Add to cart process test")
     public void testAddToCartProcess() {
-        System.out.println("\nTest: Add to cart process test");
+        System.out.println("\nAdd to cart process test");
         System.out.println("----------------------------------------");
         
         utils.searchProduct("book");
@@ -127,7 +127,7 @@ public class AmazonTest {
         assertTrue(addedToCart, "Product should be added to cart");
 
         int cartCount = utils.getCartItemCount();
-        System.out.println("🛒 Items in cart: " + cartCount);
+        System.out.println("Items in cart: " + cartCount);
         
         System.out.println("Add to cart process test successful");
     }
@@ -135,7 +135,7 @@ public class AmazonTest {
     @Test
     @DisplayName("Go to cart and check items test")
     public void testGoToCartAndCheckItems() {
-        System.out.println("\nTest: Go to cart and check items test");
+        System.out.println("\nGo to cart and check items test");
         System.out.println("----------------------------------------");
         
         utils.searchProduct("pen");
@@ -159,7 +159,7 @@ public class AmazonTest {
     @Test
     @DisplayName("Filtering process test")
     public void testFilteringProcess() {
-        System.out.println("\nTest: Filtering process test");
+        System.out.println("\nFiltering process test");
         System.out.println("----------------------------------------");
         
         utils.searchProduct("phone");
@@ -200,7 +200,7 @@ public class AmazonTest {
         
         if (width <= 768) {
             assertTrue(utils.isElementVisible(By.id("nav-hamburger-menu")), 
-                      "Hamburger menu should be visible for " + device);
+                      "Hamburger menu should be visible for  " + device);
             System.out.println("Mobile menu visible for " + device);
         }
         
@@ -211,7 +211,7 @@ public class AmazonTest {
     @Test
     @DisplayName("Performance test")
     public void testPerformance() {
-        System.out.println("\ntest: Performance test");
+        System.out.println("\n Performance test");
         System.out.println("----------------------------------------");
         
         long loadTime = utils.measurePageLoadTime();
@@ -225,7 +225,7 @@ public class AmazonTest {
     @Test
     @DisplayName("Multiple tabs operations test")
     public void testMultipleTabs() {
-        System.out.println("\nest: Multiple tabs operations test");
+        System.out.println("\nMultiple tabs operations test");
         System.out.println("----------------------------------------");
         
         String originalUrl = utils.getCurrentUrl();
@@ -270,7 +270,7 @@ public class AmazonTest {
     @Test
     @DisplayName("Element interactions test ")
     public void testElementInteractions() {
-        System.out.println("\ntest Element interactions test");
+        System.out.println("\n Element interactions test");
         System.out.println("----------------------------------------");
         
         assertTrue(utils.isElementClickable(By.id("twotabsearchtextbox")), 
@@ -288,7 +288,7 @@ public class AmazonTest {
     @Test
     @DisplayName("URL validation test")
     public void testUrlValidation() {
-        System.out.println("\nTest: URL validation test");
+        System.out.println("\n URL validation test");
         System.out.println("----------------------------------------");
         
         String currentUrl = utils.getCurrentUrl();
@@ -296,14 +296,14 @@ public class AmazonTest {
         assertTrue(currentUrl.contains("amazon.com.tr"), "URL should contain Amazon Turkey");
         assertTrue(currentUrl.startsWith("https://"), "URL should use HTTPS protocol");
         
-        System.out.println("URL: " + currentUrl);
+        System.out.println("URL " + currentUrl);
         System.out.println("URL validation test successful");
     }
 
     @Test
     @DisplayName("Page title validation test")
     public void testPageTitleValidation() {
-        System.out.println("\nTest: Page title validation test");
+        System.out.println("\nPage title validation test");
         System.out.println("----------------------------------------");
         
         String pageTitle = utils.getPageTitle();
@@ -313,14 +313,14 @@ public class AmazonTest {
         assertTrue(pageTitle.contains("Amazon") || pageTitle.contains("amazon"), 
                   "Page title should contain Amazon");
         
-        System.out.println("Page title: " + pageTitle);
+        System.out.println("Page title " + pageTitle);
         System.out.println("Page title validation test successful");
     }
 
     @Test
     @DisplayName("Login process test")
     public void testLoginProcess() {
-        System.out.println("\ntest: Login process test");
+        System.out.println("\nLogin process test");
         System.out.println("----------------------------------------");
         
         utils.navigateToLoginPage();
@@ -343,7 +343,7 @@ public class AmazonTest {
 
     @AfterAll
     public static void teardown() {
-        System.out.println("\nADVANCED tests completing...");
+        System.out.println("\nADVANCED tests completing");
         System.out.println("==============================================");
         
         if (utils != null) {
@@ -353,7 +353,7 @@ public class AmazonTest {
         System.out.println("All advanced tests completed! ehehe");
         System.out.println("==============================================");
         
-        System.out.println("Program closing...");
+        System.out.println("Program closing");
         System.exit(0);
     }
 } 
