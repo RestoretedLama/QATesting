@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="" />
+    <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -35,12 +38,6 @@
   &quot;keyToString&quot;: {
     &quot;Application.Main.executor&quot;: &quot;Run&quot;,
     &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
-    &quot;JUnit.AmazonAdvancedTest.testAddAndRemoveFromCart.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.AmazonAdvancedTest.testAddToCartProcess.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.AmazonAdvancedTest.testAmazonLoginWithCredentials.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.AmazonAdvancedTest.testLoginProcess.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.AmazonAdvancedTest.testPageTitleValidation.executor&quot;: &quot;Run&quot;,
-    &quot;JUnit.AmazonAdvancedTest.testUrlValidation.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.BlueSkyLoginTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.BlueSkyTest.executor&quot;: &quot;Run&quot;,
     &quot;JUnit.BlueskyLoginTest.executor&quot;: &quot;Run&quot;,
@@ -51,7 +48,8 @@
     &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;elctual&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/enisa/Downloads/selenium-java-4.32.0&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
@@ -62,16 +60,11 @@
     &quot;onboarding.tips.debug.path&quot;: &quot;C:/Users/enisa/OneDrive/Masaüstü/javaProjelerim/TwitterTest/src/Main.java&quot;,
     &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.25271967&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.24482758&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;preferences.lookFeel&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
-  <component name="RecentsManager">
-    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="" />
-    </key>
-  </component>
   <component name="RunManager" selected="Application.Main">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
@@ -80,42 +73,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonAdvancedTest.testAddAndRemoveFromCart" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BlueSkyLoginTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="METHOD_NAME" value="testAddAndRemoveFromCart" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="BlueSkyLoginTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonAdvancedTest.testAmazonLoginWithCredentials" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BlueSkyTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="METHOD_NAME" value="testAmazonLoginWithCredentials" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="BlueSkyTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonAdvancedTest.testLoginProcess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="BlueskyLoginTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="METHOD_NAME" value="testLoginProcess" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="BlueskyLoginTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonAdvancedTest.testScrolling" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TwitterLoginTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="METHOD_NAME" value="testScrolling" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="TwitterLoginTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -123,12 +112,20 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.AmazonAdvancedTest.testScrolling" />
-        <item itemvalue="JUnit.AmazonAdvancedTest.testLoginProcess" />
-        <item itemvalue="JUnit.AmazonAdvancedTest.testAddAndRemoveFromCart" />
-        <item itemvalue="JUnit.AmazonAdvancedTest.testAmazonLoginWithCredentials" />
+        <item itemvalue="JUnit.BlueSkyTest" />
+        <item itemvalue="JUnit.BlueskyLoginTest" />
+        <item itemvalue="JUnit.BlueSkyLoginTest" />
+        <item itemvalue="JUnit.TwitterLoginTest" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-a94e463ab2e7-intellij.indexing.shared.core-IU-243.26053.27" />
+        <option value="bundled-js-predefined-d6986cc7102b-1632447f56bf-JavaScript-IU-243.26053.27" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -152,32 +149,14 @@
       <workItem from="1749805682327" duration="2304000" />
       <workItem from="1749808216303" duration="1414000" />
       <workItem from="1750083559088" duration="447000" />
-      <workItem from="1750098055380" duration="6173000" />
-      <workItem from="1750156317961" duration="5000" />
+      <workItem from="1750185370799" duration="3270000" />
+      <workItem from="1750190328255" duration="38000" />
+      <workItem from="1750191083376" duration="11000" />
+      <workItem from="1750193613167" duration="354000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/Main.java</url>
-          <line>17</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-method">
-          <url>file://$PROJECT_DIR$/Tests/AmazonAdvancedTest.java</url>
-          <line>46</line>
-          <properties class="AmazonAdvancedTest" method="testProductSearchWithDifferentTerms">
-            <option name="EMULATED" value="true" />
-            <option name="WATCH_EXIT" value="false" />
-          </properties>
-          <option name="timeStamp" value="2" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
