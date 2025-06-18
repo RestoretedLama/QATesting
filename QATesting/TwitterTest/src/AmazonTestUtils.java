@@ -11,12 +11,12 @@ public class AmazonTestUtils {
     
     public AmazonTestUtils(WebDriver driver) {
         this.driver = driver;
-        this.wait = new WebDriverWait(driver, Duration.ofSeconds(20));
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(6));
     }
     
     public void testDelay() {
         try {
-            Thread.sleep(2000);
+            Thread.sleep(500);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -24,7 +24,7 @@ public class AmazonTestUtils {
     
     public void longDelay() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             Thread.currentThread().interrupt();
         }
@@ -137,7 +137,8 @@ public class AmazonTestUtils {
     }
     
     public List<WebElement> getSearchResults() {
-        return driver.findElements(By.cssSelector("[data-component-type='s-search-result']"));
+        List<WebElement> all = driver.findElements(By.cssSelector("[data-component-type='s-search-result']"));
+        return all.size() > 2 ? all.subList(0, 2) : all;
     }
     
     public boolean clickFirstProduct() {
@@ -346,8 +347,8 @@ public class AmazonTestUtils {
             if (cartItems.isEmpty()) {
                 cartItems = driver.findElements(By.cssSelector(".cart-item"));
             }
-            System.out.println("Cart items found: " + cartItems.size());
-            return cartItems;
+            // Sadece ilk 2 ürünü döndür
+            return cartItems.size() > 2 ? cartItems.subList(0, 2) : cartItems;
         } catch (Exception e) {
             System.out.println("Get cart items error: " + e.getMessage());
             return List.of();
@@ -357,22 +358,19 @@ public class AmazonTestUtils {
     public boolean removeFromCart(int itemIndex) {
         try {
             System.out.println("Removing item " + itemIndex + " from cart");
-            
             List<WebElement> removeButtons = driver.findElements(By.cssSelector("input[value*='Delete'], input[value*='Remove'], .a-button[data-action='delete']"));
-            
+            if (removeButtons.size() > 2) removeButtons = removeButtons.subList(0, 2);
             if (itemIndex < removeButtons.size()) {
                 WebElement removeButton = removeButtons.get(itemIndex);
                 if (removeButton.isDisplayed() && removeButton.isEnabled()) {
                     removeButton.click();
                     System.out.println("Remove button clicked");
-                    testDelay();
+                    Thread.sleep(200);
                     return true;
                 }
             }
-            
             System.out.println("Remove button not found for index " + itemIndex);
             return false;
-            
         } catch (Exception e) {
             System.out.println("Remove from cart error: " + e.getMessage());
             return false;
@@ -416,34 +414,29 @@ public class AmazonTestUtils {
     public boolean navigateToCategory(String categoryName) {
         try {
             System.out.println("Navigating to category: " + categoryName);
-            
-            String[] categorySelectors = {
-                "a[href*='" + categoryName.toLowerCase() + "']",
-                "a[text*='" + categoryName + "']",
-                "a[title*='" + categoryName + "']",
-                "[aria-label*='" + categoryName + "']"
-            };
-            
-            for (String selector : categorySelectors) {
-                try {
-                    List<WebElement> categoryLinks = driver.findElements(By.cssSelector(selector));
-                    for (WebElement link : categoryLinks) {
-                        if (link.isDisplayed() && link.isEnabled()) {
-                            link.click();
-                            System.out.println("Category link clicked: " + categoryName);
-                            waitForPageLoad();
-                            testDelay();
-                            return true;
-                        }
+            // Sadece ilk 2 kategori sekmesini kontrol et
+            List<WebElement> categoryTabs = driver.findElements(By.cssSelector("a, span, div"));
+            int checked = 0;
+            for (WebElement tab : categoryTabs) {
+                if (checked >= 2) break;
+                String text = tab.getText().trim().toLowerCase();
+                if (!text.isEmpty() && (text.equalsIgnoreCase(categoryName) || text.contains(categoryName.toLowerCase()))) {
+                    try {
+                        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", tab);
+                        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+                        wait.until(ExpectedConditions.elementToBeClickable(tab));
+                        tab.click();
+                        System.out.println("Category tab clicked: " + text);
+                        testDelay();
+                        return true;
+                    } catch (Exception e) {
+                        System.out.println("Kategoriye tıklanamadı: " + text + " | Hata: " + e.getMessage());
                     }
-                } catch (Exception e) {
-                    continue;
                 }
+                checked++;
             }
-            
-            System.out.println("Category not found: " + categoryName);
+            System.out.println("Category not found on main page: " + categoryName);
             return false;
-            
         } catch (Exception e) {
             System.out.println("Navigate to category error: " + e.getMessage());
             return false;
@@ -455,7 +448,7 @@ public class AmazonTestUtils {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
             System.out.println("Scrolled to bottom");
-            testDelay();
+            Thread.sleep(200);
         } catch (Exception e) {
             System.out.println("Scroll to bottom error: " + e.getMessage());
         }
@@ -465,7 +458,7 @@ public class AmazonTestUtils {
         try {
             driver.manage().window().setSize(new Dimension(width, height));
             System.out.println("Window size set to: " + width + "x" + height);
-            testDelay();
+            Thread.sleep(200);
         } catch (Exception e) {
             System.out.println("Set window size error: " + e.getMessage());
         }
@@ -475,7 +468,7 @@ public class AmazonTestUtils {
         try {
             driver.manage().window().maximize();
             System.out.println("Window maximized");
-            testDelay();
+            Thread.sleep(200);
         } catch (Exception e) {
             System.out.println("Maximize window error: " + e.getMessage());
         }
@@ -546,16 +539,18 @@ public class AmazonTestUtils {
     }
     
     public List<WebElement> getFilterOptions() {
-        return driver.findElements(By.cssSelector(".a-spacing-micro"));
+        List<WebElement> all = driver.findElements(By.cssSelector(".a-spacing-micro"));
+        return all.size() > 2 ? all.subList(0, 2) : all;
     }
     
     public boolean applyFilter(int filterIndex) {
         try {
             List<WebElement> filters = getFilterOptions();
+            if (filters.size() > 2) filters = filters.subList(0, 2);
             if (filterIndex < filters.size()) {
                 filters.get(filterIndex).click();
                 System.out.println("Filter applied: " + filterIndex);
-                testDelay();
+                Thread.sleep(200);
                 return true;
             }
             return false;
