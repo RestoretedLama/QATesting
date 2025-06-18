@@ -414,26 +414,24 @@ public class AmazonTestUtils {
     public boolean navigateToCategory(String categoryName) {
         try {
             System.out.println("Navigating to category: " + categoryName);
-            // Sadece ilk 2 kategori sekmesini kontrol et
+            handleCookieBannerAndPopups(); // Engelleyici popup'ları kapat
+
             List<WebElement> categoryTabs = driver.findElements(By.cssSelector("a, span, div"));
-            int checked = 0;
             for (WebElement tab : categoryTabs) {
-                if (checked >= 2) break;
                 String text = tab.getText().trim().toLowerCase();
                 if (!text.isEmpty() && (text.equalsIgnoreCase(categoryName) || text.contains(categoryName.toLowerCase()))) {
-                    try {
-                        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", tab);
-                        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-                        wait.until(ExpectedConditions.elementToBeClickable(tab));
-                        tab.click();
-                        System.out.println("Category tab clicked: " + text);
-                        testDelay();
-                        return true;
-                    } catch (Exception e) {
-                        System.out.println("Kategoriye tıklanamadı: " + text + " | Hata: " + e.getMessage());
+                    if (tab.isDisplayed() && tab.isEnabled()) {
+                        try {
+                            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", tab);
+                            tab.click();
+                            System.out.println("Category tab clicked: " + text);
+                            testDelay();
+                            return true;
+                        } catch (Exception e) {
+                            System.out.println("Kategoriye tıklanamadı: " + text + " | Hata: " + e.getMessage());
+                        }
                     }
                 }
-                checked++;
             }
             System.out.println("Category not found on main page: " + categoryName);
             return false;
