@@ -7,7 +7,7 @@ import java.util.List;
 public class AmazonTestUtils {
     
     private final WebDriver driver;
-    private final WebDriverWait wait;
+    public final WebDriverWait wait;
     
     public AmazonTestUtils(WebDriver driver) {
         this.driver = driver;
@@ -226,8 +226,7 @@ public class AmazonTestUtils {
         }
     }
     
-    // Basit onay kontrolü
-    private boolean waitForAddToCartConfirmation() {
+    public boolean waitForAddToCartConfirmation() {
         try {
             String[] confirmationSelectors = {
                 "#attachDisplayAddBaseAlert",

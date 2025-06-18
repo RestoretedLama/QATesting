@@ -8,6 +8,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.util.List;
 
@@ -371,5 +373,95 @@ public class AmazonTest {
         
         System.out.println("Program closing...");
         System.exit(0);
+    }
+
+    public boolean addFirstProductToCart(String searchTerm) {
+        try {
+            driver.get("https://www.amazon.com.tr/");
+            utils.waitForPageLoad();
+            utils.handleCookieBannerAndPopups();
+            utils.testDelay();
+
+            // Arama
+            WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
+            searchBox.clear();
+            searchBox.sendKeys(searchTerm);
+            driver.findElement(By.id("nav-search-submit-button")).click();
+            utils.wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-component-type='s-search-result']")));
+            utils.testDelay();
+
+            // Gerçek ürün detayına giden ilk linki bul
+            List<WebElement> results = driver.findElements(By.cssSelector("[data-component-type='s-search-result']"));
+            WebElement firstProductLink = null;
+            String productText = "";
+            for (WebElement result : results) {
+                // Önce <h2> altındaki <a> ile dene
+                try {
+                    WebElement h2 = result.findElement(By.tagName("h2"));
+                    WebElement link = h2.findElement(By.tagName("a"));
+                    String href = link.getAttribute("href");
+                    if (href != null && href.contains("/dp/") && link.isDisplayed() && link.isEnabled()) {
+                        firstProductLink = link;
+                        productText = link.getText();
+                        break;
+                    }
+                } catch (Exception ignore) {}
+                // Olmazsa kutudaki tüm <a> etiketlerini dene
+                if (firstProductLink == null) {
+                    List<WebElement> links = result.findElements(By.tagName("a"));
+                    for (WebElement link : links) {
+                        String href = link.getAttribute("href");
+                        if (href != null && href.contains("/dp/") && link.isDisplayed() && link.isEnabled()) {
+                            firstProductLink = link;
+                            productText = link.getText();
+                            break;
+                        }
+                    }
+                }
+                if (firstProductLink != null) break;
+            }
+            if (firstProductLink == null) {
+                System.out.println("Hiçbir gerçek ürün linki bulunamadı!");
+                return false;
+            }
+            ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", firstProductLink);
+            utils.testDelay();
+            System.out.println("Tıklanan ürün: " + productText);
+            firstProductLink.click();
+            utils.wait.until(ExpectedConditions.presenceOfElementLocated(By.id("productTitle")));
+            utils.testDelay();
+
+            // Sepete ekle butonunu bul ve tıkla
+            WebElement addToCartBtn = null;
+            String[] selectors = {
+                "#add-to-cart-button",
+                "input[name='submit.add-to-cart']",
+                "button[name='submit.add-to-cart']"
+            };
+            for (String selector : selectors) {
+                try {
+                    addToCartBtn = driver.findElement(By.cssSelector(selector));
+                    if (addToCartBtn.isDisplayed() && addToCartBtn.isEnabled()) {
+                        break;
+                    }
+                } catch (Exception ignore) {}
+            }
+            if (addToCartBtn == null) {
+                System.out.println("Sepete ekle butonu yok!");
+                return false;
+            }
+            addToCartBtn.click();
+            System.out.println("Sepete ekle tıklandı");
+            boolean confirmed = utils.waitForAddToCartConfirmation();
+            if (confirmed) {
+                System.out.println("Ürün sepete eklendi!");
+            } else {
+                System.out.println("Sepete ekleme onayı alınamadı!");
+            }
+            return confirmed;
+        } catch (Exception e) {
+            System.out.println("Hata: " + e.getMessage());
+            return false;
+        }
     }
 } 
