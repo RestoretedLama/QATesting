@@ -64,24 +64,25 @@ public class AmazonTest {
 
     @ParameterizedTest
     @CsvSource({
-        "Bilgisayar, true",
-        "Bebek, true",
+            "Bilgisayar, true",
+            "Bebek, true",
+            "Ayakkabı, true"
     })
     @DisplayName("Category navigation test")
     public void testCategoryNavigation(String categoryName, boolean expectedResult) {
         System.out.println("\n'" + categoryName + "' category test");
         System.out.println("----------------------------------------");
-        
+
         utils.openCategoryMenu();
-        
+
         boolean result = utils.navigateToCategory(categoryName);
-        assertEquals(expectedResult, result, categoryName + " category navigation should be " + 
-                    (expectedResult ? "successful" : "unsuccessful"));
-        
+        assertEquals(expectedResult, result, categoryName + " category navigation should be " +
+                (expectedResult ? "successful" : "unsuccessful"));
+
         if (result) {
             String pageTitle = utils.getPageTitle();
-            assertTrue(pageTitle.contains(categoryName) || pageTitle.contains("Amazon"), 
-                      "Category page should load correctly");
+            assertTrue(pageTitle.contains(categoryName) || pageTitle.contains("Amazon"),
+                    "Category page should load correctly");
             System.out.println("'" + categoryName + "' category test successful");
         } else {
             System.out.println("'" + categoryName + "' category test failed");

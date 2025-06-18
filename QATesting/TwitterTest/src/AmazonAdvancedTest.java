@@ -61,7 +61,7 @@ public class AmazonAdvancedTest {
 
     @ParameterizedTest
     @CsvSource({
-        "Bilgisayar, true",
+        "Bilgisayarlar, true",
         "Bebek, true",
         "Ayakkabı, true"
     })
@@ -69,8 +69,6 @@ public class AmazonAdvancedTest {
     public void testCategoryNavigation(String categoryName, boolean expectedResult) {
         System.out.println("\n'" + categoryName + "' category test");
         System.out.println("----------------------------------------");
-        
-        utils.openCategoryMenu();
         
         boolean result = utils.navigateToCategory(categoryName);
         assertEquals(expectedResult, result, categoryName + " category navigation should be " + 
@@ -91,9 +89,9 @@ public class AmazonAdvancedTest {
     public void testProductDetailInformation() {
         System.out.println("\nProduct detail page information test");
         System.out.println("----------------------------------------");
-        
-        utils.searchProduct("laptop");
-        utils.clickFirstProduct();
+
+        // Arama ve ilk gerçek ürünü tıkla
+        assertTrue(utils.clickFirstRealProduct("laptop"), "İlk gerçek ürün tıklanamadı!");
 
         String productTitle = utils.getProductTitle();
         assertNotNull(productTitle, "Product title should not be null");
@@ -104,7 +102,7 @@ public class AmazonAdvancedTest {
 
         String currentUrl = utils.getCurrentUrl();
         assertTrue(currentUrl.contains("amazon.com.tr"), "URL should contain Amazon Turkey");
-        
+
         System.out.println("Product: " + productTitle);
         System.out.println("Price: " + productPrice);
         System.out.println("URL: " + currentUrl);
