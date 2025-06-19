@@ -110,7 +110,7 @@ public class AmazonTest {
 
         System.out.println("Product: " + productTitle);
         System.out.println("Price: " + productPrice);
-        System.out.println("URL: " + currentUrl);
+        //System.out.println("URL: " + currentUrl); it's too long
         System.out.println("Product detail information test successful");
     }
 

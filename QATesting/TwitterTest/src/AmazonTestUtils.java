@@ -21,14 +21,7 @@ public class AmazonTestUtils {
             Thread.currentThread().interrupt();
         }
     }
-    
-    public void longDelay() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            Thread.currentThread().interrupt();
-        }
-    }
+
 
     public void handleCookieBannerAndPopups() {
         System.out.println("Cookie banner and popups");
@@ -142,7 +135,7 @@ public class AmazonTestUtils {
     }
     
     public boolean clickFirstProduct() {
-        System.out.println("Selecting first product (simple & visible)");
+        System.out.println("Selecting first product");
         try {
             List<WebElement> results = getSearchResults();
             if (results.isEmpty()) {
@@ -189,7 +182,7 @@ public class AmazonTestUtils {
     }
     
     public boolean addToCartAdvanced() {
-        System.out.println("Sepete ekleniyor (basit versiyon)...");
+        System.out.println("Sepete ekleniyor (basit versiyon)");
         try {
             handleCookieBannerAndPopups();
             // En yaygın buton seçicileri
@@ -206,7 +199,6 @@ public class AmazonTestUtils {
                     if (button.isDisplayed() && button.isEnabled()) {
                         System.out.println("Buton bulundu ve tıklanıyor: " + selector);
                         button.click();
-                        // Başarıyı kontrol et
                         if (waitForAddToCartConfirmation()) {
                             System.out.println("Ürün sepete eklendi!");
                             return true;
@@ -215,11 +207,10 @@ public class AmazonTestUtils {
                         }
                     }
                 } catch (Exception e) {
-                    // Buton bulunamazsa diğer seçiciye geç
                     continue;
                 }
             }
-            System.out.println("Hiçbir sepete ekle butonu bulunamadı veya işlem başarısız oldu.");
+            System.out.println("Sepete ekle butonu bulunamadı/işlem başarısız oldu.");
             return false;
         } catch (Exception e) {
             System.out.println("Sepete ekleme hatası: " + e.getMessage());
@@ -251,7 +242,7 @@ public class AmazonTestUtils {
     
     public boolean navigateToCart() {
         try {
-            System.out.println("Navigating to cart...");
+            System.out.println("Navigating to cart");
             driver.get("https://www.amazon.com.tr/gp/cart/view.html");
             waitForPageLoad();
             testDelay();
@@ -269,7 +260,7 @@ public class AmazonTestUtils {
     
     public boolean goToCart() {
         try {
-            System.out.println("Going to cart...");
+            System.out.println("Going to cart");
             
             String[] cartSelectors = {
                 "#nav-cart",
@@ -379,7 +370,7 @@ public class AmazonTestUtils {
     
     public void openCategoryMenu() {
         try {
-            System.out.println("Opening category menu...");
+            System.out.println("Opening category menu");
             
             String[] menuSelectors = {
                 "#nav-hamburger-menu",
@@ -414,7 +405,7 @@ public class AmazonTestUtils {
     public boolean navigateToCategory(String categoryName) {
         try {
             System.out.println("Navigating to category: " + categoryName);
-            handleCookieBannerAndPopups(); // Engelleyici popup'ları kapat
+            handleCookieBannerAndPopups();
 
             List<WebElement> categoryTabs = driver.findElements(By.cssSelector("a, span, div"));
             for (WebElement tab : categoryTabs) {
@@ -428,7 +419,7 @@ public class AmazonTestUtils {
                             testDelay();
                             return true;
                         } catch (Exception e) {
-                            System.out.println("Kategoriye tıklanamadı: " + text + " | Hata: " + e.getMessage());
+                            System.out.println("Error clicking category: " + e.getMessage());
                         }
                     }
                 }
@@ -575,7 +566,7 @@ public class AmazonTestUtils {
     
     public void navigateToLoginPage() {
         try {
-            System.out.println("Navigating to login page...");
+            System.out.println("Navigating to login page");
             driver.get("https://www.amazon.com/ap/signin?openid.pape.max_auth_age=900&openid.return_to=https%3A%2F%2Fwww.amazon.com%2Fgp%2Fyourstore%2Fhome%3Fpath%3D%252Fgp%252Fyourstore%252Fhome%26useRedirectOnSuccess%3D1%26signIn%3D1%26action%3Dsign-out%26ref_%3Dnav_AccountFlyout_signout&openid.assoc_handle=usflex&openid.mode=checkid_setup&openid.ns=http%3A%2F%2Fspecs.openid.net%2Fauth%2F2.0");
             waitForPageLoad();
             testDelay();
@@ -650,9 +641,7 @@ public class AmazonTestUtils {
         }
     }
 
-    /**
-     * Amazon'da arama yapar, ilk ürünü sepete ekler (en basit ve doğrudan yöntem).
-     */
+
     public boolean addFirstProductToCart(String searchTerm) {
         try {
             driver.get("https://www.amazon.com.tr/");
@@ -660,7 +649,6 @@ public class AmazonTestUtils {
             handleCookieBannerAndPopups();
             testDelay();
 
-            // Arama
             WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
             searchBox.clear();
             searchBox.sendKeys(searchTerm);
@@ -668,7 +656,6 @@ public class AmazonTestUtils {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-component-type='s-search-result']")));
             testDelay();
 
-            // İlk ürünün ilk <a> etiketini bul ve tıkla
             List<WebElement> results = driver.findElements(By.cssSelector("[data-component-type='s-search-result']"));
             if (results.isEmpty()) {
                 System.out.println("Arama sonucu yok!");
@@ -688,7 +675,6 @@ public class AmazonTestUtils {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.id("productTitle")));
             testDelay();
 
-            // Sepete ekle butonunu bul ve tıkla
             WebElement addToCartBtn = null;
             String[] selectors = {
                 "#add-to-cart-button",
@@ -704,7 +690,7 @@ public class AmazonTestUtils {
                 } catch (Exception ignore) {}
             }
             if (addToCartBtn == null) {
-                System.out.println("Sepete ekle butonu yok!");
+                System.out.println("Sepete ekle butonu yokk!");
                 return false;
             }
             addToCartBtn.click();
@@ -729,7 +715,6 @@ public class AmazonTestUtils {
             handleCookieBannerAndPopups();
             testDelay();
 
-            // Arama
             WebElement searchBox = driver.findElement(By.id("twotabsearchtextbox"));
             searchBox.clear();
             searchBox.sendKeys(searchTerm);
@@ -737,12 +722,10 @@ public class AmazonTestUtils {
             wait.until(ExpectedConditions.presenceOfElementLocated(By.cssSelector("[data-component-type='s-search-result']")));
             testDelay();
 
-            // Gerçek ürün detayına giden ilk linki bul
             List<WebElement> results = driver.findElements(By.cssSelector("[data-component-type='s-search-result']"));
             WebElement firstProductLink = null;
             String productText = "";
             for (WebElement result : results) {
-                // Önce <h2> altındaki <a> ile dene
                 try {
                     WebElement h2 = result.findElement(By.tagName("h2"));
                     WebElement link = h2.findElement(By.tagName("a"));
@@ -753,7 +736,7 @@ public class AmazonTestUtils {
                         break;
                     }
                 } catch (Exception ignore) {}
-                // Olmazsa kutudaki tüm <a> etiketlerini dene
+
                 if (firstProductLink == null) {
                     List<WebElement> links = result.findElements(By.tagName("a"));
                     for (WebElement link : links) {
