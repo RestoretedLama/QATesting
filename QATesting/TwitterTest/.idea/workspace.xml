@@ -7,8 +7,9 @@
     <list default="true" id="67bdad49-7365-4fc1-9366-b2f4b5f1f035" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Tests/AmazonTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/Tests/AmazonTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonAdvancedTest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/AmazonTestUtils.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/AmazonTestUtils.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TestRunner.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TestRunner.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,13 +39,14 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "Application.AmazonTestUtilsCoverageTest.executor": "Coverage",
-    "Application.Main.executor": "Coverage",
+    "Application.AmazonTestUtilsCoverageTest.executor": "Run",
+    "Application.Main.executor": "Run",
+    "Application.TestRunner.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
-    "JUnit.AmazonAdvancedTest.executor": "Coverage",
+    "JUnit.AmazonAdvancedTest.executor": "Run",
     "JUnit.AmazonAdvancedTest.testCategoryNavigation.executor": "Run",
     "JUnit.AmazonAdvancedTest.testProductDetailInformation.executor": "Run",
-    "JUnit.AmazonTest.executor": "Coverage",
+    "JUnit.AmazonTest.executor": "Run",
     "JUnit.AmazonTest.testAddToCartProcess.executor": "Run",
     "JUnit.AmazonTest.testAddToCartProcessWithNewMethod.executor": "Run",
     "JUnit.AmazonTest.testCategoryNavigation.executor": "Run",
@@ -56,10 +58,12 @@
     "JUnit.AmazonTestUtilsCoverageTest.testInvalidPasswordLogin.executor": "Run",
     "JUnit.AmazonTestUtilsCoverageTest.testRegistrationPage.executor": "Run",
     "JUnit.AmazonTestUtilsCoverageTest.testWishlistCreation.executor": "Run",
+    "JUnit.BaseUtilsTest.executor": "Run",
     "JUnit.BlueSkyLoginTest.executor": "Run",
     "JUnit.BlueSkyTest.executor": "Run",
     "JUnit.BlueskyLoginTest.executor": "Run",
     "JUnit.GoogleSearchTest.testGoogleSearch.executor": "Run",
+    "JUnit.SetupTest.executor": "Run",
     "JUnit.TwitterLoginTest.executor": "Run",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -67,7 +71,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "Deniz2",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/enisa/Downloads/selenium-java-4.32.0",
     "node.js.detected.package.eslint": "true",
@@ -83,7 +87,22 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
-  <component name="RunManager" selected="JUnit.AmazonTest.testCategoryNavigation">
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\denuz\Documents\GitHub\QATesting\QATesting\TwitterTest\src" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="AmazonTestUtilsCoverageTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="AmazonTestUtilsCoverageTest" />
+      <module name="TwitterTest" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />
       <module name="TwitterTest" />
@@ -91,53 +110,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonAdvancedTest.testCategoryNavigation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="TestRunner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="TestRunner" />
       <module name="TwitterTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="METHOD_NAME" value="testCategoryNavigation(java.lang.String,boolean)" />
-      <option name="TEST_OBJECT" value="method" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonAdvancedTest.testProductDetailInformation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
-      <module name="TwitterTest" />
-      <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonAdvancedTest" />
-      <option name="METHOD_NAME" value="testProductDetailInformation" />
-      <option name="TEST_OBJECT" value="method" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration name="AmazonTest.testCategoryNavigation" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="AmazonTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
       <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="METHOD_NAME" value="testCategoryNavigation(java.lang.String,boolean)" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="AmazonTest.testLoginProcess" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name="SetupTest" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="TwitterTest" />
       <option name="PACKAGE_NAME" value="" />
-      <option name="MAIN_CLASS_NAME" value="AmazonTest" />
-      <option name="METHOD_NAME" value="testLoginProcess" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="MAIN_CLASS_NAME" value="SetupTest" />
+      <option name="TEST_OBJECT" value="class" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.AmazonTest.testCategoryNavigation" />
-        <item itemvalue="JUnit.AmazonAdvancedTest.testCategoryNavigation" />
-        <item itemvalue="JUnit.AmazonAdvancedTest.testProductDetailInformation" />
         <item itemvalue="Application.Main" />
-        <item itemvalue="JUnit.AmazonTest.testLoginProcess" />
+        <item itemvalue="Application.AmazonTestUtilsCoverageTest" />
+        <item itemvalue="JUnit.AmazonTest" />
+        <item itemvalue="Application.TestRunner" />
+        <item itemvalue="JUnit.SetupTest" />
       </list>
     </recent_temporary>
   </component>
@@ -204,9 +208,9 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/TwitterTest$AmazonTestUtilsCoverageTest.ic" NAME="AmazonTestUtilsCoverageTest Coverage Results" MODIFIED="1750249918845" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/TwitterTest$AmazonTestUtilsCoverageTest.ic" NAME="AmazonTestUtilsCoverageTest Coverage Results" MODIFIED="1750284490462" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
+    <SUITE FILE_PATH="coverage/TwitterTest$Main.ic" NAME="Main Coverage Results" MODIFIED="1750290258797" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="true" />
     <SUITE FILE_PATH="coverage/TwitterTest$AmazonTest.ic" NAME="AmazonTest Coverage Results" MODIFIED="1750249339346" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/TwitterTest$AmazonAdvancedTest.ic" NAME="AmazonAdvancedTest Coverage Results" MODIFIED="1750249286963" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
-    <SUITE FILE_PATH="coverage/TwitterTest$Main.ic" NAME="Main Coverage Results" MODIFIED="1750285807840" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

@@ -12,26 +12,23 @@ import static org.junit.platform.engine.discovery.DiscoverySelectors.selectMetho
 public class TestRunner {
     
     public static void main(String[] args) {
-        System.out.println("Amazon Turkey Website Test Bot Starting...");
+        System.out.println("Amazon Turkey Website Test Bot Starting");
         System.out.println("==============================================");
         
         try {
             runTestClass(Class.forName("AmazonAdvancedTest"));
         } catch (ClassNotFoundException e) {
             System.err.println("Test classes not found: " + e.getMessage());
-            System.err.println("Please check that test classes are in the correct location.");
         }
         
         System.out.println("\nAll tests completed!");
     }
     
     private static void runTestClass(Class<?> testClass) {
-        System.out.println("\nRunning " + testClass.getSimpleName() + " class...");
+        System.out.println("\nRunning " + testClass.getSimpleName() + " class");
         
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
-                .request()
-                .selectors(selectClass(testClass))
-                .build();
+                .request().selectors(selectClass(testClass)).build();
         
         Launcher launcher = LauncherFactory.create();
         SummaryGeneratingListener listener = new SummaryGeneratingListener();
@@ -57,7 +54,7 @@ public class TestRunner {
     }
     
     public static void runSpecificTest(Class<?> testClass, String testMethodName) {
-        System.out.println("\nRunning " + testClass.getSimpleName() + "." + testMethodName + "...");
+        System.out.println("\nRunning " + testClass.getSimpleName() + "." + testMethodName);
         
         LauncherDiscoveryRequest request = LauncherDiscoveryRequestBuilder
                 .request()
@@ -79,20 +76,27 @@ public class TestRunner {
         System.out.println("Amazon Turkey Website Test Report");
         System.out.println("=================================");
         System.out.println("Test Date: " + java.time.LocalDateTime.now());
-        System.out.println("Test Target: https://www.amazon.com.tr/");
-        System.out.println();
-        
+        System.out.println("Test Target: https://www.amazon.com.tr/\n");
+
+        //i legit don't understand why these run as tests when separate but not all together???
         try {
             runTestClass(Class.forName("AmazonAdvancedTest"));
         } catch (ClassNotFoundException e) {
             System.err.println("Test classes not found: " + e.getMessage());
-            System.err.println("Please check that test classes are in the correct location.");
             System.exit(1);
         }
+
+        try {
+            runTestClass(Class.forName("SetupTest"));
+        } catch (ClassNotFoundException e) {
+            System.err.println("Test classes not found: " + e.getMessage());
+            System.exit(1);
+        }
+
         System.out.println("\n" + "=".repeat(50));
         System.out.println("Test Report Completed");
         System.out.println("=".repeat(50));
-        System.out.println("🔒 Program closing...");
+        System.out.println("Program closing...");
         System.exit(0);
     }
 } 
