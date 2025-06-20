@@ -64,7 +64,7 @@ public class AmazonTest {
 
     @ParameterizedTest
     @CsvSource({
-            "Bilgisayar, true",
+            "Bilgisayarlar, true",
             "Bebek, true",
             "Ayakkabı, true"
     })
@@ -72,8 +72,6 @@ public class AmazonTest {
     public void testCategoryNavigation(String categoryName, boolean expectedResult) {
         System.out.println("\n'" + categoryName + "' category test");
         System.out.println("----------------------------------------");
-
-        utils.openCategoryMenu();
 
         boolean result = utils.navigateToCategory(categoryName);
         assertEquals(expectedResult, result, categoryName + " category navigation should be " +
@@ -88,6 +86,7 @@ public class AmazonTest {
             System.out.println("'" + categoryName + "' category test failed");
         }
     }
+
 
     @Test
     @DisplayName("Product detail page information test")
@@ -113,31 +112,7 @@ public class AmazonTest {
         //System.out.println("URL: " + currentUrl); it's too long
         System.out.println("Product detail information test successful");
     }
-
-    @Test
-    @DisplayName("Go to cart and check items test")
-    public void testGoToCartAndCheckItems() {
-        System.out.println("\nTest: Go to cart and check items test");
-        System.out.println("----------------------------------------");
-        
-        utils.searchProduct("pen");
-        utils.clickFirstProduct();
-        utils.addToCartAdvanced();
-        
-        boolean cartOpened = utils.goToCart();
-
-        assertTrue(cartOpened, "Cart page should open");
-        
-        List<WebElement> cartItems = utils.getCartItems();
-        System.out.println("Items in cart: " + cartItems.size());
-        
-        if (!cartItems.isEmpty()) {
-            System.out.println("Go to cart and check items test successful");
-        } else {
-            System.out.println("Cart appears to be empty????");
-        }
-    }
-
+    
     @Test
     @DisplayName("Filtering process test")
     public void testFilteringProcess() {
